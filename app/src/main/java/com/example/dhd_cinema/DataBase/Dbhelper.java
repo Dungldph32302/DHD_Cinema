@@ -38,7 +38,7 @@ public class Dbhelper extends SQLiteOpenHelper {
         db.execSQL("create table PhongChieu(\n" +
                 "      ID_Phong integer primary key autoincrement,\n" +
                 "      TenPhong TEXT not null,\n" +
-                "      SoCho TEXT not null,\n" +
+                "      SoCho interger not null,\n" +
                 "      LoaiPhong integer not null)");
 
         db.execSQL("create table Ghe(\n" +
