@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/home"
+        android:title="Lịch chiếu"
+        android:icon="@drawable/baseline_ondemand_video_24"
+        >
+    </item>
+    <item
+        android:id="@+id/hoaDon"
+        android:title="Phim"
+        android:icon="@drawable/baseline_videocam_24"
+        >
+
+    </item>
+    <item
+        android:id="@+id/sanPham"
+        android:title="Thông báo"
+        android:icon="@drawable/baseline_notifications_none_24"
+
+        >
+    </item>
+    <item
+        android:id="@+id/thongtin"
+        android:title="Khác"
+        android:icon="@drawable/baseline_view_compact_alt_24"
+        >
+    </item>
+</menu>

@@ -1,16 +1,24 @@
 package com.example.dhd_cinema.Model;
 
 public class GheModel {
-    private int id,trangThai;
+    private int id,idPhong,trangThai;
     private String soGhe;
 
     public GheModel() {
     }
 
-    public GheModel(int id, int trangThai, String soGhe) {
-        this.id = id;
+    public GheModel(int idPhong, int trangThai, String soGhe) {
+        this.idPhong = idPhong;
         this.trangThai = trangThai;
         this.soGhe = soGhe;
+    }
+
+    public int getIdPhong() {
+        return idPhong;
+    }
+
+    public void setIdPhong(int idPhong) {
+        this.idPhong = idPhong;
     }
 
     public int getId() {

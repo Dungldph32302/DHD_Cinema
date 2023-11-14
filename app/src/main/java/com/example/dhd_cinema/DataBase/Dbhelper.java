@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 public class Dbhelper extends SQLiteOpenHelper {
     private static final String DB="hh";
     public Dbhelper(@Nullable Context context) {
-        super(context, DB,null,1);
+        super(context, DB,null,6);
     }
 
     @Override
@@ -25,7 +25,6 @@ public class Dbhelper extends SQLiteOpenHelper {
         db.execSQL("create table TheLoai(\n" +
                 "      ID_TL integer primary key autoincrement,\n" +
                 "      TenTheLoai TEXT not null)");
-
         db.execSQL("create table Phim(\n" +
                 "      ID_Phim integer primary key autoincrement,\n" +
                 "      ID_TL integer REFERENCES TheLoai(ID_TL),\n" +
@@ -76,32 +75,35 @@ public class Dbhelper extends SQLiteOpenHelper {
                 "      PhuongThuc integer not null,\n" +
                 "      TrangThai int not null)");
 
-        db.execSQL("INSERT INTO NguoiDung (TenDangNhap, Email, SDT, MatKhau, Quyen) " +
-                "VALUES (1,'user1', 'user1@example.com', '123456789', 'password1', 1)");
+// Thêm dữ liệu vào bảng NguoiDung
+        db.execSQL("INSERT INTO NguoiDung (ID_ND,TenDangNhap, Email, SDT, MatKhau, Quyen) VALUES (1,'user1', 'user1@example.com', '123456789', 'password1', 1)");
 
-        db.execSQL("INSERT INTO TheLoai (TenTheLoai) " +
-                "VALUES (1,'Hành động')");
+// Thêm dữ liệu vào bảng TheLoai
+        db.execSQL("INSERT INTO TheLoai (TenTheLoai) VALUES ('TenTheLoai1')");
 
-        db.execSQL("INSERT INTO Phim (ID_TL, TenPhim, DaoDien, NgayPhatHanh, Mota, Anh) " +
-                "VALUES (1, 'Phim 1', 'Đạo diễn 1', '2021-01-01', 'Mô tả phim 1', 'anh1.jpg')");
+// Thêm dữ liệu vào bảng Phim
+        db.execSQL("INSERT INTO Phim (ID_TL, TenPhim, DaoDien, NgayPhatHanh, Mota, Anh) VALUES (1, 'TenPhim1', 'DaoDien1', '2023-11-12', 'Mo ta phim 1', 'link_anh1')");
 
-        db.execSQL("INSERT INTO PhongChieu (TenPhong, SoCho, LoaiPhong) " +
-                "VALUES ('Phòng 1', '100', 1)");
+// Thêm dữ liệu vào bảng PhongChieu
+        db.execSQL("INSERT INTO PhongChieu (TenPhong, SoCho, LoaiPhong) VALUES ('Phong1', 100, 1)");
+        db.execSQL("INSERT INTO PhongChieu (TenPhong, SoCho, LoaiPhong) VALUES ('Phong2', 50, 2)");
 
-        db.execSQL("INSERT INTO Ghe (ID_Phong, SoGhe, TrangThai) " +
-                "VALUES (1, 'A1', 1)");
+// Thêm dữ liệu vào bảng Ghe
+        db.execSQL("INSERT INTO Ghe (ID_Phong, SoGhe, TrangThai) VALUES (1, 'A1', 0)");
+        db.execSQL("INSERT INTO Ghe (ID_Phong, SoGhe, TrangThai) VALUES (1, 'A2', 1)");
 
-        db.execSQL("INSERT INTO SuatChieu (ID_Phim, ID_Phong, GioChieu, Gia) " +
-                "VALUES (1, 1, '18:00', 10000)");
+// Thêm dữ liệu vào bảng SuatChieu
+        db.execSQL("INSERT INTO SuatChieu (ID_Phim, ID_Phong, GioChieu, Gia) VALUES (1, 1, '18:00', 100000)");
 
-        db.execSQL("INSERT INTO Ve (ID_ND, ID_SC, ID_Ghe, ThoiGian) " +
-                "VALUES (1, 1, 1, '2021-01-01 17:30')");
+// Thêm dữ liệu vào bảng Ve
+        db.execSQL("INSERT INTO Ve (ID_ND, ID_SC, ID_Ghe, ThoiGian) VALUES (1, 1, 1, '2023-11-12 18:00')");
 
-        db.execSQL("INSERT INTO DanhGiaPhim (ID_ND, ID_Phim, NoiDung, Sao) " +
-                "VALUES (1, 1, 'Bộ phim rất hay!', 5)");
+// Thêm dữ liệu vào bảng DanhGiaPhim
+        db.execSQL("INSERT INTO DanhGiaPhim (ID_ND, ID_Phim, NoiDung, Sao) VALUES (1, 1, 'Danh gia phim 1', 5)");
 
-        db.execSQL("INSERT INTO HoaDon (ID_ND, ID_Ve, TongTien, PhuongThuc, TrangThai) " +
-                "VALUES (1, 1, 10000, 1, 1)");
+// Thêm dữ liệu vào bảng HoaDon
+        db.execSQL("INSERT INTO HoaDon (ID_ND, ID_Ve, TongTien, PhuongThuc, TrangThai) VALUES (1, 1, 100000, 1, 1)");
+
 
     }
 

@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace 'com.example.dhd_cinema'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.dhd_cinema"

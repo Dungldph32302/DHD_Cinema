@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="@drawable/img"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_marginTop="80dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:text="Chỉnh sửa Phòng"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/TVmaGhe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mã: "
+        android:layout_marginStart="20dp"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:textColor="#808080"
+        />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/txtIDP"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/edittext"
+        android:hint="Tên phòng"
+        android:paddingStart="30dp"
+      />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:layout_marginTop="20dp"
+        android:id="@+id/txtSG"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/edittext"
+        android:hint="Số ghế"
+        android:paddingStart="30dp"
+       />
+    <androidx.appcompat.widget.AppCompatEditText
+        android:layout_marginTop="20dp"
+        android:id="@+id/txttt"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/edittext"
+        android:hint="Loại phòng"
+        android:paddingStart="30dp"
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp">
+
+        <Button
+
+            android:id="@+id/btnUpdateTV"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Update" />
+
+        <Button
+            android:id="@+id/btncanelTV"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:text="Cancel" />
+    </LinearLayout>
+
+</LinearLayout>
