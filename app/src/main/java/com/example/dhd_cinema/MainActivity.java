@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -14,8 +15,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.dhd_cinema.Framgment.Fragment_Phim;
 import com.example.dhd_cinema.Framgment.Fragment_PhongChieu;
 import com.example.dhd_cinema.Framgment.Fragment_SuatChieu;
+import com.example.dhd_cinema.Framgment.Fragment_TheLoaiPhim;
 import com.example.dhd_cinema.Framgment.Fragment_ghe;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -62,10 +65,14 @@ public class MainActivity extends AppCompatActivity {
                 } else if (item.getItemId()==R.id.sanPham) {
 
 
+                }else if (item.getItemId()==R.id.sanPham) {
+
+
                 }
                 return true;
             }
         });
+        // bam vao item no ao ra
 
         // xử lý khi chọn item navigation
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -74,9 +81,11 @@ public class MainActivity extends AppCompatActivity {
                 if(item.getItemId()==R.id.phieu){
 
                 } else if (item.getItemId()==R.id.SanPham) {
-
+                    Fragment_Phim fragment_phim =new Fragment_Phim(); //tao doi tuong
+                    replec(fragment_phim);
                 } else if (item.getItemId()==R.id.TheLoai) {
-
+                    Fragment_TheLoaiPhim fragment_theLoaiPhim =new Fragment_TheLoaiPhim(); //tao doi tuong
+                    replec(fragment_theLoaiPhim);
                 } else if (item.getItemId()==R.id.ThanhVien) {
 
                 } else if (item.getItemId()==R.id.TKXuat) {
@@ -90,6 +99,10 @@ public class MainActivity extends AppCompatActivity {
                 }else if (item.getItemId()==R.id.checkout) {
 
                 }
+                // doi ten titel
+                getSupportActionBar().setTitle(item.getTitle());
+                // bam vao item no ao ra
+                drawable.closeDrawer(GravityCompat.START);
                 return true;
             }
         });
