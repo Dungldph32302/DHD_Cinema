@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.dhd_cinema.Framgment.Fragment_PhongChieu;
+import com.example.dhd_cinema.Framgment.Fragment_SuatChieu;
 import com.example.dhd_cinema.Framgment.Fragment_ghe;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -47,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
         // xửa lý khi chọn bottomNavigation
         Fragment_ghe frg= new Fragment_ghe();
         Fragment_PhongChieu fr= new Fragment_PhongChieu();
-        replec(fr);
+        Fragment_SuatChieu frf = new Fragment_SuatChieu();
+        replec(frf);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

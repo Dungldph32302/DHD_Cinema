@@ -1,15 +1,17 @@
 package com.example.dhd_cinema.DataBase;
 
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import androidx.annotation.Nullable;
+
+import com.example.dhd_cinema.R;
 
 public class Dbhelper extends SQLiteOpenHelper {
     private static final String DB="hh";
     public Dbhelper(@Nullable Context context) {
-        super(context, DB,null,6);
+        super(context, DB,null,12);
     }
 
     @Override
@@ -82,8 +84,10 @@ public class Dbhelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO TheLoai (TenTheLoai) VALUES ('TenTheLoai1')");
 
 // Thêm dữ liệu vào bảng Phim
-        db.execSQL("INSERT INTO Phim (ID_TL, TenPhim, DaoDien, NgayPhatHanh, Mota, Anh) VALUES (1, 'TenPhim1', 'DaoDien1', '2023-11-12', 'Mo ta phim 1', 'link_anh1')");
 
+
+        db.execSQL("INSERT INTO Phim (ID_TL, TenPhim, DaoDien, NgayPhatHanh, Mota, Anh) VALUES (1, 'TenPhim1', 'DaoDien1', '2023-11-12', 'Mo ta phim 1','android.resource://\" + context.getPackageName() + \"/drawable/img_3')");
+        db.execSQL("INSERT INTO Phim (ID_TL, TenPhim, DaoDien, NgayPhatHanh, Mota, Anh) VALUES (1, 'TenPhim2', 'DaoDien2', '2023-11-12', 'Mo ta phim 2', 'android.resource://\" + context.getPackageName() + \"/drawable/img_4')");
 // Thêm dữ liệu vào bảng PhongChieu
         db.execSQL("INSERT INTO PhongChieu (TenPhong, SoCho, LoaiPhong) VALUES ('Phong1', 100, 1)");
         db.execSQL("INSERT INTO PhongChieu (TenPhong, SoCho, LoaiPhong) VALUES ('Phong2', 50, 2)");
@@ -91,10 +95,11 @@ public class Dbhelper extends SQLiteOpenHelper {
 // Thêm dữ liệu vào bảng Ghe
         db.execSQL("INSERT INTO Ghe (ID_Phong, SoGhe, TrangThai) VALUES (1, 'A1', 0)");
         db.execSQL("INSERT INTO Ghe (ID_Phong, SoGhe, TrangThai) VALUES (1, 'A2', 1)");
-
 // Thêm dữ liệu vào bảng SuatChieu
         db.execSQL("INSERT INTO SuatChieu (ID_Phim, ID_Phong, GioChieu, Gia) VALUES (1, 1, '18:00', 100000)");
-
+        db.execSQL("INSERT INTO SuatChieu (ID_Phim, ID_Phong, GioChieu, Gia) VALUES (1, 2, '20:00', 100000)");
+        db.execSQL("INSERT INTO SuatChieu (ID_Phim, ID_Phong, GioChieu, Gia) VALUES (1, 1, '18:00', 100000)");
+        db.execSQL("INSERT INTO SuatChieu (ID_Phim, ID_Phong, GioChieu, Gia) VALUES (1, 2, '20:00', 100000)");
 // Thêm dữ liệu vào bảng Ve
         db.execSQL("INSERT INTO Ve (ID_ND, ID_SC, ID_Ghe, ThoiGian) VALUES (1, 1, 1, '2023-11-12 18:00')");
 
