@@ -5,19 +5,40 @@
     <group>
     </group>
     <item
-        android:id="@+id/phieu"
+        android:id="@+id/suatChieu"
         android:icon="@drawable/baseline_post_add_24"
-        android:title="Quản lý phiếu xuất nhập kho "/>
+        android:title="Quản l suất chiếu"/>
     <item
-
-        android:id="@+id/SanPham"
-        android:title="Quản lý sản phẩm "
+        android:id="@+id/LoaiPhim"
+        android:title="Quản lý thể loại phim "
         android:icon="@drawable/baseline_production_quantity_limits_24"
         />
     <item
         android:icon="@drawable/baseline_category_24"
-        android:id="@+id/TheLoai"
-        android:title="Quản lý loại sản phẩm "
+        android:id="@+id/Phim"
+        android:title="Quản lý Phim"
+
+        />
+    <item
+        android:icon="@drawable/baseline_category_24"
+        android:id="@+id/Phong"
+        android:title="Quản lý Phòng"
+        />
+    <item
+        android:icon="@drawable/baseline_category_24"
+        android:id="@+id/ghe"
+        android:title="Quản lý Ghế"
+        />
+    <item
+        android:icon="@drawable/baseline_category_24"
+        android:id="@+id/ve"
+        android:title="Quản lý loại Vé"
+
+        />
+    <item
+        android:icon="@drawable/baseline_category_24"
+        android:id="@+id/hoaDon"
+        android:title="Quản lý Hóa đơn"
 
         />
     <item

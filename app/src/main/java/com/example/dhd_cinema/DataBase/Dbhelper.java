@@ -11,7 +11,7 @@ import com.example.dhd_cinema.R;
 public class Dbhelper extends SQLiteOpenHelper {
     private static final String DB="hh";
     public Dbhelper(@Nullable Context context) {
-        super(context, DB,null,12);
+        super(context, DB,null,13);
     }
 
     @Override
@@ -27,13 +27,13 @@ public class Dbhelper extends SQLiteOpenHelper {
         db.execSQL("create table TheLoai(\n" +
                 "      ID_TL integer primary key autoincrement,\n" +
                 "      TenTheLoai TEXT not null)");
-        db.execSQL("create table Phim(\n" +
+        db.execSQL("create table Phim(\n"+
                 "      ID_Phim integer primary key autoincrement,\n" +
                 "      ID_TL integer REFERENCES TheLoai(ID_TL),\n" +
                 "      TenPhim TEXT not null,\n" +
                 "      DaoDien TEXT not null,\n" +
-                "      NgayPhatHanh TEXT not null,\n" +
-                "      Mota TEXT not null,\n" +
+                "      NgayPhatHanh TEXT ,\n" +
+                "      Mota TEXT ,\n" +
                 "      Anh TEXT)");
 
         db.execSQL("create table PhongChieu(\n" +

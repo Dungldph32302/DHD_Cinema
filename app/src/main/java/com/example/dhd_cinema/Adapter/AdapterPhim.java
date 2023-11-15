@@ -5,6 +5,10 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +23,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.dhd_cinema.Dao.PhimDao;
 import com.example.dhd_cinema.Dao.TheLoaiPhimDao;
 import com.example.dhd_cinema.Model.Phim;
@@ -26,6 +31,7 @@ import com.example.dhd_cinema.Model.TheLoaiPhim;
 import com.example.dhd_cinema.R;
 import com.example.dhd_cinema.Spinner.TheLoaiPhimSpinner;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
@@ -52,7 +58,19 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
         holder.txtTenPhim_item.setText("" + (list.get(position).getTenPhim()));
         holder.txtDaoDien_item.setText("" + list.get(position).getDaoDien());
         holder.txtNgayPhatHanh_item.setText("" + (list.get(position).getNgayPhatHanh()));
-        holder.txtAnh.setText("" + (list.get(position).getAnh()));
+
+        String base64String = list.get(position).getAnh();
+
+// Giải mã chuỗi Base64 thành mảng byte
+        byte[] decodedByteArray = Base64.decode(base64String, Base64.DEFAULT);
+
+// Chuyển đổi mảng byte thành Bitmap
+        Bitmap bitmap = BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.length);
+
+// Hiển thị Bitmap bằng Glide
+        Glide.with(context)
+                .load(bitmap)
+                .into(holder.anh);
 
         holder.btnDelete_phim.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,6 +138,7 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
         TextView txtTenPhim_item, txtDaoDien_item, txtNgayPhatHanh_item, txtAnh;
         ImageView btnDelete_phim, btnUpdate_phim;
         LinearLayout dsPhim;
+        ImageView anh;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtTenPhim_item = itemView.findViewById(R.id.txtTenPhim_item);
@@ -128,6 +147,8 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
             btnDelete_phim = itemView.findViewById(R.id.btnDelete_Phim);
             btnUpdate_phim = itemView.findViewById(R.id.btnUpdate_Phim);
             dsPhim = itemView.findViewById(R.id.DSPhim);
+
+            anh=itemView.findViewById(R.id.imageView);
 
             txtAnh = itemView.findViewById(R.id.txtAnh);
         }

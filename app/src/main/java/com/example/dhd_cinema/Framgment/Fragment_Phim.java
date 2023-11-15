@@ -45,9 +45,7 @@ public class Fragment_Phim extends Fragment {
 
         rcvQLPhim = view.findViewById(R.id.rcvQLPhim);
         fltAddPhim = view.findViewById(R.id.fltAddPhim);
-
         loadData();
-
         fltAddPhim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

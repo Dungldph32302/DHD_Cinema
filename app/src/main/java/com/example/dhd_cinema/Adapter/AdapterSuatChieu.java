@@ -8,6 +8,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -55,19 +58,21 @@ public class AdapterSuatChieu extends RecyclerView.Adapter<AdapterSuatChieu.View
         SuatChieuModel suatChieuModel= list.get(position);
         holder.name.setText(String.valueOf(list.get(position).getTenPhim()));
         holder.ngay.setText("Giờ chiếu "+list.get(position).getGioChieu());
-        int resourceId = context.getResources().getIdentifier(list.get(position).getAnh(), "drawable", context.getPackageName());
 
-// Kiểm tra xem tài nguyên có tồn tại không
-        if (resourceId != 0) {
-            // Sử dụng Glide để tải ảnh từ tài nguyên drawable
-            Glide.with(context)
-                    .load(resourceId)
-                    .into(holder.anh);
-        } else {
-            // Xử lý trường hợp tài nguyên không tồn tại
-            Log.e(TAG, "Tài nguyên không tồn tại: link_anh1");
-        }
+        String base64String = list.get(position).getAnh();
+
+// Giải mã chuỗi Base64 thành mảng byte
+        byte[] decodedByteArray = Base64.decode(base64String, Base64.DEFAULT);
+
+// Chuyển đổi mảng byte thành Bitmap
+        Bitmap bitmap = BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.length);
+
+// Hiển thị Bitmap bằng Glide
+        Glide.with(context)
+                .load(bitmap)
+                .into(holder.anh);
 //       Glide.with(context).load(list.get(position).getAnh()).into(holder.anh);
+
 //        holder.cham.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {

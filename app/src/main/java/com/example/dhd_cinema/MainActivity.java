@@ -19,6 +19,8 @@ import com.example.dhd_cinema.Framgment.Fragment_Phim;
 import com.example.dhd_cinema.Framgment.Fragment_PhongChieu;
 import com.example.dhd_cinema.Framgment.Fragment_SuatChieu;
 import com.example.dhd_cinema.Framgment.Fragment_TheLoaiPhim;
+import com.example.dhd_cinema.Framgment.Fragment_ThemPhim;
+import com.example.dhd_cinema.Framgment.Fragment_ThemSuatChieu;
 import com.example.dhd_cinema.Framgment.Fragment_ghe;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -57,13 +59,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if(item.getItemId()==R.id.home){
-
+                    Fragment_SuatChieu frf = new Fragment_SuatChieu();
+                     replec(frf);
                 } else if (item.getItemId()==R.id.hoaDon) {
-
-                    drawerToggle.syncState();
+                   Fragment_Phim frg= new Fragment_Phim();
+                    replec(frg);
 
                 } else if (item.getItemId()==R.id.sanPham) {
-
 
                 }else if (item.getItemId()==R.id.sanPham) {
 
@@ -78,18 +80,20 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if(item.getItemId()==R.id.phieu){
+                if(item.getItemId()==R.id.suatChieu){
 
-                } else if (item.getItemId()==R.id.SanPham) {
-                    Fragment_Phim fragment_phim =new Fragment_Phim(); //tao doi tuong
-                    replec(fragment_phim);
-                } else if (item.getItemId()==R.id.TheLoai) {
+                } else if (item.getItemId()==R.id.LoaiPhim) {
                     Fragment_TheLoaiPhim fragment_theLoaiPhim =new Fragment_TheLoaiPhim(); //tao doi tuong
                     replec(fragment_theLoaiPhim);
-                } else if (item.getItemId()==R.id.ThanhVien) {
-
-                } else if (item.getItemId()==R.id.TKXuat) {
-
+                } else if (item.getItemId()==R.id.Phim) {
+                    Fragment_Phim fragment_phim =new Fragment_Phim(); //tao doi tuong
+                    replec(fragment_phim);
+                } else if (item.getItemId()==R.id.Phong) {
+                    Fragment_PhongChieu frg= new Fragment_PhongChieu();
+                    replec(frg);
+                } else if (item.getItemId()==R.id.ghe) {
+                    Fragment_ghe frg= new Fragment_ghe();
+                    replec(frg);
                 }else if (item.getItemId()==R.id.TKNhap) {
 
                 }else if (item.getItemId()==R.id.tk) {
@@ -97,7 +101,8 @@ public class MainActivity extends AppCompatActivity {
                 }else if (item.getItemId()==R.id.doimk) {
 
                 }else if (item.getItemId()==R.id.checkout) {
-
+                    Fragment_ThemSuatChieu frg= new Fragment_ThemSuatChieu();
+                    replec(frg);
                 }
                 // doi ten titel
                 getSupportActionBar().setTitle(item.getTitle());

@@ -9,6 +9,9 @@ public class Phim {
     private String Mota;
     private String Anh;
 
+    public Phim() {
+    }
+
     public Phim(int ID_TL, String tenPhim, String daoDien, String ngayPhatHanh, String mota, String anh) {
         this.ID_TL = ID_TL;
         TenPhim = tenPhim;

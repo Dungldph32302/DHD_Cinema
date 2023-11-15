@@ -24,7 +24,6 @@ public class PhimDao {
             cursor.moveToFirst();
             do {
                 list.add(new Phim(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6)));
-
             }while (cursor.moveToNext());
         }
         return list;
