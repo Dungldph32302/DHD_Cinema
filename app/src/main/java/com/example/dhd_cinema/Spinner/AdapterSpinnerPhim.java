@@ -1,4 +1,4 @@
-package com.example.dhd_cinema.Spinne;
+package com.example.dhd_cinema.Spinner;
 
 import android.app.Activity;
 import android.content.Context;

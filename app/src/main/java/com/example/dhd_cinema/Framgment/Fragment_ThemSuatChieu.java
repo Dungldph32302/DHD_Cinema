@@ -1,40 +1,22 @@
 package com.example.dhd_cinema.Framgment;
 
-import static android.app.Activity.RESULT_OK;
-
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.dhd_cinema.Dao.PhimDao;
 import com.example.dhd_cinema.Model.Phim;
 import com.example.dhd_cinema.R;
-import com.example.dhd_cinema.Spinne.AdapterSpinnerPhim;
+import com.example.dhd_cinema.Spinner.AdapterSpinnerPhim;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class Fragment_ThemSuatChieu extends Fragment {

@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 }else if (item.getItemId()==R.id.doimk) {
 
                 }else if (item.getItemId()==R.id.checkout) {
-                    Fragment_ThemSuatChieu frg= new Fragment_ThemSuatChieu();
+                    Fragment_ThemPhim frg= new Fragment_ThemPhim();
                     replec(frg);
                 }
                 // doi ten titel
