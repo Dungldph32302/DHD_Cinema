@@ -6,18 +6,21 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.dhd_cinema.Dao.PhimDao;
 import com.example.dhd_cinema.Dao.TheLoaiPhimDao;
 import com.example.dhd_cinema.Model.TheLoaiPhim;
 import com.example.dhd_cinema.R;
@@ -48,53 +51,71 @@ public class TheLoaiPhimAdapter extends RecyclerView.Adapter<TheLoaiPhimAdapter.
     public void onBindViewHolder(@NonNull TheLoaiPhimAdapter.ViewHolder holder, int position) {
         holder.txtID_TL_item.setText("Mã Loại Phim: "+ (list.get(position).getID_TL()));
         holder.txttenTheLoai_item.setText("Tên Loại Phim: "+ list.get(position).getTenTheLoai());
-        holder.btnDelete_theloai.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                AlertDialog.Builder builder =new AlertDialog.Builder(context);
-                builder.setTitle("Cảnh Báo"); //set tieu de cho hop thoai
-                builder.setIcon(R.drawable.baseline_warning_24); //icon cho hop thoai
-                builder.setMessage("Bạn Có Muốn Xóa Thể Loại Này Không?"); //chuoi thong bao
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        theLoaiPhimDao = new TheLoaiPhimDao(context);
-                        int check = theLoaiPhimDao.delete(list.get(holder.getAdapterPosition()).getID_TL());
-                        switch (check){
-                            case 1:
-                                list.clear();
-                                list = theLoaiPhimDao.selectAllTheLoaiPhim();
-                                notifyDataSetChanged();
-                                Toast.makeText(context, "Xóa thành công!!!", Toast.LENGTH_SHORT).show();
-                                break;
-                            case -1:
-                                Toast.makeText(context, "Không Thể Xóa vì đã có Phim thuộc thể loại!!!", Toast.LENGTH_SHORT).show();
-                                break;
-                            case 0:
-                                Toast.makeText(context, "Xóa không thành công!!!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-                //nut no
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(context, "Không Xóa", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                // tao va hien thi hop thoai
-                AlertDialog dialog = builder.create();// tao hop thoai
-                dialog.show();//hien thi hop thoai
-            }
-        });
         TheLoaiPhim ls =list.get(position);
-        holder.dsTheLoaiPhim.setOnClickListener(new View.OnClickListener() {
+        holder.chon.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                suaTheLoaiPhim(ls);
+            public void onClick(View view) {
+                PopupMenu popupMenu = new PopupMenu(context, view);
+                popupMenu.getMenuInflater().inflate(R.menu.popumenu, popupMenu.getMenu());
+
+                // Bắt sự kiện khi một mục trong menu được chọn
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        int itemId = item.getItemId();
+
+                        if (itemId == R.id.action_custom){
+                            // Xử lý khi chọn tùy chỉnh
+                            suaTheLoaiPhim(ls);
+                            return true;
+                        } else if (itemId == R.id.action_delete) {
+                            AlertDialog.Builder builder =new AlertDialog.Builder(context);
+                            builder.setTitle("Cảnh Báo"); //set tieu de cho hop thoai
+                            builder.setIcon(R.drawable.baseline_warning_24); //icon cho hop thoai
+                            builder.setMessage("Bạn Có Muốn Xóa Thể Loại Này Không?"); //chuoi thong bao
+                            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    theLoaiPhimDao = new TheLoaiPhimDao(context);
+                                    int check = theLoaiPhimDao.delete(list.get(holder.getAdapterPosition()).getID_TL());
+                                    switch (check){
+                                        case 1:
+                                            list.clear();
+                                            list = theLoaiPhimDao.selectAllTheLoaiPhim();
+                                            notifyDataSetChanged();
+                                            Toast.makeText(context, "Xóa thành công!!!", Toast.LENGTH_SHORT).show();
+                                            break;
+                                        case -1:
+                                            Toast.makeText(context, "Không Thể Xóa vì đã có Phim thuộc thể loại!!!", Toast.LENGTH_SHORT).show();
+                                            break;
+                                        case 0:
+                                            Toast.makeText(context, "Xóa không thành công!!!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                            //nut no
+                            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Toast.makeText(context, "Không Xóa", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                            // tao va hien thi hop thoai
+                            AlertDialog dialog = builder.create();// tao hop thoai
+                            dialog.show();//hien thi hop thoai
+                        }
+                        return  false;
+                    }
+                });
+
+                popupMenu.show();
             }
         });
+
+
+
+
     }
 
     @Override
@@ -104,13 +125,13 @@ public class TheLoaiPhimAdapter extends RecyclerView.Adapter<TheLoaiPhimAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtID_TL_item, txttenTheLoai_item;
-        ImageView btnDelete_theloai;
+        ImageView chon;
         LinearLayout dsTheLoaiPhim;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtID_TL_item = itemView.findViewById(R.id.txtID_TL_item);
             txttenTheLoai_item = itemView.findViewById(R.id.txttenTheLoai_item);
-            btnDelete_theloai = itemView.findViewById(R.id.btnDelete_theloai);
+            chon = itemView.findViewById(R.id.img_Chon);
             dsTheLoaiPhim = itemView.findViewById(R.id.DSTheLoaiPhim);
         }
     }

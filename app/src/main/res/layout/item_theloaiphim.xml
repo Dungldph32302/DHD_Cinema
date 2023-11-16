@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_margin="5dp"
-        android:background="#5BF38EDD"
         android:padding="10dp"
         android:id="@+id/DSTheLoaiPhim">
 
@@ -48,8 +47,8 @@
                 android:textSize="17sp" />
         </LinearLayout>
         <ImageView
-            android:id="@+id/btnDelete_theloai"
-            android:src="@drawable/baseline_delete_24"
+            android:id="@+id/img_Chon"
+            android:src="@drawable/img_3cham"
             android:layout_width="30dp"
             android:layout_height="30dp"/>
     </LinearLayout>

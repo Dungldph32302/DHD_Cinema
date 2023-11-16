@@ -10,12 +10,14 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.Base64;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.dhd_cinema.Dao.GheDao;
 import com.example.dhd_cinema.Dao.PhimDao;
 import com.example.dhd_cinema.Dao.TheLoaiPhimDao;
 import com.example.dhd_cinema.Model.Phim;
@@ -72,46 +75,67 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
                 .load(bitmap)
                 .into(holder.anh);
 
-        holder.btnDelete_phim.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Cảnh Báo"); //set tieu de cho hop thoai
-                builder.setIcon(R.drawable.baseline_warning_24); //icon cho hop thoai
-                builder.setMessage("Bạn Có Muốn Xóa Phim Này Không?"); //chuoi thong bao
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        holder.chon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popupMenu = new PopupMenu(context, view);
+                popupMenu.getMenuInflater().inflate(R.menu.popumenu, popupMenu.getMenu());
+
+                // Bắt sự kiện khi một mục trong menu được chọn
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        phimDao = new PhimDao(context);
-                        int check = phimDao.delete(list.get(holder.getAdapterPosition()).getID_Phim());
-                        switch (check) {
-                            case 1:
-                                list.clear();
-                                list = phimDao.selectAllPhim();
-                                notifyDataSetChanged();
-                                Toast.makeText(context, "Xóa thành công!!!", Toast.LENGTH_SHORT).show();
-                                break;
-                            case -1:
-                                Toast.makeText(context, "Không Thể Xóa vì Phim Đang Có Trong Suất CHiếu!!!", Toast.LENGTH_SHORT).show();
-                                break;
-                            case 0:
-                                Toast.makeText(context, "Xóa không thành công!!!", Toast.LENGTH_SHORT).show();
+                    public boolean onMenuItemClick(MenuItem item) {
+                        int itemId = item.getItemId();
+
+                        if (itemId == R.id.action_custom){
+                            // Xử lý khi chọn tùy chỉnh
+                            showDialogSua(list.get(position));
+                            return true;
+                        } else if (itemId == R.id.action_delete) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setTitle("Cảnh Báo"); //set tieu de cho hop thoai
+                            builder.setIcon(R.drawable.baseline_warning_24); //icon cho hop thoai
+                            builder.setMessage("Bạn Có Muốn Xóa Phim Này Không?"); //chuoi thong bao
+                            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    phimDao = new PhimDao(context);
+                                    int check = phimDao.delete(list.get(holder.getAdapterPosition()).getID_Phim());
+                                    switch (check) {
+                                        case 1:
+                                            list.clear();
+                                            list = phimDao.selectAllPhim();
+                                            notifyDataSetChanged();
+                                            Toast.makeText(context, "Xóa thành công!!!", Toast.LENGTH_SHORT).show();
+                                            break;
+                                        case -1:
+                                            Toast.makeText(context, "Không Thể Xóa vì Phim Đang Có Trong Suất CHiếu!!!", Toast.LENGTH_SHORT).show();
+                                            break;
+                                        case 0:
+                                            Toast.makeText(context, "Xóa không thành công!!!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                            //nut no
+                            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Toast.makeText(context, "Không Xóa", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                            // tao va hien thi hop thoai
+                            AlertDialog dialog = builder.create();// tao hop thoai
+                            dialog.show();//hien thi hop thoai
                         }
+                        return  false;
                     }
                 });
-                //nut no
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(context, "Không Xóa", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                // tao va hien thi hop thoai
-                AlertDialog dialog = builder.create();// tao hop thoai
-                dialog.show();//hien thi hop thoai
+
+                popupMenu.show();
             }
         });
+
 
         Phim ls = list.get(position);
         holder.dsPhim.setOnClickListener(new View.OnClickListener() {
@@ -120,13 +144,6 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
                 DSPhim(ls);
             }
         });
-        holder.btnUpdate_phim.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialogSua(ls);
-            }
-        });
-
     }
 
     @Override
@@ -136,7 +153,7 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtTenPhim_item, txtDaoDien_item, txtNgayPhatHanh_item, txtAnh;
-        ImageView btnDelete_phim, btnUpdate_phim;
+        ImageView chon;
         LinearLayout dsPhim;
         ImageView anh;
         public ViewHolder(@NonNull View itemView) {
@@ -144,8 +161,7 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
             txtTenPhim_item = itemView.findViewById(R.id.txtTenPhim_item);
             txtDaoDien_item = itemView.findViewById(R.id.txtDaoDien_item);
             txtNgayPhatHanh_item = itemView.findViewById(R.id.txtNgayPhatHanh_item);
-            btnDelete_phim = itemView.findViewById(R.id.btnDelete_Phim);
-            btnUpdate_phim = itemView.findViewById(R.id.btnUpdate_Phim);
+            chon = itemView.findViewById(R.id.img_chon);
             dsPhim = itemView.findViewById(R.id.DSPhim);
 
             anh=itemView.findViewById(R.id.imageView);
@@ -164,6 +180,7 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
         builder.setView(view); //gan view cho hop thoai
 
         //anh xa cac thanh phan widget
+        ImageView anh =view.findViewById(R.id.imageView2);
         TextView txtID_Phim_chiTiet = view.findViewById(R.id.txtID_Phim_chiTiet);
         TextView txtID_TL_chiTiet = view.findViewById(R.id.txtID_TL_chiTiet);
         TextView txtTenPhim_chiTiet = view.findViewById(R.id.txtTenPhim_chiTiet);
@@ -179,6 +196,18 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
         txtDaoDien_chiTiet.setText(phim.getDaoDien());
         txtNgayPhatHanh_chiTiet.setText(phim.getNgayPhatHanh());
         txtMoTa_chiTiet.setText(phim.getMota());
+        String base64String = phim.getAnh();
+
+// Giải mã chuỗi Base64 thành mảng byte
+        byte[] decodedByteArray = Base64.decode(base64String, Base64.DEFAULT);
+
+// Chuyển đổi mảng byte thành Bitmap
+        Bitmap bitmap = BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.length);
+
+// Hiển thị Bitmap bằng Glide
+        Glide.with(context)
+                .load(bitmap)
+                .into(anh);
 
         //nut no
         btnExit_chiTiet.setOnClickListener(new View.OnClickListener() {

@@ -21,8 +21,7 @@ public class Dbhelper extends SQLiteOpenHelper {
                 "      TenDangNhap TEXT not null,\n" +
                 "      Email TEXT not null,\n" +
                 "      SDT TEXT not null,\n" +
-                "      MatKhau TEXT not null,\n" +
-                "      Quyen integer not null)");
+                "      MatKhau TEXT not null)");
 
         db.execSQL("create table TheLoai(\n" +
                 "      ID_TL integer primary key autoincrement,\n" +
@@ -78,7 +77,7 @@ public class Dbhelper extends SQLiteOpenHelper {
                 "      TrangThai int not null)");
 
 // Thêm dữ liệu vào bảng NguoiDung
-        db.execSQL("INSERT INTO NguoiDung (ID_ND,TenDangNhap, Email, SDT, MatKhau, Quyen) VALUES (1,'user1', 'user1@example.com', '123456789', 'password1', 1)");
+        db.execSQL("INSERT INTO NguoiDung (ID_ND, TenDangNhap, Email, SDT, MatKhau) VALUES (1,'admin', 'user1@example.com', '123456789', 'admin')");
 
 // Thêm dữ liệu vào bảng TheLoai
         db.execSQL("INSERT INTO TheLoai (TenTheLoai) VALUES ('TenTheLoai1')");
