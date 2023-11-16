@@ -5,13 +5,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="10dp"
     tools:context=".Framgment.Fragment_ThemSuatChieu">
 
+    <TextView
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:text="Tạo xuất chiếu"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chọn phim :"
+
+        android:textStyle="bold"
+        />
     <Spinner
         android:id="@+id/spinnerPhim"
         android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
         android:layout_width="300dp"
         android:layout_height="180dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chọn Phòng :"
+        android:textStyle="bold"
+        />
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="300dp"
+        android:layout_height="60dp"/>
+
+    <EditText
+        android:hint="dd-mm-yyyy"
+        android:textSize="20dp"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:background="@drawable/edittextngay"
+        />
 
 </LinearLayout>

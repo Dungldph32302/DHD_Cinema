@@ -44,9 +44,7 @@ public class Dbhelper extends SQLiteOpenHelper {
 
         db.execSQL("create table Ghe(\n" +
                 "      ID_Ghe integer primary key autoincrement,\n" +
-                "      ID_Phong integer REFERENCES PhongChieu(ID_Phong),\n" +
-                "      SoGhe TEXT not null,\n" +
-                "      TrangThai integer not null)");
+                "      SoGhe TEXT not null)");
 
         db.execSQL("create table SuatChieu(\n" +
                 "      ID_SC integer primary key autoincrement,\n" +
@@ -93,8 +91,13 @@ public class Dbhelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO PhongChieu (TenPhong, SoCho, LoaiPhong) VALUES ('Phong2', 50, 2)");
 
 // Thêm dữ liệu vào bảng Ghe
-        db.execSQL("INSERT INTO Ghe (ID_Phong, SoGhe, TrangThai) VALUES (1, 'A1', 0)");
-        db.execSQL("INSERT INTO Ghe (ID_Phong, SoGhe, TrangThai) VALUES (1, 'A2', 1)");
+        for (int i=1;i<=10;i++){
+            db.execSQL("INSERT INTO Ghe ( SoGhe) VALUES ('A'+i)");
+            db.execSQL("INSERT INTO Ghe ( SoGhe) VALUES ('B'+i)");
+            db.execSQL("INSERT INTO Ghe ( SoGhe) VALUES ('C'+i)");
+            db.execSQL("INSERT INTO Ghe ( SoGhe) VALUES ('D'+i)");
+            db.execSQL("INSERT INTO Ghe ( SoGhe) VALUES ('E'+i)");
+        }
 // Thêm dữ liệu vào bảng SuatChieu
         db.execSQL("INSERT INTO SuatChieu (ID_Phim, ID_Phong, GioChieu, Gia) VALUES (1, 1, '18:00', 100000)");
         db.execSQL("INSERT INTO SuatChieu (ID_Phim, ID_Phong, GioChieu, Gia) VALUES (1, 2, '20:00', 100000)");
