@@ -2,10 +2,12 @@ package com.example.dhd_cinema.Framgment;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -49,7 +51,8 @@ public class Fragment_Phim extends Fragment {
         fltAddPhim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialogThem();
+               // Intent intent = new Intent(Fragment_Phim.this, Fragment_ThemPhim.class);
+                //showDialogThem();
             }
         });
         return view;
@@ -59,11 +62,11 @@ public class Fragment_Phim extends Fragment {
         phimDao = new PhimDao(getContext());
         list = phimDao.selectAllPhim();
 
-        GridLayoutManager manager= new GridLayoutManager(getActivity(),2);
-        rcvQLPhim.setLayoutManager(manager);
+//        GridLayoutManager manager= new GridLayoutManager(getActivity(),2);
+//        rcvQLPhim.setLayoutManager(manager);
 
-        // LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        // rcvQLPhim.setLayoutManager(linearLayoutManager);
+         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+         rcvQLPhim.setLayoutManager(linearLayoutManager);
         AdapterPhim adapter = new AdapterPhim(getContext(),list);
         rcvQLPhim.setAdapter(adapter);
     }
