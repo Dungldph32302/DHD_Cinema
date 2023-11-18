@@ -2,10 +2,18 @@ package com.example.dhd_cinema.Model;
 
 public class SuatChieuModel {
     private int id,idPhim,idPhong,gia;
-    private String gioChieu,anh,tenPhim,tenPhong;
+    private String gioChieu,anh,tenPhim,tenPhong,ngayChieu;
 
 
     public SuatChieuModel() {
+    }
+
+    public String getNgayChieu() {
+        return ngayChieu;
+    }
+
+    public void setNgayChieu(String ngayChieu) {
+        this.ngayChieu = ngayChieu;
     }
 
     public String getAnh() {

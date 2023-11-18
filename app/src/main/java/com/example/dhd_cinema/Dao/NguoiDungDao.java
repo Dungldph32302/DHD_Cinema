@@ -55,7 +55,7 @@ public class NguoiDungDao {
     public boolean insert(NguoiDung tt) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();//ghi du lieu vao database
         ContentValues values = new ContentValues();//đưa du lieu vao database
-        values.put("TenDangNhap", tt.getTenDangNhap());
+        values.put("HoTen", tt.getTenDangNhap());
         values.put("Email", tt.getEmail());
         values.put("SDT", tt.getSDT());
         values.put("MatKhau", tt.getMatKhau());

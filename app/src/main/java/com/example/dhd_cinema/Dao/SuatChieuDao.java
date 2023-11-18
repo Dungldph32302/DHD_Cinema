@@ -43,6 +43,7 @@ public class SuatChieuDao {
                     suatChieuModel.setId(cursor.getInt(cursor.getColumnIndex("ID_SC")));
                     suatChieuModel.setIdPhim(cursor.getInt(cursor.getColumnIndex("ID_Phim")));
                     suatChieuModel.setIdPhong(cursor.getInt(cursor.getColumnIndex("ID_Phong")));
+                    suatChieuModel.setNgayChieu(cursor.getString(cursor.getColumnIndex("NgayChieu")));
                     suatChieuModel.setGioChieu(cursor.getString(cursor.getColumnIndex("GioChieu")));
                     suatChieuModel.setGia(cursor.getInt(cursor.getColumnIndex("Gia")));
                     suatChieuModel.setTenPhim(cursor.getString(cursor.getColumnIndex("TenPhim")));
@@ -73,6 +74,7 @@ public class SuatChieuDao {
         values.put("ID_SC",sp.getId());
         values.put("ID_Phim",sp.getIdPhim());
         values.put("ID_Phong",sp.getIdPhong());
+        values.put("NgayChieu",sp.getNgayChieu());
         values.put("GioChieu",sp.getGioChieu());
         values.put("Gia",sp.getGia());
         long row=db.update("SuatChieu",values,"ID_SC=?",new String[]{String.valueOf(sp.getId())});
@@ -83,6 +85,7 @@ public class SuatChieuDao {
         SQLiteDatabase db=dbhelper.getWritableDatabase();
         values.put("ID_Phim",sp.getIdPhim());
         values.put("ID_Phong",sp.getIdPhong());
+        values.put("NgayChieu",sp.getNgayChieu());
         values.put("GioChieu",sp.getGioChieu());
         values.put("Gia",sp.getGia());
         long row=db.insert("SuatChieu",null,values);

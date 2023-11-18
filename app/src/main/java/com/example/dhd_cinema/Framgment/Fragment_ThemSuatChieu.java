@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import com.example.dhd_cinema.Dao.PhimDao;
 import com.example.dhd_cinema.Dao.PhongDao;
 import com.example.dhd_cinema.Dao.SuatChieuDao;
+import com.example.dhd_cinema.MainActivity;
 import com.example.dhd_cinema.Model.Phim;
 import com.example.dhd_cinema.Model.PhongModel;
 import com.example.dhd_cinema.Model.SuatChieuModel;
@@ -128,13 +129,12 @@ public class Fragment_ThemSuatChieu extends Fragment {
                    suatChieuModel.setIdPhong(selecidPhong);
                    suatChieuModel.setGioChieu(d);
                    suatChieuModel.setGia(Integer.parseInt(g));
-
-                   Toast.makeText(getActivity(), "maphim"+selecidPhim, Toast.LENGTH_SHORT).show();
-                   Toast.makeText(getActivity(), "maphong"+selecidPhong, Toast.LENGTH_SHORT).show();
-                   Toast.makeText(getActivity(), "gio chiếu"+d, Toast.LENGTH_SHORT).show();
-
+                   suatChieuModel.setNgayChieu(n);
                    if(suatChieuDao.addSuatChieu(suatChieuModel)){
                        Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                       MainActivity mainActivity=(MainActivity)getActivity();
+                       Fragment_SuatChieu frg= new Fragment_SuatChieu();
+                       mainActivity.replec(frg);
                    }
                }
             }
