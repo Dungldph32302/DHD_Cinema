@@ -81,7 +81,6 @@ public class SuatChieuDao {
     public boolean addSuatChieu(SuatChieuModel sp){
         ContentValues values=new ContentValues();
         SQLiteDatabase db=dbhelper.getWritableDatabase();
-        values.put("ID_SC",sp.getId());
         values.put("ID_Phim",sp.getIdPhim());
         values.put("ID_Phong",sp.getIdPhong());
         values.put("GioChieu",sp.getGioChieu());

@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.dhd_cinema.Adapter.AdapterPhim;
 import com.example.dhd_cinema.Dao.PhimDao;
 import com.example.dhd_cinema.Dao.TheLoaiPhimDao;
+import com.example.dhd_cinema.MainActivity;
 import com.example.dhd_cinema.Model.Phim;
 import com.example.dhd_cinema.Model.TheLoaiPhim;
 import com.example.dhd_cinema.R;
@@ -51,8 +52,9 @@ public class Fragment_Phim extends Fragment {
         fltAddPhim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // Intent intent = new Intent(Fragment_Phim.this, Fragment_ThemPhim.class);
-                //showDialogThem();
+                Fragment_ThemPhim frg=new Fragment_ThemPhim();
+                MainActivity mainActivity = (MainActivity) getActivity();
+                mainActivity.replec(frg);
             }
         });
         return view;

@@ -11,7 +11,7 @@ import com.example.dhd_cinema.R;
 public class Dbhelper extends SQLiteOpenHelper {
     private static final String DB="hh";
     public Dbhelper(@Nullable Context context) {
-        super(context, DB,null,13);
+        super(context, DB,null,17);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class Dbhelper extends SQLiteOpenHelper {
                 "      TrangThai int not null)");
 
 // Thêm dữ liệu vào bảng NguoiDung
-        db.execSQL("INSERT INTO NguoiDung (ID_ND, TenDangNhap, Email, SDT, MatKhau) VALUES (1,'admin', 'user1@example.com', '123456789', 'admin')");
+        db.execSQL("INSERT INTO NguoiDung (ID_ND, TenDangNhap, Email, SDT, MatKhau) VALUES (1,'admin', 'hi@gmail.com', '123456789', 'admin')");
 
 // Thêm dữ liệu vào bảng TheLoai
         db.execSQL("INSERT INTO TheLoai (TenTheLoai) VALUES ('TenTheLoai1')");
@@ -91,11 +91,19 @@ public class Dbhelper extends SQLiteOpenHelper {
 
 // Thêm dữ liệu vào bảng Ghe
         for (int i=1;i<=10;i++){
-            db.execSQL("INSERT INTO Ghe ( SoGhe) VALUES ('A'+i)");
-            db.execSQL("INSERT INTO Ghe ( SoGhe) VALUES ('B'+i)");
-            db.execSQL("INSERT INTO Ghe ( SoGhe) VALUES ('C'+i)");
-            db.execSQL("INSERT INTO Ghe ( SoGhe) VALUES ('D'+i)");
-            db.execSQL("INSERT INTO Ghe ( SoGhe) VALUES ('E'+i)");
+            String soGhe = "A" + i;
+            String soGheb = "B" + i;
+            String soGhec = "C" + i;
+            String soGhed = "D" + i;
+            String soGhee = "E" + i;
+
+            db.execSQL("INSERT INTO Ghe (SoGhe) VALUES (?)", new Object[]{soGhe});
+            db.execSQL("INSERT INTO Ghe (SoGhe) VALUES (?)", new Object[]{soGheb});
+            db.execSQL("INSERT INTO Ghe (SoGhe) VALUES (?)", new Object[]{soGhec});
+            db.execSQL("INSERT INTO Ghe (SoGhe) VALUES (?)", new Object[]{soGhed});
+            db.execSQL("INSERT INTO Ghe (SoGhe) VALUES (?)", new Object[]{soGhee});
+
+            
         }
 // Thêm dữ liệu vào bảng SuatChieu
         db.execSQL("INSERT INTO SuatChieu (ID_Phim, ID_Phong, GioChieu, Gia) VALUES (1, 1, '18:00', 100000)");

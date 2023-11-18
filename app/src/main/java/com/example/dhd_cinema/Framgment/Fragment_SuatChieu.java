@@ -1,5 +1,6 @@
 package com.example.dhd_cinema.Framgment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.example.dhd_cinema.Adapter.AdapterPhongChieu;
 import com.example.dhd_cinema.Adapter.AdapterSuatChieu;
 import com.example.dhd_cinema.Dao.PhongDao;
 import com.example.dhd_cinema.Dao.SuatChieuDao;
+import com.example.dhd_cinema.MainActivity;
 import com.example.dhd_cinema.Model.PhongModel;
 import com.example.dhd_cinema.Model.SuatChieuModel;
 import com.example.dhd_cinema.R;
@@ -34,12 +36,13 @@ public class Fragment_SuatChieu extends Fragment {
     ArrayList<SuatChieuModel> list;
     RecyclerView rcv;
     AppCompatButton add;
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
          View view=inflater.inflate(R.layout.fragment_suatchieu, container, false);
          rcv=view.findViewById(R.id.rcvGhe);
-         add=view.findViewById(R.id.addGhe);
+         add=view.findViewById(R.id.addsc);
 
          suatChieuDao= new SuatChieuDao(getActivity());
          list=suatChieuDao.getAllSuatChieuWithInfo();
@@ -48,6 +51,14 @@ public class Fragment_SuatChieu extends Fragment {
         rcv.setLayoutManager(layoutManager);
          adapter= new AdapterSuatChieu(getActivity(),list);
          rcv.setAdapter(adapter);
+         add.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 Fragment_ThemSuatChieu frg=new Fragment_ThemSuatChieu();
+                 MainActivity mainActivity = (MainActivity) getActivity();
+                 mainActivity.replec(frg);
+             }
+         });
 //         add.setOnClickListener(new View.OnClickListener() {
 //             @Override
 //             public void onClick(View view) {

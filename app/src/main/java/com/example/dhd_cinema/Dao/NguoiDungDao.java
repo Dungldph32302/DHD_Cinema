@@ -16,27 +16,25 @@ public class NguoiDungDao {
     public NguoiDungDao(Context context) {
 
         this.dbHelper = new Dbhelper(context);
-
         sharedPreferences = context.getSharedPreferences("ThongTin", Context.MODE_PRIVATE);
     }
 
     // dang nhap
-    public boolean checkDangNhap(String TenDangNhap, String MatKhau) {
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db. rawQuery("select * from NguoiDung where TenDangNhap=? and MatKhau=?", new String[]{TenDangNhap, MatKhau});
-        if (cursor.getCount() != 0){
-            cursor.moveToFirst();
-            // lưu SharedPreferences
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("TenDangNhap", cursor.getString(1));
-            //editor.putString("quyen", cursor.getString(3));
-            //editor.putString("HoTen", cursor.getString(1));
-            editor.commit();
-            return true;
-        }
-        else {
-            return false;
-        }
+    public boolean checkDangNhapGmail(String TenDangNhap, String MatKhau) {
+        SQLiteDatabase db=dbHelper.getWritableDatabase();
+        Cursor cursor=db.rawQuery("select * from NguoiDung where Email=? and MatKhau=?",new String[]{TenDangNhap,MatKhau});
+        int row=cursor.getCount();
+        cursor.close();
+        db.close();
+        return (row>0);
+    }
+    public boolean checkDangNhapSDT(String SDT, String MatKhau) {
+        SQLiteDatabase db=dbHelper.getWritableDatabase();
+        Cursor cursor=db.rawQuery("select * from NguoiDung where SDT=? and MatKhau=?",new String[]{SDT,MatKhau});
+        int row=cursor.getCount();
+        cursor.close();
+        db.close();
+        return (row>0);
     }
 
     public boolean capNhatMatKhau(String TenDangNhap,String oldPass, String newPass){

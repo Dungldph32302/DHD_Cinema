@@ -4,32 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/anh_nen_dang_nhap"
+    android:background="@drawable/img_7"
     tools:context=".Login.DangNhap"
     android:orientation="vertical">
-    <!--    <ImageView-->
-    <!--        android:id="@+id/imageView"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="270dp"-->
-    <!--        app:srcCompat="@drawable/logo" />-->
 
 
-
-    <TextView
+    <ImageView
         android:id="@+id/textVie"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Đăng Nhập"
-        android:textSize="38dp"
-        android:textStyle="bold"
+        android:layout_height="320dp"
+
         android:gravity="center"
-        android:layout_marginTop="150dp"
         android:textColor="#FFFFFF"/>
 
 
     <com.google.android.material.textfield.TextInputLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColorHint="#C9CCC9"
+        android:textColor="#C9CCC9"
         android:id="@+id/textInputLayout1"
         app:passwordToggleEnabled="false"
         android:layout_marginTop="30dp">
@@ -38,9 +32,12 @@
             android:id="@+id/edtUser"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:hint="Tên Đăng Nhập"
+            android:hint="SDT or Email"
             android:layout_margin="10dp"
-            android:textColor="#FFFFFF"/>
+            android:background="@drawable/group1"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+          />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -48,38 +45,32 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColorHint="#C9CCC9"
+        android:textColor="#C9CCC9"
         android:id="@+id/textInputLayout"
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtPass"
             android:layout_width="match_parent"
+            android:background="@drawable/group1_1"
             android:layout_height="55dp"
             android:hint="Mật Khẩu"
             android:inputType="textPassword"
             android:layout_margin="10dp"
-            android:textColor="#FFFFFF"/>
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+
         <CheckBox
             android:id="@+id/chkLuuMatKhau"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nhớ mật Khẩu"
+            android:textColor="#C9CCC9"
+            android:text="  Remenber ?"
             android:layout_marginLeft="10dp"
-            android:textColor="#FFFFFF"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Quên Mật Khẩu?"
-            android:textColor="#FFFFFF"
-            android:layout_marginLeft="150dp"/>
-    </LinearLayout>
+           />
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -88,9 +79,9 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:background="@drawable/brackground_button"
+        android:background="@color/white"
         android:text="Đăng Nhập"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="19dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -100,28 +91,47 @@
         app:layout_constraintVertical_bias="0.443" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/textView"
+        android:textColor="#C9CCC9"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="-----------------------------   Hoặc   -----------------------------"
-        android:textColor="#FFFFFF"
-        android:gravity="center"
-        android:layout_marginTop="20dp"/>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnSinup"
-        android:layout_width="270dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/brackground_button"
-        android:text="Tạo Tài Khoản"
-        android:textColor="@color/white"
-        android:textSize="15dp"
+        android:text="forgot password ? "
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chkRemenber"
-        app:layout_constraintVertical_bias="0.443" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.89" />
 
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.198">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#C9CCC9"
+            android:text="Don't have an account ? " />
+
+        <TextView
+            android:textColor="#C9CCC9"
+            android:id="@+id/TvSign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="Sign Up"
+            android:textStyle="bold" />
+
+</LinearLayout>
 </LinearLayout>
