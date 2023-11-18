@@ -57,7 +57,7 @@ public class AdapterSuatChieu extends RecyclerView.Adapter<AdapterSuatChieu.View
         phongDao= new PhongDao(context);
         SuatChieuModel suatChieuModel= list.get(position);
         holder.name.setText(String.valueOf(list.get(position).getTenPhim()));
-        holder.ngay.setText("Giờ chiếu "+list.get(position).getGioChieu());
+        holder.ngay.setText(list.get(position).getNgayChieu()+"  "+list.get(position).getGioChieu());
 
         String base64String = list.get(position).getAnh();
 

@@ -121,8 +121,6 @@ public class Fragment_ThemSuatChieu extends Fragment {
                String d=gio.getText().toString().trim();
                String g=gia.getText().toString().trim();
 
-                // lấy string từ spinner Thành viên
-
                if(validate(g,n,g)){
                    SuatChieuModel suatChieuModel= new SuatChieuModel();
                    suatChieuModel.setIdPhim(selecidPhim);
@@ -180,8 +178,7 @@ public class Fragment_ThemSuatChieu extends Fragment {
                         } else {
                             thang = String.valueOf((month + 1));
                         }
-                        ngay.setText(ngayy+ "/" + thang + "/" + year);
-
+                        ngay.setText(ngayy+ "-" + thang + "-" + year);
                     }
                 },
                 calendar.get(Calendar.YEAR),

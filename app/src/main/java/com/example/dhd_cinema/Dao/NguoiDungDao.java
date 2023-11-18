@@ -39,11 +39,11 @@ public class NguoiDungDao {
 
     public boolean capNhatMatKhau(String TenDangNhap,String oldPass, String newPass){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Cursor cursor = db.rawQuery("select * from NguoiDung where TenDangNhap=? and MatKhau=?", new String[]{TenDangNhap, oldPass});
+        Cursor cursor = db.rawQuery("select * from NguoiDung where HoTen=? and MatKhau=?", new String[]{TenDangNhap, oldPass});
         if (cursor.getCount() > 0){
             ContentValues cs = new ContentValues();
             cs.put("MatKhau", newPass);
-            long check = db.update("NguoiDung", cs, "TenDangNhap=?", new String[]{TenDangNhap});
+            long check = db.update("NguoiDung", cs, "HoTen=?", new String[]{TenDangNhap});
             if (check == -1){
                 return false;
             }

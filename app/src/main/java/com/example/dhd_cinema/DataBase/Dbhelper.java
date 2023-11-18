@@ -11,7 +11,7 @@ import com.example.dhd_cinema.R;
 public class Dbhelper extends SQLiteOpenHelper {
     private static final String DB="hh";
     public Dbhelper(@Nullable Context context) {
-        super(context, DB,null,17);
+        super(context, DB,null,20);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class Dbhelper extends SQLiteOpenHelper {
                 "      TrangThai int not null)");
 
 // Thêm dữ liệu vào bảng NguoiDung
-        db.execSQL("INSERT INTO NguoiDung (ID_ND, TenDangNhap, Email, SDT, MatKhau) VALUES (1,'admin', 'hi@gmail.com', '123456789', 'admin')");
+        db.execSQL("INSERT INTO NguoiDung (ID_ND, HoTen, Email, SDT, MatKhau) VALUES (1,'admin', 'hi@gmail.com', '123456789', 'admin')");
 
 // Thêm dữ liệu vào bảng TheLoai
         db.execSQL("INSERT INTO TheLoai (TenTheLoai) VALUES ('TenTheLoai1')");
@@ -105,10 +105,8 @@ public class Dbhelper extends SQLiteOpenHelper {
             
         }
 // Thêm dữ liệu vào bảng SuatChieu
-        db.execSQL("INSERT INTO SuatChieu (ID_Phim, ID_Phong, GioChieu, Gia) VALUES (1, 1, '18:00', 100000)");
-        db.execSQL("INSERT INTO SuatChieu (ID_Phim, ID_Phong, GioChieu, Gia) VALUES (1, 2, '20:00', 100000)");
-        db.execSQL("INSERT INTO SuatChieu (ID_Phim, ID_Phong, GioChieu, Gia) VALUES (1, 1, '18:00', 100000)");
-        db.execSQL("INSERT INTO SuatChieu (ID_Phim, ID_Phong, GioChieu, Gia) VALUES (1, 2, '20:00', 100000)");
+        db.execSQL("INSERT INTO SuatChieu (ID_Phim, ID_Phong, NgayChieu,GioChieu, Gia) VALUES (1, 1, '10-20-2023','18:00', 100000)");
+        db.execSQL("INSERT INTO SuatChieu (ID_Phim, ID_Phong, NgayChieu,GioChieu, Gia) VALUES (1, 2,'10-20-2023', '20:00', 100000)");
 // Thêm dữ liệu vào bảng Ve
         db.execSQL("INSERT INTO Ve (ID_ND, ID_SC, ID_Ghe, ThoiGian) VALUES (1, 1, 1, '2023-11-12 18:00')");
 
@@ -133,7 +131,6 @@ public class Dbhelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS Ve");
             db.execSQL("DROP TABLE IF EXISTS DanhGiaPhim");
             db.execSQL("DROP TABLE IF EXISTS HoaDon");
-
             onCreate(db);// goi lai ham  onCreate
 
 
