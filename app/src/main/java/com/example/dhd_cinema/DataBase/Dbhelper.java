@@ -11,7 +11,7 @@ import com.example.dhd_cinema.R;
 public class Dbhelper extends SQLiteOpenHelper {
     private static final String DB="hh";
     public Dbhelper(@Nullable Context context) {
-        super(context, DB,null,20);
+        super(context, DB,null,21);
     }
 
     @Override
@@ -41,11 +41,15 @@ public class Dbhelper extends SQLiteOpenHelper {
                 "      TenPhong TEXT not null,\n" +
                 "      SoCho interger not null,\n" +
                 "      LoaiPhong integer not null)");
-
         db.execSQL("create table Ghe(\n" +
                 "      ID_Ghe integer primary key autoincrement,\n" +
                 "      SoGhe TEXT not null)");
 
+        db.execSQL("create table Phong_Ghe(\n" +
+                "      ID integer primary key autoincrement,\n" +
+                "      ID_Phong integer REFERENCES PhongChieu(ID_Phong),\n" +
+                "      ID_Ghe integer REFERENCES Ghe(ID_Ghe),\n" +
+                "      TrangThai integer not null)");
         db.execSQL("create table SuatChieu(\n" +
                 "      ID_SC integer primary key autoincrement,\n" +
                 "      ID_Phim integer REFERENCES Phim(ID_Phim),\n" +
@@ -58,7 +62,7 @@ public class Dbhelper extends SQLiteOpenHelper {
                 "      ID_Ve integer primary key autoincrement,\n" +
                 "      ID_ND integer REFERENCES NguoiDung(ID_ND),\n" +
                 "      ID_SC integer REFERENCES SuatChieu(ID_SC),\n" +
-                "      ID_Ghe integer REFERENCES Ghe(ID_Ghe),\n" +
+                "      ID integer REFERENCES Phong_Ghe(ID),\n" +
                 "      ThoiGian TEXT not null)");
 
         db.execSQL("create table DanhGiaPhim(\n" +
@@ -104,11 +108,14 @@ public class Dbhelper extends SQLiteOpenHelper {
 
             
         }
+
+        db.execSQL("INSERT INTO Phong_Ghe (ID_Phong, ID_Ghe, TrangThai) VALUES (1, 1, 1)");
 // Thêm dữ liệu vào bảng SuatChieu
         db.execSQL("INSERT INTO SuatChieu (ID_Phim, ID_Phong, NgayChieu,GioChieu, Gia) VALUES (1, 1, '10-20-2023','18:00', 100000)");
         db.execSQL("INSERT INTO SuatChieu (ID_Phim, ID_Phong, NgayChieu,GioChieu, Gia) VALUES (1, 2,'10-20-2023', '20:00', 100000)");
+
 // Thêm dữ liệu vào bảng Ve
-        db.execSQL("INSERT INTO Ve (ID_ND, ID_SC, ID_Ghe, ThoiGian) VALUES (1, 1, 1, '2023-11-12 18:00')");
+        db.execSQL("INSERT INTO Ve (ID_ND, ID_SC, ID, ThoiGian) VALUES (1, 1, 1, '2023-11-12 18:00')");
 
 // Thêm dữ liệu vào bảng DanhGiaPhim
         db.execSQL("INSERT INTO DanhGiaPhim (ID_ND, ID_Phim, NoiDung, Sao) VALUES (1, 1, 'Danh gia phim 1', 5)");

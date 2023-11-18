@@ -52,7 +52,6 @@ public class AdapterGhe extends RecyclerView.Adapter<AdapterGhe.ViewHolder>{
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             holder.name.setText(list.get(position).getSoGhe());
             holder.id.setText("ID : "+String.valueOf(list.get(position).getId()));
-            holder.phong.setText("ID Phòng : "+String.valueOf(list.get(position).getIdPhong()));
             dao= new GheDao(context);
             GheModel ghe=list.get(position);
             if(list.get(position).getTrangThai()==0){
@@ -149,14 +148,12 @@ public class AdapterGhe extends RecyclerView.Adapter<AdapterGhe.ViewHolder>{
         dialog.show();
         TextView id=view.findViewById(R.id.TVmaGhe);
         AppCompatEditText idp,soghe;
-        idp=view.findViewById(R.id.txtIDP);
         soghe=view.findViewById(R.id.txtSG);
         Button update,canel;
         update=view.findViewById(R.id.btnUpdateTV);
         canel=view.findViewById(R.id.btncanelTV);
 
         id.setText("Mã: "+String.valueOf(dv.getId()));
-        idp.setText(String.valueOf(dv.getIdPhong()));
         soghe.setText(dv.getSoGhe());
         // xử lý khi ấn hủy
         canel.setOnClickListener(new View.OnClickListener() {
@@ -168,17 +165,14 @@ public class AdapterGhe extends RecyclerView.Adapter<AdapterGhe.ViewHolder>{
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String idphong=idp.getText().toString().trim();
+
                 String ten = soghe.getText().toString().trim();
-                if(idphong.isEmpty()){
-                    Toast.makeText(context, "Không để trống ID Phòng", Toast.LENGTH_SHORT).show();
-                } else if (ten.isEmpty()) {
+               if (ten.isEmpty()) {
                     Toast.makeText(context, "Không để trống Số ghế", Toast.LENGTH_SHORT).show();
                 } else {
                     int idghe=dv.getId();
                     try {
                         dv.setId(idghe);
-                        dv.setIdPhong(Integer.parseInt(idphong));
                         dv.setSoGhe(ten);
                         dv.setTrangThai(dv.getTrangThai());
 

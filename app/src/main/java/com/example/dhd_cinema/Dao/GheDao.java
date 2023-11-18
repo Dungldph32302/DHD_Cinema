@@ -32,9 +32,7 @@ public class GheDao {
                 while (!cursor.isAfterLast()){
                     GheModel sp= new GheModel();
                     sp.setId(cursor.getInt(0));
-                    sp.setIdPhong(cursor.getInt(1));
-                    sp.setSoGhe(cursor.getString(2));
-                    sp.setTrangThai(cursor.getInt(3));
+                    sp.setSoGhe(cursor.getString(1));
                     list.add(sp);
                     cursor.moveToNext();
                 }
@@ -53,18 +51,14 @@ public class GheDao {
         ContentValues values=new ContentValues();
         SQLiteDatabase db=dbhelper.getWritableDatabase();
         values.put("ID_Ghe",sp.getId());
-        values.put("ID_Phong",sp.getIdPhong());
         values.put("SoGhe",sp.getSoGhe());
-        values.put("TrangThai",sp.getTrangThai());
         long row=db.update("Ghe",values,"ID_Ghe=?",new String[]{String.valueOf(sp.getId())});
         return (row>0);
     }
     public boolean addGhe(GheModel sp){
         ContentValues values=new ContentValues();
         SQLiteDatabase db=dbhelper.getWritableDatabase();
-        values.put("ID_Phong",sp.getIdPhong());
         values.put("SoGhe",sp.getSoGhe());
-        values.put("TrangThai",sp.getTrangThai());
         long row=db.insert("Ghe",null,values);
         return (row>0);
     }

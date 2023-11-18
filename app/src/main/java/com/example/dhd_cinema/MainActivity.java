@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 // doi ten titel
                 getSupportActionBar().setTitle(item.getTitle());
-                // bam vao item no ao ra
+//                // bam vao item no ao ra
                 drawable.closeDrawer(GravityCompat.START);
                 return true;
             }
