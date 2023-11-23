@@ -36,6 +36,8 @@ public class DangNhap extends AppCompatActivity {
                     if(dao.checkDangNhapSDT(user,pass)||dao.checkDangNhapGmail(user,pass)){
                         Toast.makeText(DangNhap.this, "Đang nhập thành công ", Toast.LENGTH_SHORT).show();
                         Intent intent=new Intent(DangNhap.this, MainActivity.class);
+                        intent.putExtra("user",user);
+
                         startActivity(intent);
                     }else {
                         Toast.makeText(DangNhap.this, "Đang nhập thất bại", Toast.LENGTH_SHORT).show();
