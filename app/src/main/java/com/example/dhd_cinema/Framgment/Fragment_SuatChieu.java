@@ -46,7 +46,7 @@ public class Fragment_SuatChieu extends Fragment {
 
          suatChieuDao= new SuatChieuDao(getActivity());
          list=suatChieuDao.getAllSuatChieuWithInfo();
-        int spanCount = 3; // Số cột hoặc hàng trong lưới
+        int spanCount = 2; // Số cột hoặc hàng trong lưới
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), spanCount);
         rcv.setLayoutManager(layoutManager);
          adapter= new AdapterSuatChieu(getActivity(),list);

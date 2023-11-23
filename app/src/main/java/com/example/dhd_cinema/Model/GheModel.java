@@ -3,8 +3,17 @@ package com.example.dhd_cinema.Model;
 public class GheModel {
     private int id,idPhong,trangThai;
     private String soGhe;
+    private boolean chon;
 
     public GheModel() {
+    }
+
+    public boolean isChon() {
+        return chon;
+    }
+
+    public void setChon(boolean chon) {
+        this.chon = chon;
     }
 
     public GheModel(int idPhong, int trangThai, String soGhe) {

@@ -15,6 +15,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.dhd_cinema.Framgment.FragmentAllHoaDon;
+import com.example.dhd_cinema.Framgment.Fragment_DatPhim;
 import com.example.dhd_cinema.Framgment.Fragment_Phim;
 import com.example.dhd_cinema.Framgment.Fragment_PhongChieu;
 import com.example.dhd_cinema.Framgment.Fragment_SuatChieu;
@@ -66,9 +68,11 @@ public class MainActivity extends AppCompatActivity {
                     replec(frg);
 
                 } else if (item.getItemId()==R.id.sanPham) {
-
-                }else if (item.getItemId()==R.id.sanPham) {
-
+                    Fragment_DatPhim frg= new Fragment_DatPhim();
+                    replec(frg);
+                }else if (item.getItemId()==R.id.thongtin) {
+                    FragmentAllHoaDon frg= new FragmentAllHoaDon();
+                    replec(frg);
 
                 }
                 return true;

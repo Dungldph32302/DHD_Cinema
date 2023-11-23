@@ -11,7 +11,7 @@ import com.example.dhd_cinema.R;
 public class Dbhelper extends SQLiteOpenHelper {
     private static final String DB="hh";
     public Dbhelper(@Nullable Context context) {
-        super(context, DB,null,21);
+        super(context, DB,null,31);
     }
 
     @Override
@@ -39,17 +39,12 @@ public class Dbhelper extends SQLiteOpenHelper {
         db.execSQL("create table PhongChieu(\n" +
                 "      ID_Phong integer primary key autoincrement,\n" +
                 "      TenPhong TEXT not null,\n" +
-                "      SoCho interger not null,\n" +
+                "      SoCho integer not null,\n" +
                 "      LoaiPhong integer not null)");
         db.execSQL("create table Ghe(\n" +
                 "      ID_Ghe integer primary key autoincrement,\n" +
                 "      SoGhe TEXT not null)");
 
-        db.execSQL("create table Phong_Ghe(\n" +
-                "      ID integer primary key autoincrement,\n" +
-                "      ID_Phong integer REFERENCES PhongChieu(ID_Phong),\n" +
-                "      ID_Ghe integer REFERENCES Ghe(ID_Ghe),\n" +
-                "      TrangThai integer not null)");
         db.execSQL("create table SuatChieu(\n" +
                 "      ID_SC integer primary key autoincrement,\n" +
                 "      ID_Phim integer REFERENCES Phim(ID_Phim),\n" +
@@ -62,7 +57,9 @@ public class Dbhelper extends SQLiteOpenHelper {
                 "      ID_Ve integer primary key autoincrement,\n" +
                 "      ID_ND integer REFERENCES NguoiDung(ID_ND),\n" +
                 "      ID_SC integer REFERENCES SuatChieu(ID_SC),\n" +
-                "      ID integer REFERENCES Phong_Ghe(ID),\n" +
+                "      ID_Ghe integer REFERENCES Ghe(ID_Ghe),\n" +
+                "      ID_HD integer REFERENCES HoaDon(ID_HD),\n" +
+                "      gia integer ,\n" +
                 "      ThoiGian TEXT not null)");
 
         db.execSQL("create table DanhGiaPhim(\n" +
@@ -75,10 +72,11 @@ public class Dbhelper extends SQLiteOpenHelper {
         db.execSQL("create table HoaDon(\n" +
                 "      ID_HD integer primary key autoincrement,\n" +
                 "      ID_ND integer REFERENCES NguoiDung(ID_ND),\n" +
-                "      ID_Ve integer REFERENCES Ve(ID_Ve),\n" +
-                "      TongTien Integer not null,\n" +
-                "      PhuongThuc integer not null,\n" +
+                "      sl integer not null,\n" +
+                "      TongTien Integer not null,\n"+
+                "      PhuongThuc integer not null,\n"+
                 "      TrangThai int not null)");
+
 
 // Thêm dữ liệu vào bảng NguoiDung
         db.execSQL("INSERT INTO NguoiDung (ID_ND, HoTen, Email, SDT, MatKhau) VALUES (1,'admin', 'hi@gmail.com', '123456789', 'admin')");
@@ -90,38 +88,53 @@ public class Dbhelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Phim (ID_TL, TenPhim, DaoDien, NgayPhatHanh, Mota, Anh) VALUES ( 1,'TenPhim1', 'DaoDien1', '2023-11-12', 'Mo ta phim 1','android.resource://\" + context.getPackageName() + \"/drawable/img_3')");
         db.execSQL("INSERT INTO Phim (ID_TL,TenPhim, DaoDien, NgayPhatHanh, Mota, Anh) VALUES (1,'TenPhim2', 'DaoDien2', '2023-11-12', 'Mo ta phim 2', 'android.resource://\" + context.getPackageName() + \"/drawable/img_4')");
 // Thêm dữ liệu vào bảng PhongChieu
-        db.execSQL("INSERT INTO PhongChieu (TenPhong, SoCho, LoaiPhong) VALUES ('Phong1', 100, 1)");
+        db.execSQL("INSERT INTO PhongChieu (TenPhong, SoCho, LoaiPhong) VALUES ('Phong1', 50, 1)");
         db.execSQL("INSERT INTO PhongChieu (TenPhong, SoCho, LoaiPhong) VALUES ('Phong2', 50, 2)");
+        db.execSQL("INSERT INTO PhongChieu (TenPhong, SoCho, LoaiPhong) VALUES ('Phong3', 50, 3)");
+        db.execSQL("INSERT INTO PhongChieu (TenPhong, SoCho, LoaiPhong) VALUES ('Phong4', 50, 4)");
+        db.execSQL("INSERT INTO PhongChieu (TenPhong, SoCho, LoaiPhong) VALUES ('Phong5', 50, 1)");
 // Thêm dữ liệu vào bảng Ghe
         for (int i=1;i<=10;i++){
             String soGhe = "A" + i;
-            String soGheb = "B" + i;
-            String soGhec = "C" + i;
-            String soGhed = "D" + i;
-            String soGhee = "E" + i;
-
             db.execSQL("INSERT INTO Ghe (SoGhe) VALUES (?)", new Object[]{soGhe});
-            db.execSQL("INSERT INTO Ghe (SoGhe) VALUES (?)", new Object[]{soGheb});
-            db.execSQL("INSERT INTO Ghe (SoGhe) VALUES (?)", new Object[]{soGhec});
-            db.execSQL("INSERT INTO Ghe (SoGhe) VALUES (?)", new Object[]{soGhed});
-            db.execSQL("INSERT INTO Ghe (SoGhe) VALUES (?)", new Object[]{soGhee});
 
-            
+        }
+        for (int i=1;i<=10;i++){
+            String soGheb = "B" + i;
+            db.execSQL("INSERT INTO Ghe (SoGhe) VALUES (?)", new Object[]{soGheb});
+        }
+        for (int i=1;i<=10;i++){
+
+            String soGhec = "C" + i;
+
+            db.execSQL("INSERT INTO Ghe (SoGhe) VALUES (?)", new Object[]{soGhec});
+
         }
 
-        db.execSQL("INSERT INTO Phong_Ghe (ID_Phong, ID_Ghe, TrangThai) VALUES (1, 1, 1)");
+        for (int i=1;i<=10;i++){
+           ;
+            String soGhed = "D" + i;
+            db.execSQL("INSERT INTO Ghe (SoGhe) VALUES (?)", new Object[]{soGhed});
+        }
+        for (int i=1;i<=10;i++){
+            String soGhee = "E" + i;
+            db.execSQL("INSERT INTO Ghe (SoGhe) VALUES (?)", new Object[]{soGhee});
+        }
+
 // Thêm dữ liệu vào bảng SuatChieu
         db.execSQL("INSERT INTO SuatChieu (ID_Phim, ID_Phong, NgayChieu,GioChieu, Gia) VALUES (1, 1, '10-20-2023','18:00', 100000)");
-        db.execSQL("INSERT INTO SuatChieu (ID_Phim, ID_Phong, NgayChieu,GioChieu, Gia) VALUES (1, 2,'10-20-2023', '20:00', 100000)");
+        db.execSQL("INSERT INTO SuatChieu (ID_Phim, ID_Phong, NgayChieu,GioChieu, Gia) VALUES (1, 2,'10-20-2023', '20:00', 20000)");
 
 // Thêm dữ liệu vào bảng Ve
-        db.execSQL("INSERT INTO Ve (ID_ND, ID_SC, ID, ThoiGian) VALUES (1, 1, 1, '2023-11-12 18:00')");
+        db.execSQL("INSERT INTO Ve  VALUES (1, 1, 1,1,1,45000, '2023-11-12 18:00')");
+        db.execSQL("INSERT INTO Ve  VALUES (2, 1, 1,2,1,45000, '2023-11-12 18:00')");
 
+        db.execSQL("INSERT INTO HoaDon  VALUES (1,1, 2, 90000, 1, 1)");
 // Thêm dữ liệu vào bảng DanhGiaPhim
         db.execSQL("INSERT INTO DanhGiaPhim (ID_ND, ID_Phim, NoiDung, Sao) VALUES (1, 1, 'Danh gia phim 1', 5)");
 
 // Thêm dữ liệu vào bảng HoaDon
-        db.execSQL("INSERT INTO HoaDon (ID_ND, ID_Ve, TongTien, PhuongThuc, TrangThai) VALUES (1, 1, 100000, 1, 1)");
+
 
 
     }
@@ -135,9 +148,10 @@ public class Dbhelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS PhongChieu");
             db.execSQL("DROP TABLE IF EXISTS Ghe");
             db.execSQL("DROP TABLE IF EXISTS SuatChieu");
+            db.execSQL("DROP TABLE IF EXISTS HoaDon");
             db.execSQL("DROP TABLE IF EXISTS Ve");
             db.execSQL("DROP TABLE IF EXISTS DanhGiaPhim");
-            db.execSQL("DROP TABLE IF EXISTS HoaDon");
+
             onCreate(db);// goi lai ham  onCreate
 
 

@@ -63,6 +63,45 @@ public class SuatChieuDao {
         return list;
     }
 
+        @SuppressLint("Range")
+        public SuatChieuModel getSuatChieuById(int suatChieuId) {
+            SuatChieuModel suatChieuModel = null;
+            SQLiteDatabase db = dbhelper.getReadableDatabase();
+
+            try {
+                String query = "SELECT SuatChieu.*, Phim.TenPhim, Phim.Anh, PhongChieu.TenPhong " +
+                        "FROM SuatChieu " +
+                        "INNER JOIN Phim ON SuatChieu.ID_Phim = Phim.ID_Phim " +
+                        "INNER JOIN PhongChieu ON SuatChieu.ID_Phong = PhongChieu.ID_Phong " +
+                        "WHERE SuatChieu.ID_SC = ?";
+
+                Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(suatChieuId)});
+
+                if (cursor.getCount() > 0) {
+                    cursor.moveToFirst();
+                    suatChieuModel = new SuatChieuModel();
+                    suatChieuModel.setId(cursor.getInt(cursor.getColumnIndex("ID_SC")));
+                    suatChieuModel.setIdPhim(cursor.getInt(cursor.getColumnIndex("ID_Phim")));
+                    suatChieuModel.setIdPhong(cursor.getInt(cursor.getColumnIndex("ID_Phong")));
+                    suatChieuModel.setNgayChieu(cursor.getString(cursor.getColumnIndex("NgayChieu")));
+                    suatChieuModel.setGioChieu(cursor.getString(cursor.getColumnIndex("GioChieu")));
+                    suatChieuModel.setGia(cursor.getInt(cursor.getColumnIndex("Gia")));
+                    suatChieuModel.setTenPhim(cursor.getString(cursor.getColumnIndex("TenPhim")));
+                    suatChieuModel.setAnh(cursor.getString(cursor.getColumnIndex("Anh")));
+                    suatChieuModel.setTenPhong(cursor.getString(cursor.getColumnIndex("TenPhong")));
+                }
+
+                cursor.close();
+            } catch (Exception e) {
+                Log.i(TAG, "Lỗi getSuatChieuById", e);
+            } finally {
+                db.close();
+            }
+
+            return suatChieuModel;
+        }
+
+
     public boolean deleteSuatChieu(int id){
         SQLiteDatabase db= dbhelper.getWritableDatabase();
         long row=db.delete("SuatChieu","ID_SC=?",new String[]{String.valueOf(id)});

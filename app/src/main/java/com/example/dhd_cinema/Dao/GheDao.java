@@ -2,6 +2,7 @@ package com.example.dhd_cinema.Dao;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -63,4 +64,27 @@ public class GheDao {
         return (row>0);
     }
 
+    @SuppressLint("Range")
+    public String getPhimAnhBySuatChieuId(int suatChieuId) {
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+        String anh = null;
+
+        // Truy vấn dữ liệu từ bảng SuatChieu và Phim dựa trên ID suất chiếu
+        String query = "SELECT Phim.Anh FROM Phim " +
+                "INNER JOIN SuatChieu ON Phim.ID_Phim = SuatChieu.ID_Phim " +
+                "WHERE SuatChieu.ID_SC = ?";
+
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(suatChieuId)});
+
+        if (cursor.moveToFirst()) {
+            // Lấy giá trị ảnh từ cột "Anh"
+            anh = cursor.getString(cursor.getColumnIndex("Anh"));
+        }
+
+        cursor.close();
+        db.close();
+
+        return anh;
+    }
 }
+

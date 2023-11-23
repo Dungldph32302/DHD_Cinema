@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="15dp"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:text="Chỉnh sửa xuất chiếu"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phim :"
+
+        android:textStyle="bold"
+        />
+    <Spinner
+        android:id="@+id/spinnerPhims"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="300dp"
+        android:layout_height="180dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phòng :"
+        android:textStyle="bold"
+        />
+    <Spinner
+        android:id="@+id/spinnerphongs"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="300dp"
+        android:layout_height="60dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Giá vé :"
+
+        android:textStyle="bold"
+        />
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/txtgia"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:inputType="number"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/edittext"
+        android:hint="Giá vé xuất chiếu"
+        android:paddingStart="30dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ngày chiếu :"
+
+                android:textStyle="bold"
+                />
+            <EditText
+                android:id="@+id/ngay"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:inputType="none"
+                android:hint=" dd-mm-yyyy "
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:background="@drawable/edittextngay"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Giờ chiếu :"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+                <ImageView
+                    android:layout_marginTop="7dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/img_8"/>
+                <EditText
+                    android:id="@+id/gio"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    android:inputType="none"
+                    android:hint=" hh-pp "
+                    android:textSize="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:background="@drawable/edittextngay"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    >
+    <androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/btnhuy"
+    android:layout_margin="10dp"
+    android:layout_width="180dp"
+    android:layout_height="50dp"
+    android:layout_gravity="center"
+    android:background="@drawable/brackground_button"
+    android:text="Hủy"
+    android:textColor="@color/white"
+    android:textSize="18dp"
+    />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnupdate"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/brackground_button"
+        android:text="Chỉnh sửa"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        />
+</LinearLayout>
+
+
+</LinearLayout>
