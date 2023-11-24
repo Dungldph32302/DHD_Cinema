@@ -8,21 +8,21 @@
         >
     </item>
     <item
-        android:id="@+id/hoaDon"
+        android:id="@+id/phim"
         android:title="Phim"
         android:icon="@drawable/baseline_videocam_24"
         >
 
     </item>
     <item
-        android:id="@+id/sanPham"
+        android:id="@+id/ve"
         android:title="Vé"
-        android:icon="@drawable/baseline_notifications_none_24"
+        android:icon="@drawable/img_21"
 
         >
     </item>
     <item
-        android:id="@+id/thongtin"
+        android:id="@+id/khac"
         android:title="Khác"
         android:icon="@drawable/baseline_view_compact_alt_24"
         >

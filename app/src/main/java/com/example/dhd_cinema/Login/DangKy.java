@@ -55,7 +55,6 @@ public class DangKy extends AppCompatActivity {
                         Toast.makeText(DangKy.this, "Đăng Ký Thành Công", Toast.LENGTH_SHORT).show();
                          Intent intent = new Intent(DangKy.this, DangNhap.class);
                          startActivity(intent);
-
                     }else {
                         Toast.makeText(DangKy.this, "Đăng Kí Thất Bại", Toast.LENGTH_SHORT).show();
                     }
