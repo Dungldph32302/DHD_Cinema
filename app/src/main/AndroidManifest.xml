@@ -25,7 +25,9 @@
         </activity>
         <activity
             android:name=".Login.DangKy"
-            android:exported="false" />
+            android:exported="true" >
+
+        </activity>
         <activity
             android:name=".Login.DangNhap"
             android:exported="true" >

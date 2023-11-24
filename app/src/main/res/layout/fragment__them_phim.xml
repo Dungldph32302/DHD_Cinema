@@ -14,7 +14,7 @@
         android:id="@+id/anhPhim"
         android:layout_width="170dp"
         android:layout_height="280dp"
-        android:src="@drawable/img_3"
+        android:src="@drawable/add_img"
         />
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/txtName"

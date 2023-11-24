@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.dhd_cinema.Framgment.FragmentAllHoaDon;
 import com.example.dhd_cinema.Framgment.Fragment_DatPhim;
+import com.example.dhd_cinema.Framgment.Fragment_Khac;
 import com.example.dhd_cinema.Framgment.Fragment_Phim;
 import com.example.dhd_cinema.Framgment.Fragment_PhongChieu;
 import com.example.dhd_cinema.Framgment.Fragment_SuatChieu;
@@ -24,6 +26,7 @@ import com.example.dhd_cinema.Framgment.Fragment_TheLoaiPhim;
 import com.example.dhd_cinema.Framgment.Fragment_ThemPhim;
 import com.example.dhd_cinema.Framgment.Fragment_ThemSuatChieu;
 import com.example.dhd_cinema.Framgment.Fragment_ghe;
+import com.example.dhd_cinema.Login.DangNhap;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
@@ -68,10 +71,10 @@ public class MainActivity extends AppCompatActivity {
                     replec(frg);
 
                 } else if (item.getItemId()==R.id.sanPham) {
-                    Fragment_DatPhim frg= new Fragment_DatPhim();
+                    FragmentAllHoaDon frg= new FragmentAllHoaDon();
                     replec(frg);
                 }else if (item.getItemId()==R.id.thongtin) {
-                    FragmentAllHoaDon frg= new FragmentAllHoaDon();
+                    Fragment_Khac frg= new Fragment_Khac();
                     replec(frg);
 
                 }
@@ -105,8 +108,9 @@ public class MainActivity extends AppCompatActivity {
                 }else if (item.getItemId()==R.id.doimk) {
 
                 }else if (item.getItemId()==R.id.checkout) {
-                    Fragment_ThemPhim frg= new Fragment_ThemPhim();
-                    replec(frg);
+                    Intent intent = new Intent(MainActivity.this, DangNhap.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 }
                 // doi ten titel
                 getSupportActionBar().setTitle(item.getTitle());

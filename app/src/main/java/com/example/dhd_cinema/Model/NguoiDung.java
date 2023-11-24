@@ -1,28 +1,22 @@
 package com.example.dhd_cinema.Model;
 
 public class NguoiDung {
-    private int ID_ND;
-    private String  TenDangNhap;
+    private String TenDangNhap;
+    private String  HoTen;
     private String  Email;
     private String  SDT;
     private String  MatKhau;
 
-    public NguoiDung( String tenDangNhap, String email, String SDT, String matKhau) {
+    public NguoiDung(String tenDangNhap, String hoTen, String email, String SDT, String matKhau) {
         TenDangNhap = tenDangNhap;
+        HoTen = hoTen;
         Email = email;
         this.SDT = SDT;
         MatKhau = matKhau;
     }
 
-    public int getID_ND() {
-        return ID_ND;
+    public NguoiDung() {
     }
-
-    public void setID_ND(int ID_ND) {
-        this.ID_ND = ID_ND;
-    }
-
-
 
     public String getTenDangNhap() {
         return TenDangNhap;
@@ -30,6 +24,14 @@ public class NguoiDung {
 
     public void setTenDangNhap(String tenDangNhap) {
         TenDangNhap = tenDangNhap;
+    }
+
+    public String getHoTen() {
+        return HoTen;
+    }
+
+    public void setHoTen(String hoTen) {
+        HoTen = hoTen;
     }
 
     public String getEmail() {
@@ -53,14 +55,6 @@ public class NguoiDung {
     }
 
     public void setMatKhau(String matKhau) {
-        MatKhau = matKhau;
-    }
-
-    public NguoiDung(int ID_ND, String tenDangNhap, String email, String SDT, String matKhau) {
-        this.ID_ND = ID_ND;
-        TenDangNhap = tenDangNhap;
-        Email = email;
-        this.SDT = SDT;
         MatKhau = matKhau;
     }
 }
