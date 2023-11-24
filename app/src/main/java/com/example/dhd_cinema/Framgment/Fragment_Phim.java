@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dhd_cinema.Adapter.AdapterPhim;
@@ -38,8 +41,9 @@ public class Fragment_Phim extends Fragment {
     private ArrayList<Phim> list = new ArrayList<Phim>();
 
     private PhimDao phimDao;
+    ArrayList<Phim> tempListPhim = new ArrayList<>();
 
-
+    AdapterPhim adapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,7 +52,17 @@ public class Fragment_Phim extends Fragment {
 
         rcvQLPhim = view.findViewById(R.id.rcvQLPhim);
         fltAddPhim = view.findViewById(R.id.fltAddPhim);
-        loadData();
+
+
+        // data
+        phimDao = new PhimDao(getContext());
+        list = phimDao.selectAllPhim();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        rcvQLPhim.setLayoutManager(linearLayoutManager);
+
+        adapter = new AdapterPhim(getContext(),list);
+        rcvQLPhim.setAdapter(adapter);
+
         fltAddPhim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,21 +71,26 @@ public class Fragment_Phim extends Fragment {
                 mainActivity.replec(frg);
             }
         });
+
+
+        tempListPhim = phimDao.selectAllPhim();
+        EditText edt_timKiem = view.findViewById(R.id.edtSeach);
+        edt_timKiem.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                list.clear();
+                for (Phim pm:tempListPhim) {
+                    if(pm.getTenPhim().contains(charSequence.toString())){
+                        list.add(pm);
+                    }}adapter.notifyDataSetChanged();}
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         return view;
     }
-    private void loadData(){
-        // data
-        phimDao = new PhimDao(getContext());
-        list = phimDao.selectAllPhim();
-
-//        GridLayoutManager manager= new GridLayoutManager(getActivity(),2);
-//        rcvQLPhim.setLayoutManager(manager);
-
-         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-         rcvQLPhim.setLayoutManager(linearLayoutManager);
-        AdapterPhim adapter = new AdapterPhim(getContext(),list);
-        rcvQLPhim.setAdapter(adapter);
-    }
-
 
 }

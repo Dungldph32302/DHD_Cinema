@@ -43,16 +43,18 @@ public class ThongKeDao {
     public ArrayList<Phim> selectTopPhimDanhGiaCao(){
         ArrayList<Phim> list = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT Phim.Anh, Phim.TenPhim, DanhGiaPhim.Sao\n" +
+        Cursor cursor = db.rawQuery("SELECT Phim.Anh, AVG(DanhGiaPhim.Sao) AS TrungBinhCong\n" +
                 "FROM Phim\n" +
                 "INNER JOIN DanhGiaPhim ON Phim.ID_Phim = DanhGiaPhim.ID_Phim\n" +
-                "ORDER BY DanhGiaPhim.Sao DESC\n" +
+                "GROUP BY Phim.ID_Phim, Phim.Anh\n" +
+                "HAVING COUNT(DanhGiaPhim.ID_DG) > 0\n" +
+                "ORDER BY TrungBinhCong DESC\n" +
                 "LIMIT 10;", null);
 
         if (cursor.getCount() != 0){
             cursor.moveToFirst();
             do {
-                list.add(new Phim(cursor.getString(0), cursor.getString(1), cursor.getInt(2)));
+                list.add(new Phim(cursor.getString(0), cursor.getInt(1)));
             }while (cursor.moveToNext());
         }
         return list;

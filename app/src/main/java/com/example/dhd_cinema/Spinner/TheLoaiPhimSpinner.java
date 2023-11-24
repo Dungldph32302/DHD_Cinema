@@ -46,13 +46,13 @@ public class TheLoaiPhimSpinner extends BaseAdapter {
         LayoutInflater inflater= ((Activity)context).getLayoutInflater();// sinh layout
         convertView= inflater.inflate(R.layout.item_theloaiphim_spinner,parent,false); // liên kết
         // ánh xạ thành phần từng thành phần trên  layout
-        TextView txtID_TL_Spinner=convertView.findViewById(R.id.txtID_TL_Spinner);
+        //TextView txtID_TL_Spinner=convertView.findViewById(R.id.txtID_TL_Spinner);
         TextView txtTenTheLoai_Spinner=convertView.findViewById(R.id.txtTenTheLoai_Spinner);
 
 
         // điền dữ liệu
         txtTenTheLoai_Spinner.setText(list.get(position).getTenTheLoai());
-        txtID_TL_Spinner.setText(String.valueOf(list.get(position).getID_TL()));
+        //txtID_TL_Spinner.setText(String.valueOf(list.get(position).getID_TL()));
         return convertView;
     }
 }

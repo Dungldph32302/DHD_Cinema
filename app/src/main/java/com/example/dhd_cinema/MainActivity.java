@@ -10,15 +10,18 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dhd_cinema.Framgment.FragmentAllHoaDon;
 import com.example.dhd_cinema.Framgment.FragmentVe;
 import com.example.dhd_cinema.Framgment.Fragment_DatPhim;
 import com.example.dhd_cinema.Framgment.Fragment_Khac;
+import com.example.dhd_cinema.Framgment.Fragment_NguoiDung;
 import com.example.dhd_cinema.Framgment.Fragment_Phim;
 import com.example.dhd_cinema.Framgment.Fragment_PhongChieu;
 import com.example.dhd_cinema.Framgment.Fragment_SuatChieu;
@@ -27,6 +30,7 @@ import com.example.dhd_cinema.Framgment.Fragment_ThemPhim;
 import com.example.dhd_cinema.Framgment.Fragment_ThemSuatChieu;
 import com.example.dhd_cinema.Framgment.Fragment_TrangCaNhan;
 import com.example.dhd_cinema.Framgment.Fragment_ghe;
+import com.example.dhd_cinema.Login.DangNhap;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
@@ -78,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
                     replec(frg);
 
                 }
+                // doi ten titel
+                getSupportActionBar().setTitle(item.getTitle());
                 return true;
             }
         });
@@ -103,13 +109,16 @@ public class MainActivity extends AppCompatActivity {
                     replec(frg);
                 }else if (item.getItemId()==R.id.TKNhap) {
 
-                }else if (item.getItemId()==R.id.tk) {
-
+                }else if (item.getItemId()==R.id.ThanhVien) {
+                    Fragment_NguoiDung frg= new Fragment_NguoiDung();
+                    replec(frg);
                 }else if (item.getItemId()==R.id.doimk) {
 
                 }else if (item.getItemId()==R.id.checkout) {
-                    Fragment_ThemPhim frg= new Fragment_ThemPhim();
-                    replec(frg);
+                    Intent intent = new Intent(MainActivity.this, DangNhap.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    Toast.makeText(MainActivity.this, "Đăng Xuất!!!", Toast.LENGTH_SHORT).show();
                 }
                 // doi ten titel
                 getSupportActionBar().setTitle(item.getTitle());

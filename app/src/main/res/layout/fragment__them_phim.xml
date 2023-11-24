@@ -7,7 +7,13 @@
     android:gravity="center_horizontal"
     tools:context=".Framgment.Fragment_ThemPhim">
 
-
+    <ImageView
+        android:id="@+id/btnExit_themPhim"
+        android:layout_width="25dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="-170dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/back" />
 
     <ImageView
 

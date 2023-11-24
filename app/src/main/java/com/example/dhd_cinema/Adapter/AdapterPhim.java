@@ -57,9 +57,9 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterPhim.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterPhim.ViewHolder holder,int position) {
         holder.txtTenPhim_item.setText("" + (list.get(position).getTenPhim()));
-        holder.txtDaoDien_item.setText("" + list.get(position).getDaoDien());
+        holder.txtDaoDien_item.setText("Đạo Diễn: " + list.get(position).getDaoDien());
         holder.txtNgayPhatHanh_item.setText("" + (list.get(position).getNgayPhatHanh()));
 
         String base64String = list.get(position).getAnh();
@@ -137,11 +137,11 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
         });
 
 
-        Phim ls = list.get(position);
+
         holder.dsPhim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DSPhim(ls);
+                DSPhim(list.get(position));
             }
         });
     }
@@ -163,21 +163,17 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
             txtNgayPhatHanh_item = itemView.findViewById(R.id.txtNgayPhatHanh_item);
             chon = itemView.findViewById(R.id.img_chon);
             dsPhim = itemView.findViewById(R.id.DSPhim);
-
             anh=itemView.findViewById(R.id.imageView);
-
-            txtAnh = itemView.findViewById(R.id.txtAnh);
         }
     }
 
     private Dialog dialog;
 
     public void DSPhim(Phim phim) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);// tao doi tuong cua altertdialog
-        // gan layout,tao view
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = ((Activity) context).getLayoutInflater();
         View view = inflater.inflate(R.layout.chitiet_phim, null);
-        builder.setView(view); //gan view cho hop thoai
+        builder.setView(view);
 
         //anh xa cac thanh phan widget
         ImageView anh =view.findViewById(R.id.imageView2);
@@ -236,7 +232,8 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
         EditText edtNgayPhatHanh_sua_P = view.findViewById(R.id.edtNgayPhatHanh_sua_P);
         EditText edtMota_sua_P = view.findViewById(R.id.edtMota_sua_P);
         Button btnLuu_sua_P = view.findViewById(R.id.btnLuu_sua_P);
-        Button btnHuy_sua_P = view.findViewById(R.id.btnHuy_sua_P);
+        ImageView anhphim = view.findViewById(R.id.anhPhim_Sua);
+        ImageView back = view.findViewById(R.id.btnExit_suaPhim);
         edtID_Phim_sua_P.setEnabled(false);
 
         // Hiển thị dữ liệu hiện tại của phim trong các trường sửa
@@ -245,6 +242,18 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
         edtDaoDien_sua_P.setText(phim.getDaoDien());
         edtNgayPhatHanh_sua_P.setText(phim.getNgayPhatHanh());
         edtMota_sua_P.setText(phim.getMota());
+        String base64String = phim.getAnh();
+
+// Giải mã chuỗi Base64 thành mảng byte
+        byte[] decodedByteArray = Base64.decode(base64String, Base64.DEFAULT);
+
+// Chuyển đổi mảng byte thành Bitmap
+        Bitmap bitmap = BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.length);
+
+// Hiển thị Bitmap bằng Glide
+        Glide.with(context)
+                .load(bitmap)
+                .into(anhphim);
 
         // Setup Spinner
         TheLoaiPhimDao theLoaiPhimDao = new TheLoaiPhimDao(context);
@@ -293,10 +302,10 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
         });
 
         // Xử lý sự kiện khi nhấn nút "Hủy"
-        btnHuy_sua_P.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "Hủy cập nhật", Toast.LENGTH_SHORT).show();
+            public void onClick(View view) {
+                Toast.makeText(context, "Thoát", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });

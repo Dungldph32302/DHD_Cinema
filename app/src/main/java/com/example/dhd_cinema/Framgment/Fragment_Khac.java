@@ -84,6 +84,15 @@ TextView ten, email, sdt;
                 mainActivity.replec(frg);
             }
         });
+
+        phimDanhGiaCao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment_PhimHay frg=new Fragment_PhimHay();
+                MainActivity mainActivity = (MainActivity) getActivity();
+                mainActivity.replec(frg);
+            }
+        });
         return view;
     }
 }

@@ -10,7 +10,21 @@ public class Phim {
     private String Anh;
     private int SoLuongVeDat;
 
-    private int Sao;
+    private float trungBinhCong;
+
+    public Phim(String anh, float trungBinhCong) {
+        Anh = anh;
+        this.trungBinhCong = trungBinhCong;
+    }
+
+    public float getTrungBinhCong() {
+        return trungBinhCong;
+    }
+
+    public void setTrungBinhCong(float trungBinhCong) {
+        this.trungBinhCong = trungBinhCong;
+    }
+
     public Phim(String tenPhim, String anh, int soLuongVeDat) {
         TenPhim = tenPhim;
         Anh = anh;

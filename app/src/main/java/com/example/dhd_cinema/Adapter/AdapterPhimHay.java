@@ -20,27 +20,26 @@ import com.example.dhd_cinema.R;
 
 import java.util.ArrayList;
 
-public class AdapterPhimHot extends RecyclerView.Adapter<AdapterPhimHot.ViewHolder> {
+public class AdapterPhimHay extends RecyclerView.Adapter<AdapterPhimHay.ViewHolder> {
 
     private Context context;
     private ArrayList<Phim> list;
 
-    public AdapterPhimHot(Context context, ArrayList<Phim> list) {
+    public AdapterPhimHay(Context context, ArrayList<Phim> list) {
         this.context = context;
         this.list = list;
     }
     @NonNull
     @Override
-    public AdapterPhimHot.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterPhimHay.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-        View view = inflater.inflate(R.layout.item_phimhot, parent, false);
+        View view = inflater.inflate(R.layout.item_phimhay, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterPhimHot.ViewHolder holder, int position) {
-        holder.ten.setText("" + list.get(position).getTenPhim());
-        holder.soLuong.setText("" + String.valueOf(list.get(position).getSoLuongVeDat()));
+    public void onBindViewHolder(@NonNull AdapterPhimHay.ViewHolder holder, int position) {
+        holder.sao.setText("" + String.valueOf(list.get(position).getTrungBinhCong()));
 
         String base64String = list.get(position).getAnh();
 
@@ -63,12 +62,12 @@ public class AdapterPhimHot extends RecyclerView.Adapter<AdapterPhimHot.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView anh;
-        TextView ten, soLuong;
+        TextView sao;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            anh = itemView.findViewById(R.id.img_AnhTop10);
-            ten = itemView.findViewById(R.id.txtTenPhimTop10);
-            soLuong = itemView.findViewById(R.id.txtSoLuongTop10);
+            anh = itemView.findViewById(R.id.img_AnhTop5);
+            sao = itemView.findViewById(R.id.txtSaoTop5);
         }
     }
 }
