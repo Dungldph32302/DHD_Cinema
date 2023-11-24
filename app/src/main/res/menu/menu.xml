@@ -16,7 +16,7 @@
     </item>
     <item
         android:id="@+id/sanPham"
-        android:title="Thông báo"
+        android:title="Vé"
         android:icon="@drawable/baseline_notifications_none_24"
 
         >

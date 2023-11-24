@@ -40,11 +40,15 @@ public class HoaDonDao {
                 while (!cursor.isAfterLast()){
                     HoaDonModel sp= new HoaDonModel();
                     sp.setId(cursor.getInt(0));
-                    sp.setIdND(cursor.getInt(1));
+                    sp.setTennguoidung(cursor.getString(1));
                     sp.setSl(cursor.getInt(2));
                     sp.setTongtien(cursor.getInt(3));
                     sp.setPhuongthuc(cursor.getInt(4));
                     sp.setTrangthai(cursor.getInt(5));
+
+
+
+
                     list.add(sp);
                     cursor.moveToNext();
                 }
@@ -100,17 +104,18 @@ public class HoaDonDao {
         try {
             ContentValues hoaDonValues = new ContentValues();
             hoaDonValues.put("ID_HD",hoaDon.getId());
-            hoaDonValues.put("ID_ND", hoaDon.getIdND());
+            hoaDonValues.put("TenDangNhap", hoaDon.getTennguoidung());
             hoaDonValues.put("sl", hoaDon.getSl());
             hoaDonValues.put("TongTien", hoaDon.getTongtien());
             hoaDonValues.put("PhuongThuc", hoaDon.getPhuongthuc());
+            hoaDonValues.put("ngay",hoaDon.getThoigian());
             hoaDonValues.put("TrangThai", hoaDon.getTrangthai());
             long hoaDonId = db.insert("HoaDon", null, hoaDonValues);
             if (hoaDonId != -1) {
                 if(gheModels.size()>=0) {
                     for (GheModel gheModel : gheModels) {
                         ContentValues chiTietValues = new ContentValues();
-                        chiTietValues.put("ID_ND", hoaDon.getIdND());
+                        chiTietValues.put("TenDangNhap", hoaDon.getTennguoidung());
                         chiTietValues.put("ID_SC", hoaDon.getIdsc());
                         chiTietValues.put("ID_Ghe",gheModel.getId());
                         chiTietValues.put("ID_HD", hoaDon.getId());

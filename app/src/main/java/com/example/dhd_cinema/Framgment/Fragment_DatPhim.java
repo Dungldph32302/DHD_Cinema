@@ -109,8 +109,9 @@ public class Fragment_DatPhim extends Fragment {
                     Bundle bundle1= new Bundle();
                     bundle1.putInt("sll",adapterGheInDat.getTongTatCa());
                     bundle1.putInt("giahh",giaa);
-                    bundle1.putInt("idschh",idsc);
 
+                    bundle1.putInt("idschh",idsc);
+                    bundle1.putSerializable("list",list3);
                     frg.setArguments(bundle1);
                     MainActivity mainActivity = (MainActivity)getActivity();
                     mainActivity.replec(frg);

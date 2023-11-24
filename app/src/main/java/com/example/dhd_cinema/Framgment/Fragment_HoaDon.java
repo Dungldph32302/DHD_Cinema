@@ -1,6 +1,7 @@
 package com.example.dhd_cinema.Framgment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -16,9 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dhd_cinema.Adapter.AdapterGhe_in_Dat;
+import com.example.dhd_cinema.Booked_tickets_successfully;
 import com.example.dhd_cinema.Dao.GheDao;
 import com.example.dhd_cinema.Dao.HoaDonDao;
 import com.example.dhd_cinema.Dao.SuatChieuDao;
+import com.example.dhd_cinema.MainActivity;
 import com.example.dhd_cinema.Model.GheModel;
 import com.example.dhd_cinema.Model.HoaDonModel;
 import com.example.dhd_cinema.Model.SuatChieuModel;
@@ -43,7 +46,8 @@ public class Fragment_HoaDon extends Fragment {
     AdapterGhe_in_Dat adapterGheInDat;
     HoaDonDao hoaDonDao; GheDao gheDao;
     ArrayList<GheModel>list;
-    int idsc=-1,idphim=-1,idv=-1,tongtien=0,phuongthuc=0,soluong=0,giave=0,idmax;
+    ArrayList<GheModel>list1;
+    int idsc=-1,idphim=-1,idv=-1,tongtien=0,phuongthuc=-1,soluong=0,giave=0,idmax;
     SuatChieuDao suatChieuDao;
     String tenphim;
     AppCompatButton thanhtoan;
@@ -70,13 +74,15 @@ public class Fragment_HoaDon extends Fragment {
 
         list=gheDao.getAllGhe();
         adapterGheInDat=new AdapterGhe_in_Dat(getActivity(),list);
-        ArrayList<GheModel>list1=adapterGheInDat.getSelectedListGhe();
+       list1=adapterGheInDat.getSelectedListGhe();
 
         Bundle bundle = getArguments();
         if (bundle != null) {
              idsc = bundle.getInt("idschh");
              giave = bundle.getInt("giahh");
              soluong = bundle.getInt("sll");
+             list1= (ArrayList<GheModel>)bundle.getSerializable("list");
+            Toast.makeText(getActivity(), " so luong"+list1.size(), Toast.LENGTH_SHORT).show();
             sl.setText(String.valueOf(soluong));
             gia.setText(String.valueOf(giave) +"đ");
             tong.setText(String.valueOf(giave*soluong)+"đ");
@@ -86,6 +92,7 @@ public class Fragment_HoaDon extends Fragment {
         ngay.setText(sc.getNgayChieu());
         tenp.setText(sc.getTenPhim());
         phong.setText(sc.getTenPhong());
+
 
 
 
@@ -140,17 +147,25 @@ public class Fragment_HoaDon extends Fragment {
                 HoaDonModel hoaDonModel= new HoaDonModel();
                 hoaDonModel.setId(idmax);
                 hoaDonModel.setIdsc(idsc);
+                hoaDonModel.setTennguoidung("admin");
                 hoaDonModel.setGia(giave);
                 hoaDonModel.setPhuongthuc(phuongthuc);
                 hoaDonModel.setSl(soluong);
                 hoaDonModel.setThoigian(ngay);
                 hoaDonModel.setTongtien(giave*soluong);
-                if(hoaDonDao.addHoaDonandve(hoaDonModel,list1)){
-
-                    Toast.makeText(getActivity(), "Tạo thành công ", Toast.LENGTH_SHORT).show();
+                hoaDonModel.setTrangthai(phuongthuc);
+                if(phuongthuc==-1){
+                    Toast.makeText(getActivity(), "Vui lòng chọn phương thức thanh toán ", Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(getActivity(), "Tạo không thành công ", Toast.LENGTH_SHORT).show();
+                    if(hoaDonDao.addHoaDonandve(hoaDonModel,list1)){
+                        Toast.makeText(getActivity(), "Tạo thành công ", Toast.LENGTH_SHORT).show();
+                        Intent intent= new Intent(getActivity(), Booked_tickets_successfully.class);
+                        startActivity(intent);
+                    }else {
+                        Toast.makeText(getActivity(), "Tạo không thành công ", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
             }
         });
         return view;

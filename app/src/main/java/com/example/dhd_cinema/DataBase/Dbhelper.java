@@ -11,7 +11,7 @@ import com.example.dhd_cinema.R;
 public class Dbhelper extends SQLiteOpenHelper {
     private static final String DB="hh";
     public Dbhelper(@Nullable Context context) {
-        super(context, DB,null,31);
+        super(context, DB,null,35);
     }
 
     @Override
@@ -62,6 +62,7 @@ public class Dbhelper extends SQLiteOpenHelper {
                 "      gia integer ,\n" +
                 "      ThoiGian TEXT not null)");
 
+
         db.execSQL("create table DanhGiaPhim(\n" +
                 "      ID_DG integer primary key autoincrement,\n" +
                 "      TenDangNhap text REFERENCES NguoiDung(TenDangNhap),\n" +
@@ -77,6 +78,7 @@ public class Dbhelper extends SQLiteOpenHelper {
                 "      PhuongThuc integer not null,\n"+
                 "      ngay text not null,\n"+
                 "      TrangThai int not null)");
+
 
 
 // Thêm dữ liệu vào bảng NguoiDung
@@ -119,7 +121,9 @@ public class Dbhelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO Ghe (SoGhe) VALUES (?)", new Object[]{soGhee});
         }
 
-
+        db.execSQL("INSERT INTO HoaDon VALUES (1,'admin',2,500001,0,'20-20-2020',0)");
+        db.execSQL("INSERT INTO Ve VALUES (1,'admin',1,1,1,'20-20-2020',45000)");
+        db.execSQL("INSERT INTO Ve VALUES (2,'admin',1,1,1,'20-20-2020',450000)");
     }
 
     @Override

@@ -78,10 +78,9 @@ public class AdapterHoaDon extends RecyclerView.Adapter<AdapterHoaDon.ViewHolder
 
 
               hoaDonDao= new HoaDonDao(context);
-              String name=hoaDonDao.getHoTenById(list.get(position).getIdND());
         // xử lý khi click vào item suất chiếu
                holder.maHD.setText(String.valueOf("Mã hóa đơn "+list.get(position).getId()));
-               holder.maND.setText(String.valueOf("Người Thanh toán: "+name));
+               holder.maND.setText(String.valueOf("Người Thanh toán: "+list.get(position).getTennguoidung()));
                holder.maSC.setText(String.valueOf("Số Lượng vé: "+list.get(position).getSl()));
                holder.ngay.setText(String.valueOf(list.get(position).getThoigian()));
                holder.tongtien.setText(String.valueOf(list.get(position).getTongtien())+ "$");

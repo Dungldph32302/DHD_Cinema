@@ -3,7 +3,8 @@ package com.example.dhd_cinema.Model;
 public class HoaDonModel {
 
     private int id,idND,sl,tongtien,phuongthuc,trangthai,gia,idsc;
-    private String thoigian;
+    private String thoigian,tennguoidung;
+
 
     public HoaDonModel(int id, int idND, int sl, int tongtien, int phuongthuc, int trangthai) {
         this.id = id;
@@ -12,6 +13,14 @@ public class HoaDonModel {
         this.tongtien = tongtien;
         this.phuongthuc = phuongthuc;
         this.trangthai = trangthai;
+    }
+
+    public String getTennguoidung() {
+        return tennguoidung;
+    }
+
+    public void setTennguoidung(String tennguoidung) {
+        this.tennguoidung = tennguoidung;
     }
 
     public int getIdsc() {
