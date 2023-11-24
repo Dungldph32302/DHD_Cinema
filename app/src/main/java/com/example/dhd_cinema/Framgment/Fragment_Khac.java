@@ -75,6 +75,15 @@ TextView ten, email, sdt;
                 mainActivity.replec(frg);
             }
         });
+
+        hoaDon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentAllHoaDon frg=new FragmentAllHoaDon();
+                MainActivity mainActivity = (MainActivity) getActivity();
+                mainActivity.replec(frg);
+            }
+        });
         return view;
     }
 }

@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (item.getItemId()==R.id.ve) {
                     FragmentVe frg= new FragmentVe();
                     replec(frg);
-                }else if (item.getItemId()==R.id.khac) {
+                 }else if (item.getItemId()==R.id.khac) {
                     Fragment_Khac frg= new Fragment_Khac();
                     replec(frg);
 
