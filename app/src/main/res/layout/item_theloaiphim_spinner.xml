@@ -4,19 +4,19 @@
     android:layout_height="match_parent"
     android:padding="5dp">
 
-    <TextView
-        android:id="@+id/txtID_TL_Spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="1"
-        android:textSize="18dp" />
+<!--    <TextView-->
+<!--        android:id="@+id/txtID_TL_Spinner"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="1"-->
+<!--        android:textSize="18dp" />-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=" / "
-        android:textSize="18dp"
-        android:textStyle="bold" />
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text=" / "-->
+<!--        android:textSize="18dp"-->
+<!--        android:textStyle="bold" />-->
 
     <TextView
         android:id="@+id/txtTenTheLoai_Spinner"

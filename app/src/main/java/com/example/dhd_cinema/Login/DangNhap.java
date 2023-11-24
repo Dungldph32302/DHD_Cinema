@@ -100,7 +100,9 @@ public class DangNhap extends AppCompatActivity {
                     if (nguoiDungDao.checkDangNhap(user, pass)) {
                         //
                         Toast.makeText(DangNhap.this, "Đăng Nhập Thành Công", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(DangNhap.this, MainActivity.class));
+                        Intent intent = new Intent(DangNhap.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
                     } else {
                         Toast.makeText(DangNhap.this, "Sai pass hoặc mk", Toast.LENGTH_SHORT).show();
                     }

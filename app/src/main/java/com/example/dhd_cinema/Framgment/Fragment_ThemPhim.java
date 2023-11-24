@@ -54,7 +54,7 @@ public class Fragment_ThemPhim extends Fragment {
     AppCompatEditText tenPhim, ngayPhatHanh, daoDien, moTa;
     Spinner theloai;
     private static final int YeuCauQuyen = 10;
-    ImageView anhPhim;
+    ImageView anhPhim, exit;
     AppCompatButton themPhim;
     private final ActivityResultLauncher<Intent> moGalleryLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -78,7 +78,7 @@ public class Fragment_ThemPhim extends Fragment {
         moTa=view.findViewById(R.id.txtMT);
         anhPhim=view.findViewById(R.id.anhPhim);
         themPhim=view.findViewById(R.id.addPhim);
-
+       exit = view.findViewById(R.id.btnExit_themPhim);
         dao = new PhimDao(getActivity());
 
         anhPhim.setOnClickListener(new View.OnClickListener() {
@@ -172,6 +172,15 @@ public class Fragment_ThemPhim extends Fragment {
             }
         });
 
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Thoát!!!", Toast.LENGTH_SHORT).show();
+                Fragment_Phim frg=new Fragment_Phim();
+                MainActivity mainActivity = (MainActivity) getActivity();
+                mainActivity.replec(frg);
+            }
+        });
         return view;
     }
 
