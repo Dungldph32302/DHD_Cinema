@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.dhd_cinema.Framgment.FragmentAllHoaDon;
+import com.example.dhd_cinema.Framgment.FragmentVe;
 import com.example.dhd_cinema.Framgment.Fragment_DatPhim;
 import com.example.dhd_cinema.Framgment.Fragment_Khac;
 import com.example.dhd_cinema.Framgment.Fragment_Phim;
@@ -24,6 +25,7 @@ import com.example.dhd_cinema.Framgment.Fragment_SuatChieu;
 import com.example.dhd_cinema.Framgment.Fragment_TheLoaiPhim;
 import com.example.dhd_cinema.Framgment.Fragment_ThemPhim;
 import com.example.dhd_cinema.Framgment.Fragment_ThemSuatChieu;
+import com.example.dhd_cinema.Framgment.Fragment_TrangCaNhan;
 import com.example.dhd_cinema.Framgment.Fragment_ghe;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -64,15 +66,14 @@ public class MainActivity extends AppCompatActivity {
                 if(item.getItemId()==R.id.home){
                     Fragment_SuatChieu frf = new Fragment_SuatChieu();
                      replec(frf);
-                } else if (item.getItemId()==R.id.hoaDon) {
+                } else if (item.getItemId()==R.id.phim) {
                    Fragment_Phim frg= new Fragment_Phim();
                     replec(frg);
 
-                } else if (item.getItemId()==R.id.sanPham) {
-                    Fragment_DatPhim frg= new Fragment_DatPhim();
+                } else if (item.getItemId()==R.id.ve) {
+                    FragmentVe frg= new FragmentVe();
                     replec(frg);
-
-                }else if (item.getItemId()==R.id.thongtin) {
+                 }else if (item.getItemId()==R.id.khac) {
                     Fragment_Khac frg= new Fragment_Khac();
                     replec(frg);
 

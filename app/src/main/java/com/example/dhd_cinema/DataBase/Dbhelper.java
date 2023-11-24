@@ -138,7 +138,6 @@ public class Dbhelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS HoaDon");
             db.execSQL("DROP TABLE IF EXISTS Ve");
             db.execSQL("DROP TABLE IF EXISTS DanhGiaPhim");
-
             onCreate(db);// goi lai ham  onCreate
 
 
