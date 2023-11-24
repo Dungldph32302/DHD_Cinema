@@ -8,6 +8,24 @@ public class Phim {
     private String NgayPhatHanh;
     private String Mota;
     private String Anh;
+    private int SoLuongVeDat;
+
+    private int Sao;
+    public Phim(String tenPhim, String anh, int soLuongVeDat) {
+        TenPhim = tenPhim;
+        Anh = anh;
+        SoLuongVeDat = soLuongVeDat;
+    }
+
+    public int getSoLuongVeDat() {
+        return SoLuongVeDat;
+    }
+
+    public void setSoLuongVeDat(int soLuongVeDat) {
+        SoLuongVeDat = soLuongVeDat;
+    }
+
+
 
     public Phim() {
     }

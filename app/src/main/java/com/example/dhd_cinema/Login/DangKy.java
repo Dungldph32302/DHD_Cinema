@@ -15,7 +15,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 public class DangKy extends AppCompatActivity {
     Button btnDangKy;
-    TextInputEditText edtTenDangNhap, edtEmail, edtSDT, edtPass, edtEndPass;
+    TextInputEditText edtTenDangNhap, hoTen, edtEmail, edtSDT, edtPass, edtEndPass;
     private NguoiDungDao nguoiDungDao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,7 @@ public class DangKy extends AppCompatActivity {
         setContentView(R.layout.activity_dang_ky);
 
         edtTenDangNhap = findViewById(R.id.edtTenDangNhap);
+        hoTen = findViewById(R.id.edtHoTen);
         edtEmail = findViewById(R.id.edtEmail);
         edtPass = findViewById(R.id.edtPass);
         edtSDT = findViewById(R.id.edtSDT);
@@ -35,12 +36,13 @@ public class DangKy extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String tenDangNhap= edtTenDangNhap.getText().toString();
+                String hoten= hoTen.getText().toString();
                 String email = edtEmail.getText().toString();
                 String sdt = edtSDT.getText().toString();
                 String pass = edtPass.getText().toString();
                 String endPass = edtEndPass.getText().toString();
-                NguoiDung nguoiDung = new NguoiDung(tenDangNhap, email, sdt, pass);
-                if (tenDangNhap.isEmpty() || email.isEmpty() || sdt.isEmpty() || pass.isEmpty() || endPass.isEmpty()){
+                NguoiDung nguoiDung = new NguoiDung(tenDangNhap, hoten, email, sdt, pass);
+                if (tenDangNhap.isEmpty() || hoten.isEmpty() || email.isEmpty() || sdt.isEmpty() || pass.isEmpty() || endPass.isEmpty()){
                     Toast.makeText(DangKy.this, "Không Được Để Trống", Toast.LENGTH_SHORT).show();
                 } else if (!checkEmail(email)) {
                     Toast.makeText(DangKy.this, "Email không hợp lệ", Toast.LENGTH_SHORT).show();

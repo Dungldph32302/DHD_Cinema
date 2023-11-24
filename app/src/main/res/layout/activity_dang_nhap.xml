@@ -32,7 +32,7 @@
             android:id="@+id/edtUser"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:hint="SDT or Email"
+            android:hint="Tên Đăng Nhập"
             android:layout_margin="10dp"
             android:background="@drawable/group1"
             android:textColorHint="@color/white"
@@ -93,7 +93,7 @@
     <TextView
         android:layout_marginTop="40dp"
         android:layout_gravity="center_horizontal"
-        android:id="@+id/textView"
+        android:id="@+id/txtQuenMK"
         android:textColor="#C9CCC9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -126,7 +126,7 @@
 
         <TextView
             android:textColor="#C9CCC9"
-            android:id="@+id/TvSign"
+            android:id="@+id/txtSign"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
