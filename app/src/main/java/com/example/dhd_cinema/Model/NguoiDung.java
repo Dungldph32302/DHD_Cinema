@@ -6,6 +6,7 @@ public class NguoiDung {
     private String  Email;
     private String  SDT;
     private String  MatKhau;
+    private int quyen;
 
     public NguoiDung(String tenDangNhap, String hoTen, String email, String SDT, String matKhau) {
         TenDangNhap = tenDangNhap;
@@ -13,6 +14,14 @@ public class NguoiDung {
         Email = email;
         this.SDT = SDT;
         MatKhau = matKhau;
+    }
+
+    public int getQuyen() {
+        return quyen;
+    }
+
+    public void setQuyen(int quyen) {
+        this.quyen = quyen;
     }
 
     public NguoiDung() {

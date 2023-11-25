@@ -1,5 +1,6 @@
 package com.example.dhd_cinema.Dao;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -41,6 +42,23 @@ public class NguoiDungDao {
         else {
             return false;
         }
+    }
+
+    @SuppressLint("Range")
+    public int layQuyenTuDangNhap(String tenDangNhap) {
+        int quyen = -1; // Giả sử -1 là giá trị mặc định nếu không tìm thấy
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT Quyen FROM NguoiDung WHERE TenDangNhap=?", new String[]{tenDangNhap});
+
+        if (cursor.moveToFirst()) {
+            quyen = cursor.getInt(cursor.getColumnIndex("Quyen"));
+        }
+
+        cursor.close();
+        db.close();
+
+        return quyen;
     }
 
     public boolean capNhatMatKhau(String TenDangNhap,String MkCu, String MkMoi){

@@ -2,6 +2,7 @@ package com.example.dhd_cinema.Framgment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -88,7 +89,7 @@ public class Fragment_HoaDon extends Fragment {
             tong.setText(String.valueOf(giave*soluong)+"đ");
         }
         SuatChieuModel sc= suatChieuDao.getSuatChieuById(idsc);
-        gio.setText(sc.getGioChieu());
+        gio.setText(String.valueOf(sc.getGioChieu()));
         ngay.setText(sc.getNgayChieu());
         tenp.setText(sc.getTenPhim());
         phong.setText(sc.getTenPhong());
@@ -142,6 +143,8 @@ public class Fragment_HoaDon extends Fragment {
         thanhtoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("login", getActivity().MODE_PRIVATE);
+                String savedUsername = sharedPreferences.getString("username", "");
                 @SuppressLint({"NewApi", "LocalSuppress"})
                 String ngay = String.valueOf(java.time.LocalDate.now());
                 HoaDonModel hoaDonModel= new HoaDonModel();
@@ -154,6 +157,7 @@ public class Fragment_HoaDon extends Fragment {
                 hoaDonModel.setThoigian(ngay);
                 hoaDonModel.setTongtien(giave*soluong);
                 hoaDonModel.setTrangthai(phuongthuc);
+                hoaDonModel.setTennguoidung(savedUsername);
                 if(phuongthuc==-1){
                     Toast.makeText(getActivity(), "Vui lòng chọn phương thức thanh toán ", Toast.LENGTH_SHORT).show();
                 }else {

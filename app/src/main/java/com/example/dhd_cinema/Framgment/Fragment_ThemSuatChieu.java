@@ -178,7 +178,7 @@ public class Fragment_ThemSuatChieu extends Fragment {
                         } else {
                             thang = String.valueOf((month + 1));
                         }
-                        ngay.setText(ngayy+ "-" + thang + "-" + year);
+                        ngay.setText( year+ "-" + thang + "-" +ngayy);
                     }
                 },
                 calendar.get(Calendar.YEAR),

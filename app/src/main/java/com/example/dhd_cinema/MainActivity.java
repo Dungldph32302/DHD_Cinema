@@ -11,15 +11,18 @@ import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dhd_cinema.Dao.NguoiDungDao;
 import com.example.dhd_cinema.Framgment.FragmentAllHoaDon;
 import com.example.dhd_cinema.Framgment.FragmentVe;
 import com.example.dhd_cinema.Framgment.Fragment_DatPhim;
+import com.example.dhd_cinema.Framgment.Fragment_HoaDon;
 import com.example.dhd_cinema.Framgment.Fragment_Khac;
 import com.example.dhd_cinema.Framgment.Fragment_NguoiDung;
 import com.example.dhd_cinema.Framgment.Fragment_Phim;
@@ -40,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawable;
     BottomNavigationView bottomNavigationView;
     NavigationView navigationView;
+    NguoiDungDao nguoiDungDao;
+    int quyen=-1;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,17 +58,28 @@ public class MainActivity extends AppCompatActivity {
         navigationView=findViewById(R.id.navigationView);
         View v=navigationView.getHeaderView(0);
         TextView tvname=v.findViewById(R.id.welcomeName);
+        nguoiDungDao=new NguoiDungDao(MainActivity.this);
 
         ActionBarDrawerToggle drawerToggle=new ActionBarDrawerToggle(this,drawable,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawable.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
 
+        // lấy mã người dùng
+        SharedPreferences sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
+        String tendangnhap = sharedPreferences.getString("username", "");
+        quyen=nguoiDungDao.layQuyenTuDangNhap(tendangnhap);
+
+        if(quyen==0){
+            toolbar.setVisibility(View.GONE);
+        }else {
+            toolbar.setVisibility(View.VISIBLE);
+        }
         // xửa lý khi chọn bottomNavigation
-        Fragment_ghe frg= new Fragment_ghe();
-        Fragment_PhongChieu fr= new Fragment_PhongChieu();
         Fragment_SuatChieu frf = new Fragment_SuatChieu();
         replec(frf);
+
+
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -80,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
                  }else if (item.getItemId()==R.id.khac) {
                     Fragment_Khac frg= new Fragment_Khac();
                     replec(frg);
-
                 }
                 // doi ten titel
                 getSupportActionBar().setTitle(item.getTitle());
@@ -112,8 +127,9 @@ public class MainActivity extends AppCompatActivity {
                 }else if (item.getItemId()==R.id.ThanhVien) {
                     Fragment_NguoiDung frg= new Fragment_NguoiDung();
                     replec(frg);
-                }else if (item.getItemId()==R.id.doimk) {
-
+                }else if (item.getItemId()==R.id.hoaDon) {
+                    FragmentAllHoaDon frg= new FragmentAllHoaDon();
+                    replec(frg);
                 }else if (item.getItemId()==R.id.checkout) {
                     Intent intent = new Intent(MainActivity.this, DangNhap.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

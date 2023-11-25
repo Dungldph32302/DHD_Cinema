@@ -45,10 +45,6 @@ public class HoaDonDao {
                     sp.setTongtien(cursor.getInt(3));
                     sp.setPhuongthuc(cursor.getInt(4));
                     sp.setTrangthai(cursor.getInt(5));
-
-
-
-
                     list.add(sp);
                     cursor.moveToNext();
                 }
@@ -145,4 +141,59 @@ public class HoaDonDao {
 
         return false;
     }
+
+    public ArrayList<HoaDonModel> getHoaDonByTrangThai(int trangThai) {
+        ArrayList<HoaDonModel> list = new ArrayList<>();
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+        try {
+            String query = "SELECT * FROM HoaDon WHERE trangthai = ?";
+            Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(trangThai)});
+
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    HoaDonModel sp = new HoaDonModel();
+                    sp.setId(cursor.getInt(0));
+                    sp.setTennguoidung(cursor.getString(1));
+                    sp.setSl(cursor.getInt(2));
+                    sp.setTongtien(cursor.getInt(3));
+                    sp.setPhuongthuc(cursor.getInt(4));
+                    sp.setTrangthai(cursor.getInt(5));
+                    list.add(sp);
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            Log.i(TAG, "Lỗi getHoaDonByTrangThai", e);
+        }
+        return list;
+    }
+
+    public ArrayList<HoaDonModel> getHoaDonByTenngdung(String ten) {
+        ArrayList<HoaDonModel> list = new ArrayList<>();
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+        try {
+            String query = "SELECT * FROM HoaDon WHERE TenDangNhap = ?";
+            Cursor cursor = db.rawQuery(query, new String[]{ten});
+
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    HoaDonModel sp = new HoaDonModel();
+                    sp.setId(cursor.getInt(0));
+                    sp.setTennguoidung(cursor.getString(1));
+                    sp.setSl(cursor.getInt(2));
+                    sp.setTongtien(cursor.getInt(3));
+                    sp.setPhuongthuc(cursor.getInt(4));
+                    sp.setTrangthai(cursor.getInt(5));
+                    list.add(sp);
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            Log.i(TAG, "Lỗi getHoaDonByTennguoi dung", e);
+        }
+        return list;
+    }
+
 }

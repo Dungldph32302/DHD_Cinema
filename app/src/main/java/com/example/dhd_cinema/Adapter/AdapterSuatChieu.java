@@ -13,6 +13,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.dhd_cinema.Dao.NguoiDungDao;
 import com.example.dhd_cinema.Dao.PhimDao;
 import com.example.dhd_cinema.Dao.PhongDao;
 import com.example.dhd_cinema.Dao.SuatChieuDao;
@@ -55,8 +57,13 @@ import com.example.dhd_cinema.Spinner.AdapterSpinnerPhim;
 import com.example.dhd_cinema.Spinner.AdapterSpinnerPhong;
 
 import java.security.AccessController;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class AdapterSuatChieu extends RecyclerView.Adapter<AdapterSuatChieu.ViewHolder>{
 
@@ -82,6 +89,14 @@ public class AdapterSuatChieu extends RecyclerView.Adapter<AdapterSuatChieu.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        int quyen=-1;
+        SharedPreferences sharedPreferences = context.getSharedPreferences("login", context.MODE_PRIVATE);
+        String tendangnhap = sharedPreferences.getString("username", "");
+        NguoiDungDao nguoiDungDao= new NguoiDungDao(context);
+        quyen=nguoiDungDao.layQuyenTuDangNhap(tendangnhap);
+        if(quyen==0){
+            holder.chinh.setVisibility(View.INVISIBLE);
+        }
         phongDao= new PhongDao(context);
         SuatChieuModel suatChieuModel= list.get(position);
         dao= new SuatChieuDao(context);
@@ -104,22 +119,31 @@ public class AdapterSuatChieu extends RecyclerView.Adapter<AdapterSuatChieu.View
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment_DatPhim frg = new Fragment_DatPhim();
-                Fragment_HoaDon frg1= new Fragment_HoaDon();
-                MainActivity mainActivity = (MainActivity)context;
-                mainActivity.replec(frg);
+                String ngay = list.get(position).getNgayChieu();
+                @SuppressLint({"NewApi", "LocalSuppress"})
+                String ngayht = String.valueOf(java.time.LocalDate.now());
+                int result = compareDates(ngay, ngayht);
+                if(result>0||result==0) {
 
-                String ng=list.get(position).getGioChieu()+"  "+list.get(position).getNgayChieu();
-                Bundle bundle = new Bundle();
-                bundle.putInt("scid",list.get(position).getId());
-                bundle.putString("ngaygio",ng);
-                bundle.putString("ten",list.get(position).getTenPhim());
-                bundle.putInt("gia",list.get(position).getGia());
-                frg.setArguments(bundle);
-                frg1.setArguments(bundle);
+                    Fragment_DatPhim frg = new Fragment_DatPhim();
+                    Fragment_HoaDon frg1 = new Fragment_HoaDon();
+                    MainActivity mainActivity = (MainActivity) context;
+                    mainActivity.replec(frg);
 
+                    String ng = list.get(position).getGioChieu() + "  " + list.get(position).getNgayChieu();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("scid", list.get(position).getId());
+                    bundle.putString("ngaygio", ng);
+                    bundle.putString("ten", list.get(position).getTenPhim());
+                    bundle.putInt("gia", list.get(position).getGia());
+                    frg.setArguments(bundle);
+                    frg1.setArguments(bundle);
+                }else {
+                    Toast.makeText(context, "Xuất chiếu này đã được chiếu ", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
         holder.chinh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -378,4 +402,28 @@ public class AdapterSuatChieu extends RecyclerView.Adapter<AdapterSuatChieu.View
         });
 
     }
+
+    public static int compareDates(String ngay1, String ngay2) {
+        try {
+            // Định dạng chuỗi ngày
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+
+            // Chuyển đổi chuỗi ngày thành đối tượng Date
+            Date date1 = sdf.parse(ngay1);
+            Date date2 = sdf.parse(ngay2);
+
+            // Chuyển đổi Date thành LocalDate
+            LocalDate localDate1 = date1.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
+            LocalDate localDate2 = date2.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
+
+            // So sánh LocalDate
+            return localDate1.compareTo(localDate2);
+        } catch (ParseException e) {
+            // Xử lý lỗi định dạng ngày nếu cần
+            e.printStackTrace();
+            return 0; // Trả về 0 nếu có lỗi
+        }
+    }
+
 }
+
