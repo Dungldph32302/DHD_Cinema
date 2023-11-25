@@ -59,6 +59,7 @@ public class ThongKeDao {
         }
         return list;
     }
+
     public int DoanhThu(String tuNgay, String denNgay) {
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         String sql = "SELECT SUM(TongTien) as doanhThu FROM HoaDon WHERE ngay BETWEEN ? AND ?";
@@ -75,4 +76,5 @@ public class ThongKeDao {
         cursor.close();
         return doanhThu;
     }
+
 }
