@@ -11,7 +11,7 @@ import com.example.dhd_cinema.R;
 public class Dbhelper extends SQLiteOpenHelper {
     private static final String DB="hh";
     public Dbhelper(@Nullable Context context) {
-        super(context, DB,null,37);
+         super(context, DB,null,39);
     }
 
     @Override
@@ -21,6 +21,7 @@ public class Dbhelper extends SQLiteOpenHelper {
                 "      HoTen TEXT not null,\n" +
                 "      Email TEXT not null,\n" +
                 "      SDT TEXT not null,\n" +
+                "      Quyen int not null,\n" +
                 "      MatKhau TEXT not null)");
 
         db.execSQL("create table TheLoai(\n" +
@@ -82,7 +83,8 @@ public class Dbhelper extends SQLiteOpenHelper {
 
 
 // Thêm dữ liệu vào bảng NguoiDung
-        db.execSQL("INSERT INTO NguoiDung (TenDangNhap, HoTen, Email, SDT, MatKhau) VALUES ('admin','admin', 'hi@gmail.com', '123456789', 'admin')");
+        db.execSQL("INSERT INTO NguoiDung  VALUES ('anh','admin', 'hi@gmail.com', '123456789',0, 'admin')");
+        db.execSQL("INSERT INTO NguoiDung  VALUES ('admin','admin', 'hi@gmail.com', '123456789',1, 'admin')");
 
 // Thêm dữ liệu vào bảng TheLoai
         db.execSQL("INSERT INTO TheLoai (TenTheLoai) VALUES ('TenTheLoai1')");

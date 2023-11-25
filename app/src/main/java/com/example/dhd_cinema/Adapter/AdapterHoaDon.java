@@ -8,6 +8,7 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -33,6 +34,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.dhd_cinema.Dao.HoaDonDao;
+import com.example.dhd_cinema.Dao.NguoiDungDao;
 import com.example.dhd_cinema.Dao.PhimDao;
 import com.example.dhd_cinema.Dao.PhongDao;
 import com.example.dhd_cinema.Dao.SuatChieuDao;
@@ -85,10 +87,20 @@ public class AdapterHoaDon extends RecyclerView.Adapter<AdapterHoaDon.ViewHolder
                holder.ngay.setText(String.valueOf(list.get(position).getThoigian()));
                holder.tongtien.setText(String.valueOf(list.get(position).getTongtien())+ "$");
                holder.tongtien.setTextColor(Color.parseColor("#0000FF"));;
-               if(list.get(position).getTrangthai()==0){
-                   holder.trangthai.setText("Chưa thanh toán");
-               }else {
+               int quyen=-1;
+        SharedPreferences sharedPreferences = context.getSharedPreferences("login", context.MODE_PRIVATE);
+        String tendangnhap = sharedPreferences.getString("username", "");
+        NguoiDungDao nguoiDungDao= new NguoiDungDao(context);
+        quyen=nguoiDungDao.layQuyenTuDangNhap(tendangnhap);
+        if(quyen==0){
+            holder.thanhtoan.setVisibility(View.GONE);
+            holder.delete.setVisibility(View.GONE);
+        }
+               if(list.get(position).getTrangthai()==1){
                    holder.trangthai.setText("Đã thanh toán");
+                   holder.thanhtoan.setVisibility(View.GONE);
+               }else {
+                   holder.trangthai.setText("Chưa thanh toán");
                }
     }
 
@@ -98,10 +110,13 @@ public class AdapterHoaDon extends RecyclerView.Adapter<AdapterHoaDon.ViewHolder
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView anh,chinh;
+        ImageView delete,chinh;
+        AppCompatButton thanhtoan;
         TextView maHD,maND,maSC,ngay,trangthai,tongtien;
         public ViewHolder(@NonNull View view) {
             super(view);
+            delete=view.findViewById(R.id.imgDeletePM);
+            thanhtoan=view.findViewById(R.id.btnthanhtoan);
             maHD=view.findViewById(R.id.tvmahd);
             maND=view.findViewById(R.id.tvmand);
             maSC=view.findViewById(R.id.tvsc);
