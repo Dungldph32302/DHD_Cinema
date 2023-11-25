@@ -1,18 +1,34 @@
 package com.example.dhd_cinema.Framgment;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatEditText;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,9 +41,11 @@ import com.example.dhd_cinema.Dao.SuatChieuDao;
 import com.example.dhd_cinema.MainActivity;
 import com.example.dhd_cinema.Model.GheModel;
 import com.example.dhd_cinema.Model.HoaDonModel;
+import com.example.dhd_cinema.Model.PhongModel;
 import com.example.dhd_cinema.Model.SuatChieuModel;
 import com.example.dhd_cinema.R;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 
@@ -38,11 +56,21 @@ public class Fragment_HoaDon extends Fragment {
 
     }
 
-
+    private static final int YeuCauQuyen = 10;
+    private final ActivityResultLauncher<Intent> moGalleryLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    xuLyKetQuaChonAnh(result);
+                }
+            }
+    );
 
     LinearLayout tienmat,chuyenkhoan;
 
     int index=0;
+    ImageView anh;
     TextView ngay,gio,gia,sl,tong,phong,tenp;
     AdapterGhe_in_Dat adapterGheInDat;
     HoaDonDao hoaDonDao; GheDao gheDao;
@@ -52,6 +80,9 @@ public class Fragment_HoaDon extends Fragment {
     SuatChieuDao suatChieuDao;
     String tenphim;
     AppCompatButton thanhtoan;
+    private String linkanh;
+
+    HoaDonModel hoaDonModel;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -97,9 +128,9 @@ public class Fragment_HoaDon extends Fragment {
 
 
 
-
         Drawable drawable= ContextCompat.getDrawable(getContext(), R.drawable.phuongthuc);
         Drawable drawable1= ContextCompat.getDrawable(getContext(), R.drawable.phuongthuc1);
+
 
         tienmat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,19 +154,9 @@ public class Fragment_HoaDon extends Fragment {
         chuyenkhoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                index=1;
-                phuongthuc=1;
-                if(index==0){
-                    tienmat.setBackground(drawable);
-                    chuyenkhoan.setBackground(drawable1);
-                } else if (index==1) {
-                    chuyenkhoan.setBackground(drawable);
-                    tienmat.setBackground(drawable1);
-                }else {
-                    chuyenkhoan.setBackground(drawable1);
-                    tienmat.setBackground(drawable1);
-                }
-                Toast.makeText(getActivity(), " index"+index, Toast.LENGTH_SHORT).show();
+             openDialogchuyenkhoan();
+
+
             }
         });
 
@@ -173,5 +194,94 @@ public class Fragment_HoaDon extends Fragment {
             }
         });
         return view;
+    }
+    @SuppressLint({"MissingInflatedId", "LocalSuppress"})
+    public void openDialogchuyenkhoan () {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        LayoutInflater inflater =getActivity().getLayoutInflater();
+        View view = inflater.inflate(R.layout.gui_anh,null);
+        builder.setView(view);
+        Dialog dialog = builder.create();
+        dialog.show();
+        anh=view.findViewById(R.id.anhthanhtoan);
+        TextView tvtien=view.findViewById(R.id.tvtien);
+        AppCompatButton huy, gui;
+        huy=view.findViewById(R.id.btnhuy);
+        gui=view.findViewById(R.id.btnxacnhan);
+        tvtien.setText("Số tiền thanh toán : "+String.valueOf(giave*soluong));
+        huy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        // xử lý chọn ảnh
+        anh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chonAnhTuGallery();
+            }
+        });
+        gui.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Drawable drawable= ContextCompat.getDrawable(getContext(), R.drawable.phuongthuc);
+                Drawable drawable1= ContextCompat.getDrawable(getContext(), R.drawable.phuongthuc1);
+                index=1;
+                phuongthuc=1;
+                if(index==0){
+                    tienmat.setBackground(drawable);
+                    chuyenkhoan.setBackground(drawable1);
+                } else if (index==1) {
+                    chuyenkhoan.setBackground(drawable);
+                    tienmat.setBackground(drawable1);
+                }else {
+                    chuyenkhoan.setBackground(drawable1);
+                    tienmat.setBackground(drawable1);
+                }
+                dialog.dismiss();
+            }
+
+
+        });
+
+    }
+
+    private void chonAnhTuGallery() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        moGalleryLauncher.launch(Intent.createChooser(intent, "Chọn ảnh"));
+    }
+
+    private void xuLyKetQuaChonAnh(ActivityResult result) {
+        if (result.getResultCode() == RESULT_OK) {
+            Intent data = result.getData();
+            if (data != null) {
+                Uri uri = data.getData();
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), uri);
+                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                    byte[] byteArray = byteArrayOutputStream.toByteArray();
+
+                    // Chuyển đổi mảng byte thành chuỗi base64
+                    linkanh = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+                    anh.setImageBitmap(bitmap);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private int kiemTraQuyen(Activity activity, String quyen) {
+        return ContextCompat.checkSelfPermission(activity, quyen);
+    }
+
+    private void yeuCauQuyen(String[] quyen, int maYeuCau) {
+        requestPermissions(quyen, maYeuCau);
     }
 }
