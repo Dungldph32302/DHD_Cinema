@@ -22,6 +22,7 @@ import com.example.dhd_cinema.Dao.NguoiDungDao;
 import com.example.dhd_cinema.Framgment.FragmentAllHoaDon;
 import com.example.dhd_cinema.Framgment.FragmentVe;
 import com.example.dhd_cinema.Framgment.Fragment_DatPhim;
+import com.example.dhd_cinema.Framgment.Fragment_DoanhThu;
 import com.example.dhd_cinema.Framgment.Fragment_HoaDon;
 import com.example.dhd_cinema.Framgment.Fragment_Khac;
 import com.example.dhd_cinema.Framgment.Fragment_NguoiDung;
@@ -122,9 +123,13 @@ public class MainActivity extends AppCompatActivity {
                 } else if (item.getItemId()==R.id.ghe) {
                     Fragment_ghe frg= new Fragment_ghe();
                     replec(frg);
-                }else if (item.getItemId()==R.id.TKNhap) {
+                }else if (item.getItemId()==R.id.TKDT) {
+                    Fragment_DoanhThu frg= new Fragment_DoanhThu();
+                    replec(frg);
+                }else if (item.getItemId()==R.id.TKDT){
 
-                }else if (item.getItemId()==R.id.ThanhVien) {
+                }
+                else if (item.getItemId()==R.id.ThanhVien) {
                     Fragment_NguoiDung frg= new Fragment_NguoiDung();
                     replec(frg);
                 }else if (item.getItemId()==R.id.hoaDon) {

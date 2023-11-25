@@ -51,12 +51,12 @@
         <menu>
 
             <item
-                android:id="@+id/TKXuat"
-                android:title="Sản phẩm Xuất Kho"
+                android:id="@+id/TKDT"
+                android:title="Doanh thu "
                 android:icon="@drawable/baseline_import_export_24"/>
             <item
-                android:id="@+id/TKNhap"
-                android:title="Sản phẩm Nhập Kho"
+                android:id="@+id/TKDTP"
+                android:title="Doanh thu theo phim"
                 android:icon="@drawable/baseline_import_export_24"/>
         </menu>
     </item>
