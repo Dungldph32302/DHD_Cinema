@@ -11,7 +11,7 @@ import com.example.dhd_cinema.R;
 public class Dbhelper extends SQLiteOpenHelper {
     private static final String DB="hh";
     public Dbhelper(@Nullable Context context) {
-        super(context, DB,null,35);
+        super(context, DB,null,37);
     }
 
     @Override
@@ -121,7 +121,7 @@ public class Dbhelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO Ghe (SoGhe) VALUES (?)", new Object[]{soGhee});
         }
 
-        db.execSQL("INSERT INTO HoaDon VALUES (1,'admin',2,500001,0,'20-20-2020',0)");
+        db.execSQL("INSERT INTO HoaDon VALUES (1,'admin',2,50000,0,'20-10-2023',1)");
         db.execSQL("INSERT INTO Ve VALUES (1,'admin',1,1,1,'20-20-2020',45000)");
         db.execSQL("INSERT INTO Ve VALUES (2,'admin',1,1,1,'20-20-2020',450000)");
     }

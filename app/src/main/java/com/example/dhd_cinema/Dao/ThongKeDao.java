@@ -59,4 +59,20 @@ public class ThongKeDao {
         }
         return list;
     }
+    public int DoanhThu(String tuNgay, String denNgay) {
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+        String sql = "SELECT SUM(TongTien) as doanhThu FROM HoaDon WHERE ngay BETWEEN ? AND ?";
+        String dk[] = {tuNgay, denNgay};
+        int doanhThu = 0;
+        Cursor cursor = sqLiteDatabase.rawQuery(sql, dk);
+        if (cursor.moveToFirst()) {
+            try {
+                doanhThu = cursor.getInt(cursor.getColumnIndexOrThrow("doanhThu"));
+            } catch (Exception e) {
+                doanhThu = 0;
+            }
+        }
+        cursor.close();
+        return doanhThu;
+    }
 }
