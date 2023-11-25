@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:layout_margin="5dp"
     >
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+>
 
 
     <LinearLayout
@@ -88,7 +94,7 @@
                 android:textColor="#777"/>
         </LinearLayout>
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btntraSach"
+            android:id="@+id/btnthanhtoan"
             android:background="@drawable/buttonthanhtoan"
             android:layout_marginTop="10dp"
             android:layout_width="140dp"
@@ -107,6 +113,6 @@
         android:layout_gravity="center_vertical"
         android:background="@drawable/baseline_delete_24" />
 
-
-
 </LinearLayout>
+
+</androidx.cardview.widget.CardView>

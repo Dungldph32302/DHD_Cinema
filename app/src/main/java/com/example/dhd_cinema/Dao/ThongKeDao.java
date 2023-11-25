@@ -30,7 +30,6 @@ public class ThongKeDao {
                 "GROUP BY Phim.ID_Phim " +
                 "ORDER BY SoLuongVeDat DESC " +
                 "LIMIT 5", null);
-
         if (cursor.getCount() != 0){
             cursor.moveToFirst();
             do {

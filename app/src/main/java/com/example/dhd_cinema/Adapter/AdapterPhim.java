@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -27,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.dhd_cinema.Dao.GheDao;
+import com.example.dhd_cinema.Dao.NguoiDungDao;
 import com.example.dhd_cinema.Dao.PhimDao;
 import com.example.dhd_cinema.Dao.TheLoaiPhimDao;
 import com.example.dhd_cinema.Model.Phim;
@@ -58,6 +60,14 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull AdapterPhim.ViewHolder holder,int position) {
+        int quyen=-1;
+        SharedPreferences sharedPreferences = context.getSharedPreferences("login", context.MODE_PRIVATE);
+        String tendangnhap = sharedPreferences.getString("username", "");
+        NguoiDungDao nguoiDungDao= new NguoiDungDao(context);
+        quyen=nguoiDungDao.layQuyenTuDangNhap(tendangnhap);
+        if(quyen==0){
+            holder.chon.setVisibility(View.INVISIBLE);
+        }
         holder.txtTenPhim_item.setText("" + (list.get(position).getTenPhim()));
         holder.txtDaoDien_item.setText("Đạo Diễn: " + list.get(position).getDaoDien());
         holder.txtNgayPhatHanh_item.setText("" + (list.get(position).getNgayPhatHanh()));
@@ -196,15 +206,12 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
 
 // Giải mã chuỗi Base64 thành mảng byte
         byte[] decodedByteArray = Base64.decode(base64String, Base64.DEFAULT);
-
 // Chuyển đổi mảng byte thành Bitmap
         Bitmap bitmap = BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.length);
-
 // Hiển thị Bitmap bằng Glide
         Glide.with(context)
                 .load(bitmap)
                 .into(anh);
-
         //nut no
         btnExit_chiTiet.setOnClickListener(new View.OnClickListener() {
             @Override

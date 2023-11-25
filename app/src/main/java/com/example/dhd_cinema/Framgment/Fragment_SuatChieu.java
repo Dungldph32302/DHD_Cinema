@@ -1,27 +1,35 @@
 package com.example.dhd_cinema.Framgment;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.dhd_cinema.Adapter.AdapterPhongChieu;
 import com.example.dhd_cinema.Adapter.AdapterSuatChieu;
+import com.example.dhd_cinema.Adapter.ImageAdapter;
+import com.example.dhd_cinema.Dao.NguoiDungDao;
 import com.example.dhd_cinema.Dao.PhongDao;
 import com.example.dhd_cinema.Dao.SuatChieuDao;
 import com.example.dhd_cinema.MainActivity;
 import com.example.dhd_cinema.Model.PhongModel;
 import com.example.dhd_cinema.Model.SuatChieuModel;
 import com.example.dhd_cinema.R;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Fragment_SuatChieu extends Fragment {
@@ -36,6 +44,8 @@ public class Fragment_SuatChieu extends Fragment {
     ArrayList<SuatChieuModel> list;
     RecyclerView rcv;
     AppCompatButton add;
+    private ViewPager2 viewPager;
+    private Handler sliderHandler = new Handler();
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,14 +53,71 @@ public class Fragment_SuatChieu extends Fragment {
          View view=inflater.inflate(R.layout.fragment_suatchieu, container, false);
          rcv=view.findViewById(R.id.rcvGhe);
          add=view.findViewById(R.id.addsc);
+        viewPager =view.findViewById(R.id.viewPager);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"})
+        TabLayout tabLayout =view.findViewById(R.id.tabLayout);
+
+        // xử lý phân quyền
+        int quyen=-1;
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("login", getActivity().MODE_PRIVATE);
+        String tendangnhap = sharedPreferences.getString("username", "");
+        NguoiDungDao nguoiDungDao= new NguoiDungDao(getActivity());
+        quyen=nguoiDungDao.layQuyenTuDangNhap(tendangnhap);
+        if(quyen==0){
+           add.setVisibility(View.GONE);
+        }
+        // sinh tablayout
+        TabLayout.Tab tab1 = tabLayout.newTab().setText(" SẮP CHIẾU ");
+        tabLayout.addTab(tab1);
+        TabLayout.Tab tab3 = tabLayout.newTab().setText(" ĐÃ CHIẾU ");
+        tabLayout.addTab(tab3);
+
+        // xử lý slide
+        List<Integer> imageList = new ArrayList<>();
+        imageList.add(R.drawable.img_23);
+        imageList.add(R.drawable.img_22);
+        imageList.add(R.drawable.img_24);
+
+
+        ImageAdapter adapterimg = new ImageAdapter(imageList);
+        viewPager.setAdapter(adapterimg);
+        autoSlide();
 
          suatChieuDao= new SuatChieuDao(getActivity());
-         list=suatChieuDao.getAllSuatChieuWithInfo();
+         list=suatChieuDao.getsuatchieusapchieu();
         int spanCount = 2; // Số cột hoặc hàng trong lưới
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), spanCount);
         rcv.setLayoutManager(layoutManager);
          adapter= new AdapterSuatChieu(getActivity(),list);
          rcv.setAdapter(adapter);
+
+
+         // xửa lý khi chọn tablayout
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int selectedTabIndex = tab.getPosition();
+                if (selectedTabIndex == 0) {
+                    ArrayList<SuatChieuModel> list1 = suatChieuDao.getsuatchieusapchieu();
+                    adapter = new AdapterSuatChieu(getActivity(), list1);
+                    rcv.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                } else if (selectedTabIndex == 1) {
+                    ArrayList<SuatChieuModel> list1 = suatChieuDao.dachieu();
+                    adapter = new AdapterSuatChieu(getActivity(), list1);
+                    rcv.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
          add.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
@@ -59,46 +126,35 @@ public class Fragment_SuatChieu extends Fragment {
                  mainActivity.replec(frg);
              }
          });
-//         add.setOnClickListener(new View.OnClickListener() {
-//             @Override
-//             public void onClick(View view) {
-//                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//                 LayoutInflater inflater = getLayoutInflater();
-//                 View view1 = inflater.inflate(R.layout.add_ghe, null);
-//                 builder.setView(view1);
-//                 Dialog dialog = builder.create();
-//                 dialog.show();
-//                 AppCompatEditText idphong = view1.findViewById(R.id.txtIDP);
-//                 AppCompatEditText soghe = view1.findViewById(R.id.txtSG);
-//
-//                 Button them = view1.findViewById(R.id.btnadd);
-//                 // xử lý khi chọn hủy
-//
-//                 them.setOnClickListener(new View.OnClickListener() {
-//                     @Override
-//                     public void onClick(View v) {
-//                         if (idphong.getText().toString().trim().isEmpty()) {
-//                             Toast.makeText(getActivity(), "Vui lòng nhập ID phòng", Toast.LENGTH_SHORT).show();
-//                         } else if (soghe.getText().toString().trim().isEmpty()) {
-//                             Toast.makeText(getActivity(), "Vui lòng nhập Số ghế", Toast.LENGTH_SHORT).show();
-//                         } else {
-//                             GheModel tl = new GheModel();
-//                             tl.setTrangThai(0);
-//                             tl.setIdPhong(Integer.parseInt(idphong.getText().toString()));
-//                             tl.setSoGhe(soghe.getText().toString());
-//                             if (gheDao.addGhe(tl)) {
-//                                 list.clear();
-//                                 list.addAll(gheDao.getAllGhe());
-//                                 adapterGhe.notifyDataSetChanged();
-//                                 Toast.makeText(getActivity(), "Bạn đã thêm 1 ghế mới ", Toast.LENGTH_SHORT).show();
-//                                 dialog.dismiss();
-//                             }
-//                         }
-//                     }
-//                 });
-//
-//             }
-//         });
+
          return view;
+    }
+    private boolean isAutoForward = true;
+    private void autoSlide() {
+
+        sliderHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                int currentPosition = viewPager.getCurrentItem();
+                int nextPosition;
+
+                if (isAutoForward) {
+                    nextPosition = currentPosition + 1;
+                } else {
+                    nextPosition = currentPosition - 1;
+                }
+
+                if (nextPosition >= viewPager.getAdapter().getItemCount()) {
+                    isAutoForward = false;
+                    nextPosition = viewPager.getAdapter().getItemCount() - 2;
+                } else if (nextPosition < 0) {
+                    isAutoForward = true;
+                    nextPosition = 1;
+                }
+
+                viewPager.setCurrentItem(nextPosition);
+                autoSlide();
+            }
+        }, 5000);
     }
 }
