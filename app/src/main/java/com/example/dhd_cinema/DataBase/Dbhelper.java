@@ -54,7 +54,7 @@ public class Dbhelper extends SQLiteOpenHelper {
                 "      GioChieu TEXT not null,\n" +
                 "      Gia integer not null)");
 
-        db.execSQL("create table Ve(\n" +
+        db.execSQL("create table Ve(\n"+
                 "      ID_Ve integer primary key autoincrement,\n" +
                 "      TenDangNhap text REFERENCES NguoiDung(TenDangNhap),\n" +
                 "      ID_SC integer REFERENCES SuatChieu(ID_SC),\n" +

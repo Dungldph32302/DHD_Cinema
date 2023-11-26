@@ -93,7 +93,12 @@
                 android:textSize="16sp"
                 android:textColor="#777"/>
         </LinearLayout>
-
+        <TextView
+            android:id="@+id/tvphuongthuc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phương thức thanh toán : "
+            />
 
         <ImageView
             android:id="@+id/imghtt"

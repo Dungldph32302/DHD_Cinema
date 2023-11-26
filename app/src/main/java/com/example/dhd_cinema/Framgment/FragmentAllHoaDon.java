@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dhd_cinema.Adapter.AdapterHoaDon;
 import com.example.dhd_cinema.Adapter.AdapterSuatChieu;
@@ -70,6 +71,7 @@ public class FragmentAllHoaDon extends Fragment {
         if(quyen==0){
             tv.setText("Hóa Đơn Của Tôi ");
             tabLayout.setVisibility(View.GONE);
+            Toast.makeText(getActivity(), "tên "+tendangnhap, Toast.LENGTH_SHORT).show();
            ArrayList<HoaDonModel> list1=hoaDonDao.getHoaDonByTenngdung(tendangnhap);
             adapterHoaDon= new AdapterHoaDon(getActivity(),list1);
             rcv.setAdapter(adapterHoaDon);

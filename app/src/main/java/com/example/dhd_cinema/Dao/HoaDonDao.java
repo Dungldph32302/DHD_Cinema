@@ -190,8 +190,9 @@ public class HoaDonDao {
                     sp.setSl(cursor.getInt(2));
                     sp.setTongtien(cursor.getInt(3));
                     sp.setPhuongthuc(cursor.getInt(4));
-                    sp.setAnh(cursor.getString(5));
-                    sp.setTrangthai(cursor.getInt(6));
+                    sp.setThoigian(cursor.getString(5));
+                    sp.setAnh(cursor.getString(6));
+                    sp.setTrangthai(cursor.getInt(7));
                     list.add(sp);
                     cursor.moveToNext();
                 }

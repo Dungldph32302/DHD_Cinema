@@ -81,6 +81,7 @@ public class AdapterHoaDon extends RecyclerView.Adapter<AdapterHoaDon.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
               hoaDonDao= new HoaDonDao(context);
         // xử lý khi click vào item suất chiếu
                holder.maHD.setText(String.valueOf("Mã hóa đơn "+list.get(position).getId()));
@@ -89,6 +90,11 @@ public class AdapterHoaDon extends RecyclerView.Adapter<AdapterHoaDon.ViewHolder
               holder.ngay.setText(String.valueOf(list.get(position).getThoigian()));
                holder.tongtien.setText(String.valueOf(list.get(position).getTongtien())+ "$");
 
+               if(list.get(position).getPhuongthuc()==0){
+                   holder.pt.setText("Phương thức thanh toán : Tại quầy ");
+               }else {
+                   holder.pt.setText("Phương thức thanh toán : Chuyển khoản  ");
+               }
                //setanh
         String base64String =list.get(position).getAnh();
 
@@ -115,14 +121,17 @@ public class AdapterHoaDon extends RecyclerView.Adapter<AdapterHoaDon.ViewHolder
         quyen=nguoiDungDao.layQuyenTuDangNhap(tendangnhap);
         if(quyen==0){
             holder.thanhtoan.setVisibility(View.GONE);
-            holder.delete.setVisibility(View.GONE);
         }
                if(list.get(position).getTrangthai()==1){
                    holder.trangthai.setText("Đã thanh toán");
                    holder.thanhtoan.setVisibility(View.GONE);
                }else {
+
                    holder.trangthai.setText("Chưa thanh toán");
-                   holder.thanhtoan.setVisibility(View.VISIBLE);
+                   if(quyen==1){
+                       holder.thanhtoan.setVisibility(View.VISIBLE);
+                   }
+
                }
 
                // xử lý khi ấn vào ảnh
@@ -163,7 +172,7 @@ public class AdapterHoaDon extends RecyclerView.Adapter<AdapterHoaDon.ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView delete,anh;
         AppCompatButton thanhtoan;
-        TextView maHD,maND,maSC,ngay,trangthai,tongtien;
+        TextView maHD,maND,maSC,ngay,trangthai,tongtien,pt;
         public ViewHolder(@NonNull View view) {
             super(view);
             thanhtoan=view.findViewById(R.id.btnthanhtoan);
@@ -174,7 +183,7 @@ public class AdapterHoaDon extends RecyclerView.Adapter<AdapterHoaDon.ViewHolder
             trangthai=view.findViewById(R.id.tvTrangThai);
             tongtien=view.findViewById(R.id.tvtongtien);
             anh=view.findViewById(R.id.imghtt);
-
+            pt=view.findViewById(R.id.tvphuongthuc);
         }
     }
     @SuppressLint({"MissingInflatedId", "LocalSuppress"})

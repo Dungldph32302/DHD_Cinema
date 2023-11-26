@@ -228,7 +228,7 @@ public class Fragment_HoaDon extends Fragment {
                 if (linkanh != null && !linkanh.isEmpty()) {
                     Toast.makeText(getActivity(), "linh ảnh"+linkanh, Toast.LENGTH_SHORT).show();
                 index=1;
-                phuongthuc=0;
+                phuongthuc=1;
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("login", getActivity().MODE_PRIVATE);
                 String savedUsername = sharedPreferences.getString("username", "");
                 @SuppressLint({"NewApi", "LocalSuppress"})
@@ -242,7 +242,7 @@ public class Fragment_HoaDon extends Fragment {
                 hoaDonModel.setSl(soluong);
                 hoaDonModel.setThoigian(ngay);
                 hoaDonModel.setTongtien(giave*soluong);
-                hoaDonModel.setTrangthai(phuongthuc);
+                hoaDonModel.setTrangthai(0);
                 hoaDonModel.setTennguoidung(savedUsername);
                 hoaDonModel.setAnh(linkanh);
                 if(phuongthuc==-1){
@@ -283,7 +283,6 @@ public class Fragment_HoaDon extends Fragment {
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                     bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                     byte[] byteArray = byteArrayOutputStream.toByteArray();
-
                     // Chuyển đổi mảng byte thành chuỗi base64
                     linkanh = Base64.encodeToString(byteArray, Base64.DEFAULT);
 
