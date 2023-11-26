@@ -8,12 +8,14 @@ public class NguoiDung {
     private String  MatKhau;
     private int quyen;
 
-    public NguoiDung(String tenDangNhap, String hoTen, String email, String SDT, String matKhau) {
+
+    public NguoiDung(String tenDangNhap, String hoTen, String email, String SDT, String matKhau, int quyen) {
         TenDangNhap = tenDangNhap;
         HoTen = hoTen;
         Email = email;
         this.SDT = SDT;
         MatKhau = matKhau;
+        this.quyen = quyen;
     }
 
     public int getQuyen() {
