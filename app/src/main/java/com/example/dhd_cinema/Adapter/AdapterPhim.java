@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -33,6 +34,7 @@ import com.example.dhd_cinema.Dao.NguoiDungDao;
 import com.example.dhd_cinema.Dao.PhimDao;
 import com.example.dhd_cinema.Dao.TheLoaiPhimDao;
 import com.example.dhd_cinema.Framgment.Fragment_ChiTietPhim;
+import com.example.dhd_cinema.MainActivity;
 import com.example.dhd_cinema.Model.Phim;
 import com.example.dhd_cinema.Model.TheLoaiPhim;
 import com.example.dhd_cinema.R;
@@ -65,11 +67,13 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
         int quyen=-1;
         SharedPreferences sharedPreferences = context.getSharedPreferences("login", context.MODE_PRIVATE);
         String tendangnhap = sharedPreferences.getString("username", "");
+
         NguoiDungDao nguoiDungDao= new NguoiDungDao(context);
         quyen=nguoiDungDao.layQuyenTuDangNhap(tendangnhap);
         if(quyen==0){
             holder.chon.setVisibility(View.INVISIBLE);
         }
+
         holder.txtTenPhim_item.setText("" + (list.get(position).getTenPhim()));
         holder.txtDaoDien_item.setText("Đạo Diễn: " + list.get(position).getDaoDien());
         holder.txtNgayPhatHanh_item.setText("" + (list.get(position).getNgayPhatHanh()));
@@ -154,7 +158,9 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
             public boolean onLongClick(View v) {
                 Intent intent = new Intent(context, Fragment_ChiTietPhim.class);
                 intent.putExtra("ID_Phim", list.get(position).getID_Phim());
-                context.startActivity(intent);
+                Fragment_ChiTietPhim frg = new Fragment_ChiTietPhim();
+                MainActivity mainActivity = (MainActivity) context;
+                mainActivity.replec(frg);
                 return true;
             }
         });
@@ -212,17 +218,25 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
         edtMota_sua_P.setText(phim.getMota());
         String base64String = phim.getAnh();
 
-// Giải mã chuỗi Base64 thành mảng byte
+        // Giải mã chuỗi Base64 thành mảng byte
         byte[] decodedByteArray = Base64.decode(base64String, Base64.DEFAULT);
 
-// Chuyển đổi mảng byte thành Bitmap
+        // Chuyển đổi mảng byte thành Bitmap
         Bitmap bitmap = BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.length);
 
-// Hiển thị Bitmap bằng Glide
+        // Hiển thị Bitmap bằng Glide
         Glide.with(context)
                 .load(bitmap)
                 .into(anhphim);
 
+
+        // Xử lý khi người dùng click vào ảnh để chọn hình ảnh từ thiết bị
+        anhphim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chonAnh();
+            }
+        });
         // Setup Spinner
         TheLoaiPhimDao theLoaiPhimDao = new TheLoaiPhimDao(context);
         ArrayList<TheLoaiPhim> listTheLoaiPhim = theLoaiPhimDao.selectAllTheLoaiPhim();
@@ -250,6 +264,7 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
                 phim.setNgayPhatHanh(ngayPhatHanh);
                 phim.setMota(moTa);
                 phim.setID_TL(theLoaiPhimID);
+
 
                 // Kiểm tra xem có trường nào trống không
                 if (tenPhim.isEmpty() || daoDien.isEmpty() || ngayPhatHanh.isEmpty() || moTa.isEmpty()) {
@@ -291,4 +306,21 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
         }
         return -1;
     }
+
+    // Phương thức để chọn hình ảnh từ thiết bị
+    private void chonAnh() {
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        int PICK_IMAGE_REQUEST = 1;
+        ((Activity) context).startActivityForResult(gallery, PICK_IMAGE_REQUEST);
+    }
+
+    // Phương thức để cập nhật ImageView 'anhphim' với hình ảnh được chọn từ thiết bị
+//    public void updateSelectedImage(Uri selectedImage, Bitmap bitmap) {
+//        if (selectedImage != null && bitmap != null) {
+//            Glide.with(context)
+//                    .load(selectedImage)
+//                    .into(anh);
+//        }
+//
+//    }
 }

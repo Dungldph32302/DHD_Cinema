@@ -31,7 +31,7 @@ public class Fragment_ChiTietPhim extends Fragment {
     private TextView txtDaoDien_chiTiet;
     private TextView txtNgayPhatHanh_chiTiet;
     private TextView txtMoTa_chiTiet;
-    private Button btnExit_chiTiet;
+    private ImageView btnExit_chiTiet;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

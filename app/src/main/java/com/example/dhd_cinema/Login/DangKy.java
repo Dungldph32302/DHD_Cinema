@@ -58,7 +58,7 @@ public class DangKy extends AppCompatActivity {
                     return;
                 }
 
-                NguoiDung nguoiDung = new NguoiDung(tenDangNhap, hoten, email, sdt, pass);
+                NguoiDung nguoiDung = new NguoiDung(tenDangNhap, hoten, email, sdt, pass, 0);
                 nguoiDung.setQuyen(0);
                 if (tenDangNhap.isEmpty() || hoten.isEmpty() || email.isEmpty() || sdt.isEmpty() || pass.isEmpty() || endPass.isEmpty()){
                     Toast.makeText(DangKy.this, "Không Được Để Trống", Toast.LENGTH_SHORT).show();

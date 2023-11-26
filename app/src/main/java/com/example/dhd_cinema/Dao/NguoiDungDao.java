@@ -83,7 +83,7 @@ public class NguoiDungDao {
         if (cursor.getCount() != 0){
             cursor.moveToFirst();
             do {
-                list.add(new NguoiDung(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4)));
+                list.add(new NguoiDung(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getInt(5)));
 
             }while (cursor.moveToNext());
         }
