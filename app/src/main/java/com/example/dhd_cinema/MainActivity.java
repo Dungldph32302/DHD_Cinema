@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.example.dhd_cinema.Dao.NguoiDungDao;
 import com.example.dhd_cinema.Framgment.FragmentAllHoaDon;
 import com.example.dhd_cinema.Framgment.FragmentVe;
+import com.example.dhd_cinema.Framgment.Fragment_DanhThuTheoPhim;
 import com.example.dhd_cinema.Framgment.Fragment_DatPhim;
 import com.example.dhd_cinema.Framgment.Fragment_DoanhThu;
 import com.example.dhd_cinema.Framgment.Fragment_HoaDon;
@@ -126,8 +127,9 @@ public class MainActivity extends AppCompatActivity {
                 }else if (item.getItemId()==R.id.TKDT) {
                     Fragment_DoanhThu frg= new Fragment_DoanhThu();
                     replec(frg);
-                }else if (item.getItemId()==R.id.TKDT){
-
+                }else if (item.getItemId()==R.id.TKDTP){
+                    Fragment_DanhThuTheoPhim frg= new Fragment_DanhThuTheoPhim();
+                    replec(frg);
                 }
                 else if (item.getItemId()==R.id.ThanhVien) {
                     Fragment_NguoiDung frg= new Fragment_NguoiDung();

@@ -75,5 +75,65 @@ public class ThongKeDao {
         cursor.close();
         return doanhThu;
     }
+    public int DoanhThuTatCa() {
+        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
+        String sql = "SELECT SUM(TongTien) as doanhThu FROM HoaDon";
+        int doanhThu = 0;
+        Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            try {
+                doanhThu = cursor.getInt(cursor.getColumnIndexOrThrow("doanhThu"));
+            } catch (Exception e) {
+                doanhThu = 0;
+            }
+        }
+        cursor.close();
+        return doanhThu;
+    }
 
+    public int DoanhThuThang(int thang, int nam) {
+        SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
+        String sql = "SELECT SUM(TongTien) as doanhThu FROM HoaDon WHERE strftime('%m', ngay) = ? AND strftime('%Y', ngay) = ?";
+        String[] dk = {String.format("%02d", thang), String.valueOf(nam)};
+        int doanhThu = 0;
+        Cursor cursor = sqLiteDatabase.rawQuery(sql, dk);
+        if (cursor.moveToFirst()) {
+            try {
+                doanhThu = cursor.getInt(cursor.getColumnIndexOrThrow("doanhThu"));
+            } catch (Exception e) {
+                doanhThu = 0;
+            }
+        }
+        cursor.close();
+        return doanhThu;
+    }
+
+    public ArrayList<Phim> DoanhThuTheoPhim() {
+        ArrayList<Phim> list = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT Phim.Anh, Phim.TenPhim, SUM(HoaDon.TongTien) AS TotalRevenue " +
+                "FROM Phim " +
+                "JOIN SuatChieu ON Phim.ID_Phim = SuatChieu.ID_Phim " +
+                "JOIN Ve ON SuatChieu.ID_SC = Ve.ID_SC " +
+                "JOIN HoaDon ON Ve.ID_HD = HoaDon.ID_HD " +
+                "GROUP BY Phim.ID_Phim;", null);
+
+        if (cursor.moveToFirst()) {
+            int columnIndexAnh = cursor.getColumnIndex("Anh");
+            int columnIndexTenPhim = cursor.getColumnIndex("TenPhim");
+            int columnIndexDoanhThu = cursor.getColumnIndex("TotalRevenue");
+
+            do {
+                String anh = cursor.getString(columnIndexAnh);
+                String tenPhim = cursor.getString(columnIndexTenPhim);
+                int doanhThu = cursor.getInt(columnIndexDoanhThu);
+                list.add(new Phim(tenPhim, anh, doanhThu));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return list;
+    }
 }

@@ -26,7 +26,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/textInputLayout1"
         app:passwordToggleEnabled="false"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="30dp"
+        android:textColorHint="#C9CCC9"
+        android:textColor="#C9CCC9">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtTenDangNhap"
@@ -34,13 +36,17 @@
             android:layout_height="50dp"
             android:hint="Tên Đăng Nhập"
             android:layout_margin="5dp"
-            android:textColor="#FFFFFF"/>
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:background="@drawable/group1"/>
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textInputLayout11"
-        app:passwordToggleEnabled="false">
+        app:passwordToggleEnabled="false"
+        android:textColorHint="#C9CCC9"
+        android:textColor="#C9CCC9">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtHoTen"
@@ -48,14 +54,18 @@
             android:layout_height="50dp"
             android:hint="Họ Tên"
             android:layout_margin="5dp"
-            android:textColor="#FFFFFF"/>
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:background="@drawable/group1"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textInputLayout2"
-        app:passwordToggleEnabled="false">
+        app:passwordToggleEnabled="false"
+        android:textColorHint="#C9CCC9"
+        android:textColor="#C9CCC9">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtEmail"
@@ -63,13 +73,17 @@
             android:layout_height="50dp"
             android:hint="Email"
             android:layout_margin="5dp"
-            android:textColor="#FFFFFF"/>
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:background="@drawable/group1"/>
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textInputLayout3"
-        app:passwordToggleEnabled="false">
+        app:passwordToggleEnabled="false"
+        android:textColorHint="#C9CCC9"
+        android:textColor="#C9CCC9">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtSDT"
@@ -77,7 +91,9 @@
             android:layout_height="50dp"
             android:hint="SDT"
             android:layout_margin="5dp"
-            android:textColor="#FFFFFF"/>
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:background="@drawable/group1"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -86,7 +102,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textInputLayout"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        android:textColorHint="#C9CCC9"
+        android:textColor="#C9CCC9">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtPass"
@@ -95,14 +113,18 @@
             android:hint="PassWord"
             android:inputType="textPassword"
             android:layout_margin="5dp"
-            android:textColor="#FFFFFF"/>
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:background="@drawable/group1"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textInputLayout5"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        android:textColorHint="#C9CCC9"
+        android:textColor="#C9CCC9">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtEndPass"
@@ -111,8 +133,11 @@
             android:hint="EndPassWord"
             android:inputType="textPassword"
             android:layout_margin="5dp"
-            android:textColor="#FFFFFF"/>
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:background="@drawable/group1"/>
     </com.google.android.material.textfield.TextInputLayout>
+
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -120,10 +145,10 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/brackground_button"
-        android:text="Tạo Tài Khoản"
-        android:textColor="@color/white"
+        android:layout_marginTop="30dp"
+        android:background="@color/white"
+        android:text="Tạo Tài Khoản "
+        android:textColor="@color/black"
         android:textSize="19dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -131,7 +156,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chkRemenber"
         app:layout_constraintVertical_bias="0.443" />
-
 
 
 </LinearLayout>

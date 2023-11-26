@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -31,6 +32,7 @@ import com.example.dhd_cinema.Dao.GheDao;
 import com.example.dhd_cinema.Dao.NguoiDungDao;
 import com.example.dhd_cinema.Dao.PhimDao;
 import com.example.dhd_cinema.Dao.TheLoaiPhimDao;
+import com.example.dhd_cinema.Framgment.Fragment_ChiTietPhim;
 import com.example.dhd_cinema.Model.Phim;
 import com.example.dhd_cinema.Model.TheLoaiPhim;
 import com.example.dhd_cinema.R;
@@ -74,16 +76,17 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
 
         String base64String = list.get(position).getAnh();
 
-// Giải mã chuỗi Base64 thành mảng byte
+        // Giải mã chuỗi Base64 thành mảng byte
         byte[] decodedByteArray = Base64.decode(base64String, Base64.DEFAULT);
 
-// Chuyển đổi mảng byte thành Bitmap
+        // Chuyển đổi mảng byte thành Bitmap
         Bitmap bitmap = BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.length);
 
-// Hiển thị Bitmap bằng Glide
+        // Hiển thị Bitmap bằng Glide
         Glide.with(context)
                 .load(bitmap)
                 .into(holder.anh);
+
 
 
         holder.chon.setOnClickListener(new View.OnClickListener() {
@@ -146,12 +149,13 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
             }
         });
 
-
-
-        holder.dsPhim.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View v) {
-                DSPhim(list.get(position));
+            public boolean onLongClick(View v) {
+                Intent intent = new Intent(context, Fragment_ChiTietPhim.class);
+                intent.putExtra("ID_Phim", list.get(position).getID_Phim());
+                context.startActivity(intent);
+                return true;
             }
         });
     }
@@ -179,50 +183,7 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
 
     private Dialog dialog;
 
-    public void DSPhim(Phim phim) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-        View view = inflater.inflate(R.layout.chitiet_phim, null);
-        builder.setView(view);
 
-        //anh xa cac thanh phan widget
-        ImageView anh =view.findViewById(R.id.imageView2);
-        TextView txtID_Phim_chiTiet = view.findViewById(R.id.txtID_Phim_chiTiet);
-        TextView txtID_TL_chiTiet = view.findViewById(R.id.txtID_TL_chiTiet);
-        TextView txtTenPhim_chiTiet = view.findViewById(R.id.txtTenPhim_chiTiet);
-        TextView txtDaoDien_chiTiet = view.findViewById(R.id.txtDaoDien_chiTiet);
-        TextView txtNgayPhatHanh_chiTiet = view.findViewById(R.id.txtNgayPhatHanh_chiTiet);
-        TextView txtMoTa_chiTiet = view.findViewById(R.id.txtMoTa_chiTiet);
-        Button btnExit_chiTiet = view.findViewById(R.id.btnExit_chiTiet);
-
-        //gan du lieu len cac o edittext
-        txtID_Phim_chiTiet.setText(String.valueOf(phim.getID_Phim()));
-        txtID_TL_chiTiet.setText(String.valueOf(phim.getID_TL()));
-        txtTenPhim_chiTiet.setText(phim.getTenPhim());
-        txtDaoDien_chiTiet.setText(phim.getDaoDien());
-        txtNgayPhatHanh_chiTiet.setText(phim.getNgayPhatHanh());
-        txtMoTa_chiTiet.setText(phim.getMota());
-        String base64String = phim.getAnh();
-
-// Giải mã chuỗi Base64 thành mảng byte
-        byte[] decodedByteArray = Base64.decode(base64String, Base64.DEFAULT);
-// Chuyển đổi mảng byte thành Bitmap
-        Bitmap bitmap = BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.length);
-// Hiển thị Bitmap bằng Glide
-        Glide.with(context)
-                .load(bitmap)
-                .into(anh);
-        //nut no
-        btnExit_chiTiet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "Thoát", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-            }
-        });
-        dialog = builder.create(); //tao hop thoai
-        dialog.show(); //hien thi hop thoai len man hinh
-    }
 
     public void showDialogSua(Phim phim) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);// tao doi tuong cua altertdialog

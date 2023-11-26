@@ -29,6 +29,23 @@ public class PhimDao {
         return list;
     }
 
+    public Phim selectPhimById(int phimId) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM Phim WHERE ID_Phim = ?", new String[]{String.valueOf(phimId)});
+
+        Phim phim = null;
+
+        if (cursor.getCount() != 0) {
+            cursor.moveToFirst();
+            phim = new Phim(cursor.getInt(0), cursor.getInt(1), cursor.getString(2),
+                    cursor.getString(3), cursor.getString(4), cursor.getString(5),
+                    cursor.getString(6));
+        }
+
+        cursor.close();
+        return phim;
+    }
+
     public boolean insert(Phim phim){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues cs = new ContentValues();
