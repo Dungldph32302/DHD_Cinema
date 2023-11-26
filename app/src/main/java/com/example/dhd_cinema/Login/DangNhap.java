@@ -112,12 +112,46 @@ public class DangNhap extends AppCompatActivity {
 
 
         // quenmk
-//        quenMK.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
+        quenMK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(DangNhap.this);
+                builder.setTitle("Quên mật khẩu");
+                builder.setMessage("Nhập email và số điện thoại để lấy lại mật khẩu");
+
+                LinearLayout layout = new LinearLayout(DangNhap.this);
+                layout.setOrientation(LinearLayout.VERTICAL);
+
+                final EditText edtEmail = new EditText(DangNhap.this);
+                edtEmail.setHint("Email");
+                layout.addView(edtEmail);
+
+                final EditText edtSDT = new EditText(DangNhap.this);
+                edtSDT.setHint("Số điện thoại");
+                layout.addView(edtSDT);
+
+                builder.setView(layout);
+
+                builder.setPositiveButton("Lấy lại mật khẩu", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String email = edtEmail.getText().toString();
+                        String sdt = edtSDT.getText().toString();
+
+                        String matKhau = nguoiDungDao.layMatKhau(email, sdt);
+                        if (matKhau != null) {
+                            Toast.makeText(DangNhap.this, "Mật khẩu của bạn là: " + matKhau, Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(DangNhap.this, "Email và số điện thoại không khớp", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+                builder.setNegativeButton("Hủy", null);
+
+                builder.create().show();
+            }
+        });
     }
 
 

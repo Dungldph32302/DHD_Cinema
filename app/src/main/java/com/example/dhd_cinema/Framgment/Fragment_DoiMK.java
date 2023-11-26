@@ -12,10 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.dhd_cinema.Dao.NguoiDungDao;
 import com.example.dhd_cinema.Login.DangNhap;
+import com.example.dhd_cinema.MainActivity;
 import com.example.dhd_cinema.R;
 
 
@@ -33,6 +35,15 @@ public class Fragment_DoiMK extends Fragment {
         EditText edtReNewPass = view.findViewById(R.id.edtReNewPass);
         Button btnDoiMK = view.findViewById(R.id.btnDOiMK);
         Button btnHuy = view.findViewById(R.id.btnHuy);
+        ImageView imageView = view.findViewById(R.id.btnExit_DoiMK);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment_Khac frg=new Fragment_Khac();
+                MainActivity mainActivity = (MainActivity) getActivity();
+                mainActivity.replec(frg);
+            }
+        });
 
         btnDoiMK.setOnClickListener(new View.OnClickListener() {
             @Override

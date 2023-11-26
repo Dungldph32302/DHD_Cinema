@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dhd_cinema.Dao.NguoiDungDao;
@@ -16,6 +18,7 @@ import com.google.android.material.textfield.TextInputEditText;
 public class DangKy extends AppCompatActivity {
     Button btnDangKy;
     TextInputEditText edtTenDangNhap, hoTen, edtEmail, edtSDT, edtPass, edtEndPass;
+    TextView dangnhap;
     private NguoiDungDao nguoiDungDao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +32,18 @@ public class DangKy extends AppCompatActivity {
         edtSDT = findViewById(R.id.edtSDT);
         edtEndPass = findViewById(R.id.edtEndPass);
         btnDangKy = findViewById(R.id.btnDangKy);
+        dangnhap =findViewById(R.id.txtDangNhap);
 
         nguoiDungDao = new NguoiDungDao(this);
 
+        dangnhap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(DangKy.this, "Đăng Nhập!!!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(DangKy.this, DangNhap.class);
+                startActivity(intent);
+            }
+        });
         btnDangKy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,6 +54,11 @@ public class DangKy extends AppCompatActivity {
                 String pass = edtPass.getText().toString();
                 String endPass = edtEndPass.getText().toString();
 
+
+                if (!isValidPassword(pass)) {
+                    Toast.makeText(DangKy.this, "Mật khẩu Phải có ít nhất 6 kí tự, 1 chữ cái và 1 số ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 // Kiểm tra tên đăng nhập không trùng
                 if (nguoiDungDao.checkUsernameExists(tenDangNhap)) {
                     Toast.makeText(DangKy.this, "Tên đăng nhập đã tồn tại", Toast.LENGTH_SHORT).show();
@@ -87,5 +104,10 @@ public class DangKy extends AppCompatActivity {
     private boolean checkPhoneNumber(String phoneNumber) {
         String phoneRegex = "^0[0-9]{8,9}$";
         return phoneNumber.matches(phoneRegex);
+    }
+    private boolean isValidPassword(String password) {
+        // Kiểm tra mật khẩu có ít nhất 6 kí tự và phải có ít nhất 1 chữ cái và 1 số
+        String pattern = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$";
+        return password.matches(pattern);
     }
 }

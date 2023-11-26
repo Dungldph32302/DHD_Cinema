@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/textInputLayout1"
         app:passwordToggleEnabled="false"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:textColorHint="#C9CCC9"
         android:textColor="#C9CCC9">
 
@@ -156,6 +156,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chkRemenber"
         app:layout_constraintVertical_bias="0.443" />
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="250dp"
+        android:id="@+id/txtDangNhap"
+        android:textColor="#C9CCC9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bạn dã có TK ? "
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.89" />
+
 
 
 </LinearLayout>

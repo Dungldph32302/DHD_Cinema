@@ -29,18 +29,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.dhd_cinema.Dao.GheDao;
+import com.example.dhd_cinema.ChiThietPhim;
 import com.example.dhd_cinema.Dao.NguoiDungDao;
 import com.example.dhd_cinema.Dao.PhimDao;
 import com.example.dhd_cinema.Dao.TheLoaiPhimDao;
-import com.example.dhd_cinema.Framgment.Fragment_ChiTietPhim;
+import com.example.dhd_cinema.HoaDon_chitiet;
 import com.example.dhd_cinema.MainActivity;
 import com.example.dhd_cinema.Model.Phim;
 import com.example.dhd_cinema.Model.TheLoaiPhim;
 import com.example.dhd_cinema.R;
 import com.example.dhd_cinema.Spinner.TheLoaiPhimSpinner;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
@@ -156,11 +155,9 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Intent intent = new Intent(context, Fragment_ChiTietPhim.class);
-                intent.putExtra("ID_Phim", list.get(position).getID_Phim());
-                Fragment_ChiTietPhim frg = new Fragment_ChiTietPhim();
-                MainActivity mainActivity = (MainActivity) context;
-                mainActivity.replec(frg);
+                Intent intent= new Intent(context, ChiThietPhim.class);
+                intent.putExtra("ID_Phim",list.get(position).getID_Phim());
+                context.startActivity(intent);
                 return true;
             }
         });
@@ -190,7 +187,8 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
     private Dialog dialog;
 
 
-
+    private Uri selectedImageUri;
+    ImageView anhphim;
     public void showDialogSua(Phim phim) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);// tao doi tuong cua altertdialog
         // gan layout,tao view
@@ -206,7 +204,7 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
         EditText edtNgayPhatHanh_sua_P = view.findViewById(R.id.edtNgayPhatHanh_sua_P);
         EditText edtMota_sua_P = view.findViewById(R.id.edtMota_sua_P);
         Button btnLuu_sua_P = view.findViewById(R.id.btnLuu_sua_P);
-        ImageView anhphim = view.findViewById(R.id.anhPhim_Sua);
+        anhphim = view.findViewById(R.id.anhPhim_Sua);
         ImageView back = view.findViewById(R.id.btnExit_suaPhim);
         edtID_Phim_sua_P.setEnabled(false);
 
@@ -293,6 +291,7 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
             }
         });
 
+
         dialog = builder.create();
         dialog.show();
     }
@@ -323,4 +322,6 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
 //        }
 //
 //    }
+
+
 }

@@ -40,7 +40,7 @@ public class DanhGiaPhim extends AppCompatActivity {
         tvten=findViewById(R.id.textView);
         dao= new DanhgiaDao(DanhGiaPhim.this);
         Drawable drawable1= ContextCompat.getDrawable(DanhGiaPhim.this, R.drawable.img_27);
-        Drawable drawable2= ContextCompat.getDrawable(DanhGiaPhim.this, R.drawable.img_28);
+        Drawable drawable2= ContextCompat.getDrawable(DanhGiaPhim.this, R.drawable.img_1sao);
         Intent intent = getIntent();
         int idsc = intent.getIntExtra("idsc", -1);
         String ngdung = intent.getStringExtra("ng");
