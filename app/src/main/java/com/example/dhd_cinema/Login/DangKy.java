@@ -41,7 +41,25 @@ public class DangKy extends AppCompatActivity {
                 String sdt = edtSDT.getText().toString();
                 String pass = edtPass.getText().toString();
                 String endPass = edtEndPass.getText().toString();
+
+                // Kiểm tra tên đăng nhập không trùng
+                if (nguoiDungDao.checkUsernameExists(tenDangNhap)) {
+                    Toast.makeText(DangKy.this, "Tên đăng nhập đã tồn tại", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                // Kiểm tra Email
+                if (nguoiDungDao.checkEmail(email)) {
+                    Toast.makeText(DangKy.this, "Email đã tồn tại", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                // Kiểm tra SDT
+                if (nguoiDungDao.checkSDT(sdt)) {
+                    Toast.makeText(DangKy.this, "SĐT đã tồn tại", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 NguoiDung nguoiDung = new NguoiDung(tenDangNhap, hoten, email, sdt, pass);
+                nguoiDung.setQuyen(0);
                 if (tenDangNhap.isEmpty() || hoten.isEmpty() || email.isEmpty() || sdt.isEmpty() || pass.isEmpty() || endPass.isEmpty()){
                     Toast.makeText(DangKy.this, "Không Được Để Trống", Toast.LENGTH_SHORT).show();
                 } else if (!checkEmail(email)) {

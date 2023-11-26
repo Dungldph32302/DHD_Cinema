@@ -11,6 +11,21 @@ public class Phim {
     private int SoLuongVeDat;
 
     private float trungBinhCong;
+    private int doanhThu;
+
+    public Phim(int ID_Phim, String tenPhim, int doanhThu) {
+        this.ID_Phim = ID_Phim;
+        TenPhim = tenPhim;
+        this.doanhThu = doanhThu;
+    }
+
+    public int getDoanhThu() {
+        return doanhThu;
+    }
+
+    public void setDoanhThu(int doanhThu) {
+        this.doanhThu = doanhThu;
+    }
 
     public Phim(String anh, float trungBinhCong) {
         Anh = anh;
