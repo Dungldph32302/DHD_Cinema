@@ -34,8 +34,11 @@ public class Fragment_DoanhThu extends Fragment {
         edtNgayKetThuc = view.findViewById(R.id.edtNgayKetThuc);
         Button btnThongKe = view.findViewById(R.id.btnThongKe);
         TextView txtKetQua = view.findViewById(R.id.txtKetQua);
-        thongKeDao = new ThongKeDao(getContext());
+        TextView tongDoanhThu = view.findViewById(R.id.txtTongDoanhThu);
+        Button btnthang = view.findViewById(R.id.btnThang);
+        TextView txtThang = view.findViewById(R.id.txtThang);
 
+        thongKeDao = new ThongKeDao(getContext());
         edtNgayBatDau.setOnClickListener(v -> {
             showDatePickerDialog(edtNgayBatDau);
         });
@@ -54,6 +57,14 @@ public class Fragment_DoanhThu extends Fragment {
             }
         });
 
+        // Hiển thị tổng doanh thu từ trước tới thời điểm hiện tại
+        int tongDoanhThuTatCa = thongKeDao.DoanhThuTatCa();
+        tongDoanhThu.setText(tongDoanhThuTatCa + " đồng");
+
+        // Hiển thị tổng doanh thu theo tháng
+        btnthang.setOnClickListener(v -> {
+            showMonthPickerDialog(txtThang);
+        });
         return view;
     }
 
@@ -78,4 +89,40 @@ public class Fragment_DoanhThu extends Fragment {
         );
         datePickerDialog.show();
     }
+
+
+    private void showMonthPickerDialog(TextView textView) {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                getContext(),
+                (view, yearSelected, monthOfYear, dayOfMonthSelected) -> {
+                    Calendar selectedDateCalendar = Calendar.getInstance();
+                    selectedDateCalendar.set(yearSelected, monthOfYear, 1);
+                    SimpleDateFormat sdf = new SimpleDateFormat("MM/yyyy", Locale.getDefault());
+                    String selectedMonth = sdf.format(selectedDateCalendar.getTimeInMillis());
+                    textView.setText("Doanh thu " + selectedMonth);
+
+                    // Tính và hiển thị doanh thu tháng đã chọn
+                    String[] parts = selectedMonth.split("/");
+                    int selectedMonthValue = Integer.parseInt(parts[0]);
+                    int selectedYearValue = Integer.parseInt(parts[1]);
+                    int doanhThuThang = thongKeDao.DoanhThuThang(selectedMonthValue, selectedYearValue);
+
+                    // Hiển thị kết quả doanh thu tháng
+                    String result = selectedMonth + ": " + doanhThuThang + " đồng";
+                    textView.setText(result);
+                },
+                year,
+                month,
+                1 // Set ngày là 1 để hiển thị lịch tháng
+        );
+        datePickerDialog.getDatePicker().setCalendarViewShown(false); // Ẩn chế độ xem lịch
+        datePickerDialog.getDatePicker().setSpinnersShown(true); // Hiển thị spinner chọn tháng/năm
+        datePickerDialog.show();
+    }
+
+
 }

@@ -1,0 +1,5 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#C3C0C0" /> <!-- Đặt màu nền cho khung viền -->
+    <stroke android:color="#A5A1A1" android:width="2dp" /> <!-- Đặt màu và độ rộng đường viền -->
+    <corners android:radius="5dp" /> <!-- Đặt độ cong góc cho các góc của khung viền -->
+</shape>

@@ -98,10 +98,33 @@ public class NguoiDungDao {
         values.put("Email", tt.getEmail());
         values.put("SDT", tt.getSDT());
         values.put("MatKhau", tt.getMatKhau());
+        values.put("Quyen", tt.getQuyen());
         // nếu ép dữ liệu thành công thì sẽ chả về giá trị tương ứng với số dòng được chèn vào
         long row = db.insert("NguoiDung", null, values);// chèn dữ liệu vào bảng nguoidug
         return (row > 0);
     }
 
+    public boolean checkUsernameExists(String username) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM NguoiDung WHERE TenDangNhap=?", new String[]{username});
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
+        return exists;
+    }
+
+    public boolean checkEmail(String email) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM NguoiDung WHERE Email=?", new String[]{email});
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
+        return exists;
+    }
+    public boolean checkSDT(String sdt) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM NguoiDung WHERE SDT=?", new String[]{sdt});
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
+        return exists;
+    }
 
 }
