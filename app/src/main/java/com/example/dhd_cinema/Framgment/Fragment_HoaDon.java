@@ -155,8 +155,6 @@ public class Fragment_HoaDon extends Fragment {
             @Override
             public void onClick(View view) {
              openDialogchuyenkhoan();
-
-
             }
         });
 
@@ -179,6 +177,7 @@ public class Fragment_HoaDon extends Fragment {
                 hoaDonModel.setTongtien(giave*soluong);
                 hoaDonModel.setTrangthai(phuongthuc);
                 hoaDonModel.setTennguoidung(savedUsername);
+                hoaDonModel.setAnh(linkanh);
                 if(phuongthuc==-1){
                     Toast.makeText(getActivity(), "Vui lòng chọn phương thức thanh toán ", Toast.LENGTH_SHORT).show();
                 }else {
@@ -204,7 +203,7 @@ public class Fragment_HoaDon extends Fragment {
         builder.setView(view);
         Dialog dialog = builder.create();
         dialog.show();
-        anh=view.findViewById(R.id.anhthanhtoan);
+       anh =  (ImageView) view.findViewById(R.id.anhthanhtoan);
         TextView tvtien=view.findViewById(R.id.tvtien);
         AppCompatButton huy, gui;
         huy=view.findViewById(R.id.btnhuy);
@@ -226,21 +225,40 @@ public class Fragment_HoaDon extends Fragment {
         gui.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Drawable drawable= ContextCompat.getDrawable(getContext(), R.drawable.phuongthuc);
-                Drawable drawable1= ContextCompat.getDrawable(getContext(), R.drawable.phuongthuc1);
+                if (linkanh != null && !linkanh.isEmpty()) {
+                    Toast.makeText(getActivity(), "linh ảnh"+linkanh, Toast.LENGTH_SHORT).show();
                 index=1;
-                phuongthuc=1;
-                if(index==0){
-                    tienmat.setBackground(drawable);
-                    chuyenkhoan.setBackground(drawable1);
-                } else if (index==1) {
-                    chuyenkhoan.setBackground(drawable);
-                    tienmat.setBackground(drawable1);
+                phuongthuc=0;
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("login", getActivity().MODE_PRIVATE);
+                String savedUsername = sharedPreferences.getString("username", "");
+                @SuppressLint({"NewApi", "LocalSuppress"})
+                String ngay = String.valueOf(java.time.LocalDate.now());
+                HoaDonModel hoaDonModel= new HoaDonModel();
+                hoaDonModel.setId(idmax);
+                hoaDonModel.setIdsc(idsc);
+                hoaDonModel.setTennguoidung("admin");
+                hoaDonModel.setGia(giave);
+                hoaDonModel.setPhuongthuc(phuongthuc);
+                hoaDonModel.setSl(soluong);
+                hoaDonModel.setThoigian(ngay);
+                hoaDonModel.setTongtien(giave*soluong);
+                hoaDonModel.setTrangthai(phuongthuc);
+                hoaDonModel.setTennguoidung(savedUsername);
+                hoaDonModel.setAnh(linkanh);
+                if(phuongthuc==-1){
+                    Toast.makeText(getActivity(), "Vui lòng chọn phương thức thanh toán ", Toast.LENGTH_SHORT).show();
                 }else {
-                    chuyenkhoan.setBackground(drawable1);
-                    tienmat.setBackground(drawable1);
+                    if(hoaDonDao.addHoaDonandve(hoaDonModel,list1)){
+                        Toast.makeText(getActivity(), "Tạo thành công ", Toast.LENGTH_SHORT).show();
+                        Intent intent= new Intent(getActivity(), Booked_tickets_successfully.class);
+                        startActivity(intent);
+                    }else {
+                        Toast.makeText(getActivity(), "Tạo không thành công ", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                dialog.dismiss();
+            }else {
+                    Toast.makeText(getActivity(), "Chưa chọn ảnh ", Toast.LENGTH_SHORT).show();
+                }
             }
 
 
@@ -284,4 +302,5 @@ public class Fragment_HoaDon extends Fragment {
     private void yeuCauQuyen(String[] quyen, int maYeuCau) {
         requestPermissions(quyen, maYeuCau);
     }
+
 }

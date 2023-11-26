@@ -213,7 +213,6 @@ public class Fragment_ThemPhim extends Fragment {
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                     bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                     byte[] byteArray = byteArrayOutputStream.toByteArray();
-
                     // Chuyển đổi mảng byte thành chuỗi base64
                     duongDanAnh = Base64.encodeToString(byteArray, Base64.DEFAULT);
 

@@ -44,8 +44,11 @@ public class HoaDonDao {
                     sp.setSl(cursor.getInt(2));
                     sp.setTongtien(cursor.getInt(3));
                     sp.setPhuongthuc(cursor.getInt(4));
-                    sp.setTrangthai(cursor.getInt(5));
+                    sp.setThoigian(cursor.getString(5));
+                    sp.setAnh(cursor.getString(6));
+                    sp.setTrangthai(cursor.getInt(7));
                     list.add(sp);
+
                     cursor.moveToNext();
                 }
             }
@@ -105,6 +108,7 @@ public class HoaDonDao {
             hoaDonValues.put("TongTien", hoaDon.getTongtien());
             hoaDonValues.put("PhuongThuc", hoaDon.getPhuongthuc());
             hoaDonValues.put("ngay",hoaDon.getThoigian());
+            hoaDonValues.put("anh",hoaDon.getAnh());
             hoaDonValues.put("TrangThai", hoaDon.getTrangthai());
             long hoaDonId = db.insert("HoaDon", null, hoaDonValues);
             if (hoaDonId != -1) {
@@ -158,7 +162,8 @@ public class HoaDonDao {
                     sp.setSl(cursor.getInt(2));
                     sp.setTongtien(cursor.getInt(3));
                     sp.setPhuongthuc(cursor.getInt(4));
-                    sp.setTrangthai(cursor.getInt(5));
+                    sp.setAnh(cursor.getString(5));
+                    sp.setTrangthai(cursor.getInt(6));
                     list.add(sp);
                     cursor.moveToNext();
                 }
@@ -185,7 +190,8 @@ public class HoaDonDao {
                     sp.setSl(cursor.getInt(2));
                     sp.setTongtien(cursor.getInt(3));
                     sp.setPhuongthuc(cursor.getInt(4));
-                    sp.setTrangthai(cursor.getInt(5));
+                    sp.setAnh(cursor.getString(5));
+                    sp.setTrangthai(cursor.getInt(6));
                     list.add(sp);
                     cursor.moveToNext();
                 }
@@ -195,5 +201,23 @@ public class HoaDonDao {
         }
         return list;
     }
+
+    // cập nhật hóa đơn
+    public boolean updateTrangThaiHoaDon(int idHoaDon, int trangThaiMoi) {
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("TrangThai", trangThaiMoi);
+
+        String whereClause = "ID_HD = ?";
+        String[] whereArgs = { String.valueOf(idHoaDon) };
+
+        long row = db.update("HoaDon", values, whereClause, whereArgs);
+
+        db.close();
+
+        return row > 0;
+    }
+
 
 }

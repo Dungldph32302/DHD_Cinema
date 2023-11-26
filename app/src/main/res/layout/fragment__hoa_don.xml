@@ -225,6 +225,7 @@
             android:layout_height="60dp"
             >
             <ImageView
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="10dp"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
@@ -247,6 +248,7 @@
             android:layout_height="60dp"
             >
             <ImageView
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="10dp"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
@@ -257,27 +259,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Chuyển khoản "
-                android:textSize="20dp"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:background="@color/white"
-            android:layout_margin="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            >
-            <ImageView
-                android:layout_marginStart="10dp"
-                android:layout_width="60dp"
-                android:layout_height="50dp"
-                android:src="@drawable/img_16"/>
-            <TextView
-                android:layout_marginTop="16dp"
-                android:gravity="center_horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Pay Pay"
                 android:textSize="20dp"
                 />
         </LinearLayout>

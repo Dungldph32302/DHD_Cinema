@@ -89,10 +89,18 @@
                 android:id="@+id/tvNgay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ngày Thanh toán: 2023-09-20"
+                android:text=""
                 android:textSize="16sp"
                 android:textColor="#777"/>
         </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/imghtt"
+            android:layout_width="60dp"
+            android:layout_height="90dp"
+            android:layout_gravity="center_vertical"
+             />
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnthanhtoan"
             android:background="@drawable/buttonthanhtoan"
@@ -103,15 +111,8 @@
             android:textStyle="bold"
             android:textSize="14dp"
             android:text="Đã Thanh toán "/>
-
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imgDeletePM"
-        android:layout_width="45dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_vertical"
-        android:background="@drawable/baseline_delete_24" />
 
 </LinearLayout>
 

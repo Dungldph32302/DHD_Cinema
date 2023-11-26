@@ -191,5 +191,38 @@ public class VeDao {
         return list;
     }
 
+    public ArrayList<VeModel> getVeByIdHoaDon(int idHoaDon) {
+        ArrayList<VeModel> list = new ArrayList<>();
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+
+        try {
+            // Sử dụng câu truy vấn với điều kiện WHERE
+            String query = "SELECT * FROM Ve WHERE ID_HD = ?";
+            Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(idHoaDon)});
+
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    VeModel ve = new VeModel();
+                    ve.setId(cursor.getInt(0));
+                    ve.setTendangnhap(cursor.getString(1));
+                    ve.setIdsc(cursor.getInt(2));
+                    ve.setIdghe(cursor.getInt(3));
+                    ve.setIdhd(cursor.getInt(4));
+                    ve.setGia(cursor.getInt(5));
+                    ve.setNgay(cursor.getString(6));
+                    list.add(ve);
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.close();
+        }
+
+        return list;
+    }
+
 
 }
