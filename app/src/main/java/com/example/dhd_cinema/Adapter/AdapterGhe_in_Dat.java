@@ -31,6 +31,7 @@ import java.util.ArrayList;
 public class AdapterGhe_in_Dat extends RecyclerView.Adapter<AdapterGhe_in_Dat.ViewHolder>{
     private final Context context;
     private final ArrayList<GheModel> list;
+     int idsc;
  GheDao dao;
 VeDao veDao;
 private int index=0;
@@ -55,11 +56,12 @@ private int index=0;
     }
 
 private  ArrayList<GheModel> list1;
-    public AdapterGhe_in_Dat(Context context, ArrayList<GheModel> list) {
+    public AdapterGhe_in_Dat(Context context, ArrayList<GheModel> list,int id) {
         this.context = context;
         this.list = list;
         dao = new GheDao(context);
         veDao = new VeDao(context);
+        this.idsc=id;
     }
     // bắt sự kiện lắng nghe
     private OnQuantityChangeListener onQuantityChangeListener;
@@ -88,15 +90,15 @@ private  ArrayList<GheModel> list1;
         Drawable drawable2= ContextCompat.getDrawable(context,R.drawable.img_12);
             holder.name.setText(list.get(position).getSoGhe());
             GheModel ghe=list.get(position);
-            if(veDao.isSeatBooked(list.get(position).getId())){
+            if(veDao.isSeatBooked(list.get(position).getId(),idsc)){
                 holder.ghe.setBackground(drawable2);
             }
             holder.ghe.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    Toast.makeText(context, "idsc "+idsc, Toast.LENGTH_SHORT).show();
                     index++;
-                    if(veDao.isSeatBooked(list.get(position).getId())){
+                    if(veDao.isSeatBooked(list.get(position).getId(),idsc)){
                         holder.ghe.setBackground(drawable2);
                         list.get(position).setChon(false);
                     }else {

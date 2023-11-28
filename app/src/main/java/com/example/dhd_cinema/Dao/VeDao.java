@@ -23,11 +23,11 @@ public class VeDao {
         this.context = context;
         this.dbhelper = new Dbhelper(context);
     }
-    public boolean isSeatBooked(int seatId) {
+    public boolean isSeatBooked(int seatId, int showId) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
 
-        String query = "SELECT COUNT(*) FROM Ve WHERE ID_Ghe = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(seatId)});
+        String query = "SELECT COUNT(*) FROM Ve WHERE ID_Ghe = ? AND ID_SC = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(seatId), String.valueOf(showId)});
 
         boolean isBooked = false;
 
@@ -41,6 +41,7 @@ public class VeDao {
 
         return isBooked;
     }
+
 
     // lấy tên phim
     @SuppressLint("Range")

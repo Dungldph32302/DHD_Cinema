@@ -22,6 +22,6 @@ public class Booked_tickets_successfully extends AppCompatActivity {
                 Intent intent = new Intent(Booked_tickets_successfully.this, MainActivity.class);
                 startActivity(intent);
             }
-        },3000);
+        },800);
     }
 }

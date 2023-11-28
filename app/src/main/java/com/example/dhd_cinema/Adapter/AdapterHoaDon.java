@@ -92,7 +92,7 @@ public class AdapterHoaDon extends RecyclerView.Adapter<AdapterHoaDon.ViewHolder
 
                if(list.get(position).getPhuongthuc()==0){
                    holder.pt.setText("Phương thức thanh toán : Tại quầy ");
-               }else {
+               }else if(list.get(position).getPhuongthuc()==1){
                    holder.pt.setText("Phương thức thanh toán : Chuyển khoản  ");
                }
                //setanh

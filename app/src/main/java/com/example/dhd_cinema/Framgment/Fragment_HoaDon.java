@@ -104,37 +104,55 @@ public class Fragment_HoaDon extends Fragment {
         suatChieuDao= new SuatChieuDao(getActivity());
         hoaDonDao= new HoaDonDao(getActivity());
 
-        list=gheDao.getAllGhe();
-        adapterGheInDat=new AdapterGhe_in_Dat(getActivity(),list);
-       list1=adapterGheInDat.getSelectedListGhe();
-
         Bundle bundle = getArguments();
         if (bundle != null) {
-             idsc = bundle.getInt("idschh");
-             giave = bundle.getInt("giahh");
-             soluong = bundle.getInt("sll");
-             list1= (ArrayList<GheModel>)bundle.getSerializable("list");
+            idsc = bundle.getInt("idschh");
+            giave = bundle.getInt("giahh");
+            soluong = bundle.getInt("sll");
+            list1= (ArrayList<GheModel>)bundle.getSerializable("list");
             Toast.makeText(getActivity(), " so luong"+list1.size(), Toast.LENGTH_SHORT).show();
             sl.setText(String.valueOf(soluong));
             gia.setText(String.valueOf(giave) +"đ");
             tong.setText(String.valueOf(giave*soluong)+"đ");
         }
+
+        list=gheDao.getAllGhe();
+        adapterGheInDat=new AdapterGhe_in_Dat(getActivity(),list,idsc);
+      // list1=adapterGheInDat.getSelectedListGhe();
+
         SuatChieuModel sc= suatChieuDao.getSuatChieuById(idsc);
         gio.setText(String.valueOf(sc.getGioChieu()));
         ngay.setText(sc.getNgayChieu());
         tenp.setText(sc.getTenPhim());
         phong.setText(sc.getTenPhong());
 
-
-
-
         Drawable drawable= ContextCompat.getDrawable(getContext(), R.drawable.phuongthuc);
         Drawable drawable1= ContextCompat.getDrawable(getContext(), R.drawable.phuongthuc1);
-
 
         tienmat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("login", getActivity().MODE_PRIVATE);
+                String savedUsername = sharedPreferences.getString("username", "");
+                @SuppressLint({"NewApi", "LocalSuppress"})
+                String ngay = String.valueOf(java.time.LocalDate.now());
+                HoaDonModel hoaDonModel= new HoaDonModel();
+                hoaDonModel.setId(idmax);
+                hoaDonModel.setIdsc(idsc);
+                hoaDonModel.setTennguoidung("admin");
+                hoaDonModel.setGia(giave);
+                hoaDonModel.setPhuongthuc(index);
+                hoaDonModel.setSl(soluong);
+                hoaDonModel.setThoigian(ngay);
+                hoaDonModel.setTongtien(giave*soluong);
+                hoaDonModel.setTrangthai(0);
+                hoaDonModel.setTennguoidung(savedUsername);
+                hoaDonModel.setAnh(linkanh);
+                Toast.makeText(getActivity(), "idsc "+idsc+"  Số lượng "+soluong +"list  "+list1.size(), Toast.LENGTH_SHORT).show();
+
                 phuongthuc=0;
                index=0;
                 if(index==0){
@@ -154,7 +172,7 @@ public class Fragment_HoaDon extends Fragment {
         chuyenkhoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             openDialogchuyenkhoan();
+                openDialogchuyenkhoan();
             }
         });
 
@@ -171,11 +189,11 @@ public class Fragment_HoaDon extends Fragment {
                 hoaDonModel.setIdsc(idsc);
                 hoaDonModel.setTennguoidung("admin");
                 hoaDonModel.setGia(giave);
-                hoaDonModel.setPhuongthuc(phuongthuc);
+                hoaDonModel.setPhuongthuc(index);
                 hoaDonModel.setSl(soluong);
                 hoaDonModel.setThoigian(ngay);
                 hoaDonModel.setTongtien(giave*soluong);
-                hoaDonModel.setTrangthai(phuongthuc);
+                hoaDonModel.setTrangthai(0);
                 hoaDonModel.setTennguoidung(savedUsername);
                 hoaDonModel.setAnh(linkanh);
                 if(phuongthuc==-1){
@@ -238,7 +256,7 @@ public class Fragment_HoaDon extends Fragment {
                 hoaDonModel.setIdsc(idsc);
                 hoaDonModel.setTennguoidung("admin");
                 hoaDonModel.setGia(giave);
-                hoaDonModel.setPhuongthuc(phuongthuc);
+                hoaDonModel.setPhuongthuc(1);
                 hoaDonModel.setSl(soluong);
                 hoaDonModel.setThoigian(ngay);
                 hoaDonModel.setTongtien(giave*soluong);

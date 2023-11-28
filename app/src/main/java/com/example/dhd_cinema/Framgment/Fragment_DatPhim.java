@@ -63,18 +63,9 @@ public class Fragment_DatPhim extends Fragment {
         tvtenphim=view.findViewById(R.id.tvtenphim);
         btt=view.findViewById(R.id.bttt);
         gheDao= new GheDao(getActivity());
-
-
-        list=gheDao.getAllGhe();
-         int spanCount = 10; // Số cột hoặc hàng trong lưới
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), spanCount);
-        rcvghe.setLayoutManager(layoutManager);
-        adapterGheInDat= new AdapterGhe_in_Dat(getActivity(),list);
-        rcvghe.setAdapter(adapterGheInDat);
-
         Bundle bundle = getArguments();
         if (bundle != null) {
-             idsc= bundle.getInt("scid");
+            idsc= bundle.getInt("scid");
             giaa= bundle.getInt("gia");
             String ngaygio=bundle.getString("ngaygio");
             String tenPhim=bundle.getString("ten");
@@ -82,6 +73,15 @@ public class Fragment_DatPhim extends Fragment {
             tvgia.setText(String.valueOf("Giá vé :"+giaa));
             tvngay.setText("Chiếu vào: "+ngaygio);
             String linkanh=gheDao.getPhimAnhBySuatChieuId(idsc);
+
+        list=gheDao.getAllGhe();
+         int spanCount = 10; // Số cột hoặc hàng trong lưới
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), spanCount);
+        rcvghe.setLayoutManager(layoutManager);
+        adapterGheInDat= new AdapterGhe_in_Dat(getActivity(),list,idsc);
+        rcvghe.setAdapter(adapterGheInDat);
+
+
 
 // Giải mã chuỗi Base64 thành mảng byte
             byte[] decodedByteArray = Base64.decode(linkanh, Base64.DEFAULT);
@@ -109,9 +109,9 @@ public class Fragment_DatPhim extends Fragment {
                     Bundle bundle1= new Bundle();
                     bundle1.putInt("sll",adapterGheInDat.getTongTatCa());
                     bundle1.putInt("giahh",giaa);
-
                     bundle1.putInt("idschh",idsc);
                     bundle1.putSerializable("list",list3);
+                    Toast.makeText(getActivity(), "list "+list3.size(), Toast.LENGTH_SHORT).show();
                     frg.setArguments(bundle1);
                     MainActivity mainActivity = (MainActivity)getActivity();
                     mainActivity.replec(frg);
