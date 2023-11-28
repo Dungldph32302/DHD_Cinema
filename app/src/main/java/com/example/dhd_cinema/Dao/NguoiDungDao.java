@@ -127,4 +127,18 @@ public class NguoiDungDao {
         return exists;
     }
 
+    public String layMatKhau(String email, String sdt) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String query = "SELECT MatKhau FROM NguoiDung WHERE Email = ? AND SDT = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{email, sdt});
+        if (cursor.moveToFirst()) {
+            int columnIndex = cursor.getColumnIndex("MatKhau");
+            String matKhau = cursor.getString(columnIndex);
+            cursor.close();
+            return matKhau;
+        }
+        cursor.close();
+        return null;
+    }
+
 }

@@ -13,9 +13,10 @@ public class Phim {
     private float trungBinhCong;
     private int doanhThu;
 
-    public Phim(int ID_Phim, String tenPhim, int doanhThu) {
-        this.ID_Phim = ID_Phim;
+
+    public Phim(String tenPhim, int doanhThu, String anh) {
         TenPhim = tenPhim;
+        Anh = anh;
         this.doanhThu = doanhThu;
     }
 

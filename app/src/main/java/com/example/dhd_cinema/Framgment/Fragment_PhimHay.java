@@ -9,10 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.dhd_cinema.Adapter.AdapterPhimHay;
 import com.example.dhd_cinema.Adapter.AdapterPhimHot;
 import com.example.dhd_cinema.Dao.ThongKeDao;
+import com.example.dhd_cinema.MainActivity;
 import com.example.dhd_cinema.Model.Phim;
 import com.example.dhd_cinema.R;
 
@@ -28,7 +30,7 @@ public class Fragment_PhimHay extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment__phim_hay, container, false);
         RecyclerView recyclerTop10 = view.findViewById(R.id.rcvTop10PhimHay);
-
+        ImageView imageView = view.findViewById(R.id.btnExit_PhimHay);
         ThongKeDao thongKeDao = new ThongKeDao(getContext());
         ArrayList<Phim> list = thongKeDao.selectTopPhimDanhGiaCao();
 
@@ -38,6 +40,16 @@ public class Fragment_PhimHay extends Fragment {
 
         AdapterPhimHay adapter = new AdapterPhimHay(getContext(), list);
         recyclerTop10.setAdapter(adapter);
+
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment_Khac frg=new Fragment_Khac();
+                MainActivity mainActivity = (MainActivity) getActivity();
+                mainActivity.replec(frg);
+            }
+        });
         return view;
     }
 }

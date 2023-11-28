@@ -39,7 +39,7 @@ public class AdapterPhimHay extends RecyclerView.Adapter<AdapterPhimHay.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull AdapterPhimHay.ViewHolder holder, int position) {
-        holder.sao.setText("" + String.valueOf(list.get(position).getTrungBinhCong()));
+        holder.sosao.setText("" + String.valueOf(list.get(position).getTrungBinhCong()));
 
         String base64String = list.get(position).getAnh();
 
@@ -53,6 +53,31 @@ public class AdapterPhimHay extends RecyclerView.Adapter<AdapterPhimHay.ViewHold
         Glide.with(context)
                 .load(bitmap)
                 .into(holder.anh);
+
+        float sao = list.get(position).getTrungBinhCong();
+        if (sao == 1) {
+            Glide.with(context)
+                    .load(R.drawable.img_sao1) // Thay thế R.drawable.anh_sao_1 bằng ID của ảnh tương ứng
+                    .into(holder.img_sao);
+        } else if (sao == 2) {
+            Glide.with(context)
+                    .load(R.drawable.img_2sao) // Thay thế R.drawable.anh_sao_2 bằng ID của ảnh tương ứng
+                    .into(holder.img_sao);
+        }else if (sao == 3) {
+            Glide.with(context)
+                    .load(R.drawable.img_3sao) // Thay thế R.drawable.anh_sao_2 bằng ID của ảnh tương ứng
+                    .into(holder.img_sao);
+        }else if (sao == 4) {
+            Glide.with(context)
+                    .load(R.drawable.img_4sao) // Thay thế R.drawable.anh_sao_2 bằng ID của ảnh tương ứng
+                    .into(holder.img_sao);
+        }else if (sao == 5) {
+            Glide.with(context)
+                    .load(R.drawable.img_5sao) // Thay thế R.drawable.anh_sao_2 bằng ID của ảnh tương ứng
+                    .into(holder.img_sao);
+        } else {
+            holder.img_sao.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -61,13 +86,14 @@ public class AdapterPhimHay extends RecyclerView.Adapter<AdapterPhimHay.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView anh;
-        TextView sao;
+        ImageView anh, img_sao;
+        TextView sosao;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             anh = itemView.findViewById(R.id.img_AnhTop5);
-            sao = itemView.findViewById(R.id.txtSaoTop5);
+            sosao = itemView.findViewById(R.id.txtSaoTop5);
+            img_sao = itemView.findViewById(R.id.img_Sao);
         }
     }
 }

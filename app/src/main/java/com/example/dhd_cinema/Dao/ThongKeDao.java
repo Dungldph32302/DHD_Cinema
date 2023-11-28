@@ -127,7 +127,7 @@ public class ThongKeDao {
                 String anh = cursor.getString(columnIndexAnh);
                 String tenPhim = cursor.getString(columnIndexTenPhim);
                 int doanhThu = cursor.getInt(columnIndexDoanhThu);
-                list.add(new Phim(tenPhim, anh, doanhThu));
+                list.add(new Phim(tenPhim, doanhThu, anh));
             } while (cursor.moveToNext());
         }
 
