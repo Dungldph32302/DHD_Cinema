@@ -152,13 +152,21 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
             }
         });
 
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+//        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View v) {
+//                Intent intent= new Intent(context, ChiThietPhim.class);
+//                intent.putExtra("ID_Phim",list.get(position).getID_Phim());
+//                context.startActivity(intent);
+//                return true;
+//            }
+//        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View v) {
+            public void onClick(View view) {
                 Intent intent= new Intent(context, ChiThietPhim.class);
                 intent.putExtra("ID_Phim",list.get(position).getID_Phim());
                 context.startActivity(intent);
-                return true;
             }
         });
     }

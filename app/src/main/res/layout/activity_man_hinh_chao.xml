@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ManHinhChao">
+    tools:context=".ManHinhChao"
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/imageView3"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        app:srcCompat="@drawable/img_26"
+        tools:layout_editor_absoluteX="105dp"
+        tools:layout_editor_absoluteY="243dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="250dp"/>
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srcCompat="@drawable/anh_nen_dang_nhap"
-        tools:layout_editor_absoluteX="39dp"
-        tools:layout_editor_absoluteY="255dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Welcome to DHD-Cinema"
+        android:textColor="#4CAF50"
+        android:textSize="28dp"
+        android:textStyle="italic"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="393dp" />
+</LinearLayout>
