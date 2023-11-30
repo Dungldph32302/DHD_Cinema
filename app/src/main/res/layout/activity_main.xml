@@ -22,7 +22,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="#9E896A"
+                android:background="#F2994A"
                 app:title="DHD"
                 android:theme="@style/ThemeOverlay.AppCompat.Light"
                 >
@@ -35,14 +35,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/frmHienthi"/>
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:background="@color/white"
             android:id="@+id/btnNavigation"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:menu="@menu/menu"
+            android:background="#F2994A"
             app:labelVisibilityMode="labeled"
-            />
+            app:menu="@menu/menu" />
     </LinearLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"

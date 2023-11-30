@@ -3,6 +3,7 @@ package com.example.dhd_cinema.Framgment;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dhd_cinema.Adapter.AdapterPhim;
+import com.example.dhd_cinema.Dao.NguoiDungDao;
 import com.example.dhd_cinema.Dao.PhimDao;
 import com.example.dhd_cinema.Dao.TheLoaiPhimDao;
 import com.example.dhd_cinema.MainActivity;
@@ -62,6 +64,16 @@ public class Fragment_Phim extends Fragment {
 
         adapter = new AdapterPhim(getContext(),list);
         rcvQLPhim.setAdapter(adapter);
+
+        // xử lý phân quyền
+        int quyen=-1;
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("login", getActivity().MODE_PRIVATE);
+        String tendangnhap = sharedPreferences.getString("username", "");
+        NguoiDungDao nguoiDungDao= new NguoiDungDao(getActivity());
+        quyen=nguoiDungDao.layQuyenTuDangNhap(tendangnhap);
+        if(quyen==0){
+            fltAddPhim.setVisibility(View.GONE);
+        }
 
         fltAddPhim.setOnClickListener(new View.OnClickListener() {
             @Override
