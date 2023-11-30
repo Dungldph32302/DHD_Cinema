@@ -80,7 +80,7 @@ public class AdapterHoaDon extends RecyclerView.Adapter<AdapterHoaDon.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
               hoaDonDao= new HoaDonDao(context);
         // xử lý khi click vào item suất chiếu
@@ -154,10 +154,14 @@ public class AdapterHoaDon extends RecyclerView.Adapter<AdapterHoaDon.ViewHolder
         holder.thanhtoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                  int id =list.get(position).getId();
-                  if (hoaDonDao.updateTrangThaiHoaDon(id,1)){
-                      notifyDataSetChanged();
+                  int id1 =list.get(position).getId();
+                  if (hoaDonDao.updateTrangThaiHoaDon(id1,1)){
                       Toast.makeText(context, "Cập nhật thành công ", Toast.LENGTH_SHORT).show();
+                      list.clear();
+                      list.addAll(hoaDonDao.getAllHoaDon());
+                      notifyDataSetChanged();
+                  }else {
+                      Toast.makeText(context, "Cập nhật không thành công", Toast.LENGTH_SHORT).show();
                   }
             }
         });

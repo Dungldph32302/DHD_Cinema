@@ -51,8 +51,6 @@ public class FragmentAllHoaDon extends Fragment {
         tabLayout.addTab(tab1);
         TabLayout.Tab tab2 = tabLayout.newTab().setText("CHƯA THANH TOÁN");
         tabLayout.addTab(tab2);
-        TabLayout.Tab tab3 = tabLayout.newTab().setText(" ĐÃ THANH TOÁN ");
-        tabLayout.addTab(tab3);
 
         hoaDonDao= new HoaDonDao(getActivity());
         list=hoaDonDao.getAllHoaDon();
@@ -71,7 +69,6 @@ public class FragmentAllHoaDon extends Fragment {
         if(quyen==0){
             tv.setText("Hóa Đơn Của Tôi ");
             tabLayout.setVisibility(View.GONE);
-            Toast.makeText(getActivity(), "tên "+tendangnhap, Toast.LENGTH_SHORT).show();
            ArrayList<HoaDonModel> list1=hoaDonDao.getHoaDonByTenngdung(tendangnhap);
             adapterHoaDon= new AdapterHoaDon(getActivity(),list1);
             rcv.setAdapter(adapterHoaDon);
@@ -87,19 +84,12 @@ public class FragmentAllHoaDon extends Fragment {
             public void onTabSelected(TabLayout.Tab tab) {
                 int selectedTabIndex = tab.getPosition();
                 if (selectedTabIndex == 0) {
-                    ArrayList<HoaDonModel> list1 = hoaDonDao.getAllHoaDon();
-                    adapterHoaDon = new AdapterHoaDon(getActivity(), list1);
-                    rcv.setAdapter(adapterHoaDon);
+                    list.clear();
+                    list.addAll(hoaDonDao.getAllHoaDon());
                     adapterHoaDon.notifyDataSetChanged();
                 } else if (selectedTabIndex == 1) {
-                    ArrayList<HoaDonModel> list1 = hoaDonDao.getHoaDonByTrangThai(0);
-                    adapterHoaDon = new AdapterHoaDon(getActivity(), list1);
-                    rcv.setAdapter(adapterHoaDon);
-                    adapterHoaDon.notifyDataSetChanged();
-                }else if (selectedTabIndex == 2) {
-                    ArrayList<HoaDonModel> list1 = hoaDonDao.getHoaDonByTrangThai(1);
-                    adapterHoaDon = new AdapterHoaDon(getActivity(), list1);
-                    rcv.setAdapter(adapterHoaDon);
+                     list.clear();
+                     list.addAll(hoaDonDao.getHoaDonByTrangThai(0));
                     adapterHoaDon.notifyDataSetChanged();
                 }
             }

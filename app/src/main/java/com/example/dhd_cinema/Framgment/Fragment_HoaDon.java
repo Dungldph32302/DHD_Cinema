@@ -142,7 +142,6 @@ public class Fragment_HoaDon extends Fragment {
                 HoaDonModel hoaDonModel= new HoaDonModel();
                 hoaDonModel.setId(idmax);
                 hoaDonModel.setIdsc(idsc);
-                hoaDonModel.setTennguoidung("admin");
                 hoaDonModel.setGia(giave);
                 hoaDonModel.setPhuongthuc(index);
                 hoaDonModel.setSl(soluong);
@@ -187,7 +186,6 @@ public class Fragment_HoaDon extends Fragment {
                 HoaDonModel hoaDonModel= new HoaDonModel();
                 hoaDonModel.setId(idmax);
                 hoaDonModel.setIdsc(idsc);
-                hoaDonModel.setTennguoidung("admin");
                 hoaDonModel.setGia(giave);
                 hoaDonModel.setPhuongthuc(index);
                 hoaDonModel.setSl(soluong);
@@ -201,6 +199,7 @@ public class Fragment_HoaDon extends Fragment {
                 }else {
                     if(hoaDonDao.addHoaDonandve(hoaDonModel,list1)){
                         Toast.makeText(getActivity(), "Tạo thành công ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Ảnh"+linkanh, Toast.LENGTH_SHORT).show();
                         Intent intent= new Intent(getActivity(), Booked_tickets_successfully.class);
                         startActivity(intent);
                     }else {
