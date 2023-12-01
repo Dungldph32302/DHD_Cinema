@@ -122,18 +122,21 @@ public class Fragment_ThemSuatChieu extends Fragment {
                String g=gia.getText().toString().trim();
 
                if(validate(g,n,g)){
+
                    SuatChieuModel suatChieuModel= new SuatChieuModel();
                    suatChieuModel.setIdPhim(selecidPhim);
                    suatChieuModel.setIdPhong(selecidPhong);
                    suatChieuModel.setGioChieu(d);
                    suatChieuModel.setGia(Integer.parseInt(g));
                    suatChieuModel.setNgayChieu(n);
-                   if(suatChieuDao.addSuatChieu(suatChieuModel)){
-                       Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                       MainActivity mainActivity=(MainActivity)getActivity();
-                       Fragment_SuatChieu frg= new Fragment_SuatChieu();
-                       mainActivity.replec(frg);
-                   }
+                       if(suatChieuDao.addSuatChieu(suatChieuModel)){
+                           Toast.makeText(getActivity(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                           MainActivity mainActivity=(MainActivity)getActivity();
+                           Fragment_SuatChieu frg= new Fragment_SuatChieu();
+                           mainActivity.replec(frg);
+                       }
+
+
                }
             }
         });

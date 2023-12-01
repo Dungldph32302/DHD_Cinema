@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="100dp"
+    android:layout_height="50dp"
+    android:layout_margin="10dp"
+    android:background="@drawable/backgroud_ngaygio"
+    >
+   <TextView
+       android:layout_gravity="center_vertical|center_horizontal"
+       android:id="@+id/tvngay"
+       android:layout_marginStart="15dp"
+       android:layout_width="70dp"
+       android:layout_height="35dp"
+       android:text="20-11-2023"
+       android:textSize="26dp"
+       android:textStyle="bold"
+
+       />
+</LinearLayout>

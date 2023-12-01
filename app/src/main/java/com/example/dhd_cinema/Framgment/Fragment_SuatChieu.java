@@ -67,7 +67,7 @@ public class Fragment_SuatChieu extends Fragment {
            add.setVisibility(View.GONE);
         }
         // sinh tablayout
-        TabLayout.Tab tab1 = tabLayout.newTab().setText(" SẮP CHIẾU ");
+        TabLayout.Tab tab1 = tabLayout.newTab().setText(" CHIẾU THEO PHIM ");
         tabLayout.addTab(tab1);
         TabLayout.Tab tab3 = tabLayout.newTab().setText(" ĐÃ CHIẾU ");
         tabLayout.addTab(tab3);
@@ -84,7 +84,7 @@ public class Fragment_SuatChieu extends Fragment {
         autoSlide();
 
          suatChieuDao= new SuatChieuDao(getActivity());
-         list=suatChieuDao.getsuatchieusapchieu();
+         list=suatChieuDao.getOneSuatChieuForEachPhim();
         int spanCount = 2; // Số cột hoặc hàng trong lưới
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), spanCount);
         rcv.setLayoutManager(layoutManager);
@@ -98,7 +98,7 @@ public class Fragment_SuatChieu extends Fragment {
             public void onTabSelected(TabLayout.Tab tab) {
                 int selectedTabIndex = tab.getPosition();
                 if (selectedTabIndex == 0) {
-                    ArrayList<SuatChieuModel> list1 = suatChieuDao.getsuatchieusapchieu();
+                    ArrayList<SuatChieuModel> list1 = suatChieuDao.getOneSuatChieuForEachPhim();
                     adapter = new AdapterSuatChieu(getActivity(), list1);
                     rcv.setAdapter(adapter);
                     adapter.notifyDataSetChanged();

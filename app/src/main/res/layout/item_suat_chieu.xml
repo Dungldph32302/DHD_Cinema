@@ -33,14 +33,7 @@
         android:layout_height="235dp"
         android:src="@drawable/img_3"
         />
-    <TextView
-        android:id="@+id/ngaychieu"
-        android:gravity="center_horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#0099FF"
-        android:textSize="14dp"
-        android:text="15-11-2023"/>
+
     <TextView
         android:id="@+id/namephim"
         android:gravity="center_horizontal"

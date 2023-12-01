@@ -30,6 +30,7 @@ import com.example.dhd_cinema.Framgment.Fragment_NguoiDung;
 import com.example.dhd_cinema.Framgment.Fragment_Phim;
 import com.example.dhd_cinema.Framgment.Fragment_PhongChieu;
 import com.example.dhd_cinema.Framgment.Fragment_SuatChieu;
+import com.example.dhd_cinema.Framgment.Fragment_SuatChieu_2;
 import com.example.dhd_cinema.Framgment.Fragment_TheLoaiPhim;
 import com.example.dhd_cinema.Framgment.Fragment_ThemPhim;
 import com.example.dhd_cinema.Framgment.Fragment_ThemSuatChieu;
@@ -98,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
                  }else if (item.getItemId()==R.id.khac) {
                     Fragment_Khac frg= new Fragment_Khac();
                     replec(frg);
+
                 }
                 // doi ten titel
                 getSupportActionBar().setTitle(item.getTitle());

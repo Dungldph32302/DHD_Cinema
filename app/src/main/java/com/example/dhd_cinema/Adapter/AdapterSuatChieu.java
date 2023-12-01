@@ -46,6 +46,7 @@ import com.example.dhd_cinema.Dao.PhongDao;
 import com.example.dhd_cinema.Dao.SuatChieuDao;
 import com.example.dhd_cinema.Framgment.Fragment_DatPhim;
 import com.example.dhd_cinema.Framgment.Fragment_HoaDon;
+import com.example.dhd_cinema.Framgment.Fragment_SuatChieu_2;
 import com.example.dhd_cinema.Framgment.Fragment_ThemPhim;
 import com.example.dhd_cinema.MainActivity;
 import com.example.dhd_cinema.Model.GheModel;
@@ -101,7 +102,7 @@ public class AdapterSuatChieu extends RecyclerView.Adapter<AdapterSuatChieu.View
         SuatChieuModel suatChieuModel= list.get(position);
         dao= new SuatChieuDao(context);
         holder.name.setText(String.valueOf(list.get(position).getTenPhim()));
-        holder.ngay.setText(list.get(position).getNgayChieu()+"  "+list.get(position).getGioChieu());
+
 
         String base64String = list.get(position).getAnh();
 
@@ -125,19 +126,26 @@ public class AdapterSuatChieu extends RecyclerView.Adapter<AdapterSuatChieu.View
                 int result = compareDates(ngay, ngayht);
                 if(result>0||result==0) {
 
-                    Fragment_DatPhim frg = new Fragment_DatPhim();
-                    Fragment_HoaDon frg1 = new Fragment_HoaDon();
+//                    Fragment_DatPhim frg = new Fragment_DatPhim();
+//                    Fragment_HoaDon frg1 = new Fragment_HoaDon();
+//                    MainActivity mainActivity = (MainActivity) context;
+//                    mainActivity.replec(frg);
+//
+//                    String ng = list.get(position).getGioChieu() + "  " + list.get(position).getNgayChieu();
+//                    Bundle bundle = new Bundle();
+//                    bundle.putInt("scid", list.get(position).getId());
+//                    bundle.putString("ngaygio", ng);
+//                    bundle.putString("ten", list.get(position).getTenPhim());
+//                    bundle.putInt("gia", list.get(position).getGia());
+//                    frg.setArguments(bundle);
+//                    frg1.setArguments(bundle);
+                    Fragment_SuatChieu_2 frg = new Fragment_SuatChieu_2();
                     MainActivity mainActivity = (MainActivity) context;
-                    mainActivity.replec(frg);
+                    Bundle bundle= new Bundle();
+                    bundle.putInt("idphim",list.get(position).getIdPhim());
+                     frg.setArguments(bundle);
 
-                    String ng = list.get(position).getGioChieu() + "  " + list.get(position).getNgayChieu();
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("scid", list.get(position).getId());
-                    bundle.putString("ngaygio", ng);
-                    bundle.putString("ten", list.get(position).getTenPhim());
-                    bundle.putInt("gia", list.get(position).getGia());
-                    frg.setArguments(bundle);
-                    frg1.setArguments(bundle);
+                    mainActivity.replec(frg);
                 }else {
                     Toast.makeText(context, "Xuất chiếu này đã được chiếu ", Toast.LENGTH_SHORT).show();
                 }
@@ -218,7 +226,7 @@ public class AdapterSuatChieu extends RecyclerView.Adapter<AdapterSuatChieu.View
             super(view);
             anh=view.findViewById(R.id.anhchieu);
             name=view.findViewById(R.id.namephim);
-            ngay=view.findViewById(R.id.ngaychieu);
+
             chinh=view.findViewById(R.id.imgchinh);
         }
     }

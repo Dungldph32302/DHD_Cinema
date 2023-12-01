@@ -37,7 +37,7 @@ public class DanhGiaPhim extends AppCompatActivity {
         anh=findViewById(R.id.imageView11);
         binhluan=findViewById(R.id.txtbinhluan);
         danhgia=findViewById(R.id.btndanhgia);
-        tvten=findViewById(R.id.textView);
+        tvten=findViewById(R.id.textViewhihi);
         dao= new DanhgiaDao(DanhGiaPhim.this);
         Drawable drawable1= ContextCompat.getDrawable(DanhGiaPhim.this, R.drawable.img_27);
         Drawable drawable2= ContextCompat.getDrawable(DanhGiaPhim.this, R.drawable.img_1sao);

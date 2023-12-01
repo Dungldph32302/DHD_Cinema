@@ -3,7 +3,7 @@ package com.example.dhd_cinema.Model;
 public class SuatChieuModel {
     private int id,idPhim,idPhong,gia;
     private String gioChieu,anh,tenPhim,tenPhong,ngayChieu;
-
+    private boolean ischon;
 
     public SuatChieuModel() {
     }
@@ -18,6 +18,14 @@ public class SuatChieuModel {
 
     public String getAnh() {
         return anh;
+    }
+
+    public boolean isIschon() {
+        return ischon;
+    }
+
+    public void setIschon(boolean ischon) {
+        this.ischon = ischon;
     }
 
     public void setAnh(String anh) {

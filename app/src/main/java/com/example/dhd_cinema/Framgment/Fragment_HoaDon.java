@@ -110,7 +110,6 @@ public class Fragment_HoaDon extends Fragment {
             giave = bundle.getInt("giahh");
             soluong = bundle.getInt("sll");
             list1= (ArrayList<GheModel>)bundle.getSerializable("list");
-            Toast.makeText(getActivity(), " so luong"+list1.size(), Toast.LENGTH_SHORT).show();
             sl.setText(String.valueOf(soluong));
             gia.setText(String.valueOf(giave) +"đ");
             tong.setText(String.valueOf(giave*soluong)+"đ");
@@ -150,7 +149,6 @@ public class Fragment_HoaDon extends Fragment {
                 hoaDonModel.setTrangthai(0);
                 hoaDonModel.setTennguoidung(savedUsername);
                 hoaDonModel.setAnh(linkanh);
-                Toast.makeText(getActivity(), "idsc "+idsc+"  Số lượng "+soluong +"list  "+list1.size(), Toast.LENGTH_SHORT).show();
 
                 phuongthuc=0;
                index=0;
@@ -164,7 +162,6 @@ public class Fragment_HoaDon extends Fragment {
                     chuyenkhoan.setBackground(drawable1);
                     tienmat.setBackground(drawable1);
                 }
-                Toast.makeText(getActivity(), " index"+index, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -243,7 +240,6 @@ public class Fragment_HoaDon extends Fragment {
             @Override
             public void onClick(View v) {
                 if (linkanh != null && !linkanh.isEmpty()) {
-                    Toast.makeText(getActivity(), "linh ảnh"+linkanh, Toast.LENGTH_SHORT).show();
                 index=1;
                 phuongthuc=1;
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("login", getActivity().MODE_PRIVATE);
