@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ManHinhChao"
+    android:background="@drawable/img_29"
     android:orientation="vertical">
 
     <ImageView
@@ -12,10 +13,11 @@
         android:layout_width="200dp"
         android:layout_height="150dp"
         app:srcCompat="@drawable/img_26"
+
         tools:layout_editor_absoluteX="105dp"
         tools:layout_editor_absoluteY="243dp"
         android:layout_gravity="center"
-        android:layout_marginTop="250dp"/>
+        android:layout_marginTop="300dp"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -23,8 +25,8 @@
         android:gravity="center"
         android:text="Welcome to DHD-Cinema"
         android:textColor="#4CAF50"
-        android:textSize="28dp"
-        android:textStyle="italic"
+        android:textSize="26dp"
+        android:textStyle="bold"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="393dp" />
 </LinearLayout>

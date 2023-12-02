@@ -20,7 +20,14 @@ import com.example.dhd_cinema.R;
 import java.util.ArrayList;
 
 public class Fragment_PhimHot extends Fragment {
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Đặt tiêu đề trên Toolbar khi Fragment này được hiển thị
+        if (getActivity() != null) {
+            ((MainActivity) getActivity()).setActionBarTitle("Phim hot");
+        }
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

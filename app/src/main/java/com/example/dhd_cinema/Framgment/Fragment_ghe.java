@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.dhd_cinema.Adapter.AdapterGhe;
 import com.example.dhd_cinema.Dao.GheDao;
+import com.example.dhd_cinema.MainActivity;
 import com.example.dhd_cinema.Model.GheModel;
 import com.example.dhd_cinema.R;
 import com.google.android.material.textfield.TextInputEditText;
@@ -31,7 +32,14 @@ public class Fragment_ghe extends Fragment {
     public Fragment_ghe() {
         // Required empty public constructor
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Đặt tiêu đề trên Toolbar khi Fragment này được hiển thị
+        if (getActivity() != null) {
+            ((MainActivity) getActivity()).setActionBarTitle("Quản lý ghế ");
+        }
+    }
     GheDao gheDao;
     AdapterGhe adapterGhe;
     ArrayList<GheModel> list;

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.example.dhd_cinema.Dao.ThongKeDao;
+import com.example.dhd_cinema.MainActivity;
 import com.example.dhd_cinema.R;
 
 import java.text.SimpleDateFormat;
@@ -25,6 +26,14 @@ public class Fragment_DoanhThu extends Fragment {
     EditText edtNgayBatDau, edtNgayKetThuc;
     ThongKeDao thongKeDao;
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Đặt tiêu đề trên Toolbar khi Fragment này được hiển thị
+        if (getActivity() != null) {
+            ((MainActivity) getActivity()).setActionBarTitle("Doanh thu");
+        }
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

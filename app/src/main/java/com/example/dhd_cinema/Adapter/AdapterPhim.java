@@ -46,6 +46,7 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
     private Context context;
     private ArrayList<Phim> list;
     PhimDao phimDao;
+    private final   int PICK_IMAGE_REQUEST = 1;
 
     public AdapterPhim(Context context, ArrayList<Phim> list) {
         this.context = context;
@@ -222,6 +223,7 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
         edtDaoDien_sua_P.setText(phim.getDaoDien());
         edtNgayPhatHanh_sua_P.setText(phim.getNgayPhatHanh());
         edtMota_sua_P.setText(phim.getMota());
+
         String base64String = phim.getAnh();
 
         // Giải mã chuỗi Base64 thành mảng byte
@@ -270,7 +272,7 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
                 phim.setNgayPhatHanh(ngayPhatHanh);
                 phim.setMota(moTa);
                 phim.setID_TL(theLoaiPhimID);
-
+               // phim.setAnh();
 
                 // Kiểm tra xem có trường nào trống không
                 if (tenPhim.isEmpty() || daoDien.isEmpty() || ngayPhatHanh.isEmpty() || moTa.isEmpty()) {
@@ -317,19 +319,17 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
     // Phương thức để chọn hình ảnh từ thiết bị
     private void chonAnh() {
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        int PICK_IMAGE_REQUEST = 1;
         ((Activity) context).startActivityForResult(gallery, PICK_IMAGE_REQUEST);
     }
 
-    // Phương thức để cập nhật ImageView 'anhphim' với hình ảnh được chọn từ thiết bị
-//    public void updateSelectedImage(Uri selectedImage, Bitmap bitmap) {
-//        if (selectedImage != null && bitmap != null) {
-//            Glide.with(context)
-//                    .load(selectedImage)
-//                    .into(anh);
-//        }
-//
-//    }
+//     Phương thức để cập nhật ImageView 'anhphim' với hình ảnh được chọn từ thiết bị
+public void updateSelectedImage(Uri selectedImage, Bitmap bitmap) {
+    if (selectedImage != null && bitmap != null) {
+        Glide.with(context)
+                .load(selectedImage)
+                .into(anhphim);
+    }
+}
 
 
 }

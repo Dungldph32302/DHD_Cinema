@@ -158,4 +158,10 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager frg=getSupportFragmentManager();
         frg.beginTransaction().replace(R.id.frmHienthi,fragment).commit();
     }
+
+    public void setActionBarTitle(String title) {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(title);
+        }
+    }
 }

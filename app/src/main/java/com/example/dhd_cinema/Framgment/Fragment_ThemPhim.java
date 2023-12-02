@@ -47,7 +47,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Fragment_ThemPhim extends Fragment {
-
+    public void onResume() {
+        super.onResume();
+        // Đặt tiêu đề trên Toolbar khi Fragment này được hiển thị
+        if (getActivity() != null) {
+            ((MainActivity) getActivity()).setActionBarTitle("Thêm phim");
+        }
+    }
     PhimDao dao;
     ArrayList<Phim> danhSachPhim;
     String duongDanAnh;

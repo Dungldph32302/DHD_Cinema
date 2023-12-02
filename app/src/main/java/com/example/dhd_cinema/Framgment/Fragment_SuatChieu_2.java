@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +24,7 @@ import com.example.dhd_cinema.Adapter.AdapterGioChieu;
 import com.example.dhd_cinema.Adapter.AdapterNgayChieu;
 import com.example.dhd_cinema.Dao.PhimDao;
 import com.example.dhd_cinema.Dao.SuatChieuDao;
+import com.example.dhd_cinema.MainActivity;
 import com.example.dhd_cinema.Model.GheModel;
 import com.example.dhd_cinema.Model.Phim;
 import com.example.dhd_cinema.Model.SuatChieuModel;
@@ -38,6 +40,14 @@ public class Fragment_SuatChieu_2 extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Đặt tiêu đề trên Toolbar khi Fragment này được hiển thị
+        if (getActivity() != null) {
+            ((MainActivity) getActivity()).setActionBarTitle("Đặt vé ");
+        }
+    }
     SuatChieuDao suatChieuDao;
     AdapterNgayChieu adapterNgayChieu;
     AdapterGioChieu adapterGioChieu;
@@ -47,6 +57,7 @@ public class Fragment_SuatChieu_2 extends Fragment {
     TextView tvtongtien,tvsoghe,tvgia,tvngay,tvtenphim;
     ImageView img;
     PhimDao phimDao;
+    AppCompatButton btn;
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,6 +72,16 @@ public class Fragment_SuatChieu_2 extends Fragment {
         tvgia=view.findViewById(R.id.tvgiave);
         tvngay=view.findViewById(R.id.tvchieu);
         tvtenphim=view.findViewById(R.id.tvtenphim);
+        btn=view.findViewById(R.id.appCompatButton);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity mainActivity=(MainActivity)getActivity();
+                Fragment_SuatChieu frg= new Fragment_SuatChieu();
+                mainActivity.replec(frg);
+            }
+        });
 
 // Tạo LinearLayoutManager với hướng là HORIZONTAL cho rcvg
         LinearLayoutManager layoutManagerGioChieu = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);

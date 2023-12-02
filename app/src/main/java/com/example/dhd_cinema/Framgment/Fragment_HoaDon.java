@@ -55,7 +55,14 @@ public class Fragment_HoaDon extends Fragment {
     public Fragment_HoaDon() {
 
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Đặt tiêu đề trên Toolbar khi Fragment này được hiển thị
+        if (getActivity() != null) {
+            ((MainActivity) getActivity()).setActionBarTitle("Đặt vé ");
+        }
+    }
     private static final int YeuCauQuyen = 10;
     private final ActivityResultLauncher<Intent> moGalleryLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),

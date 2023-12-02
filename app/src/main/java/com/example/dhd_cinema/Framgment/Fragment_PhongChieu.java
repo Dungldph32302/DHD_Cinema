@@ -19,6 +19,7 @@ import com.example.dhd_cinema.Adapter.AdapterGhe;
 import com.example.dhd_cinema.Adapter.AdapterPhongChieu;
 import com.example.dhd_cinema.Dao.GheDao;
 import com.example.dhd_cinema.Dao.PhongDao;
+import com.example.dhd_cinema.MainActivity;
 import com.example.dhd_cinema.Model.GheModel;
 import com.example.dhd_cinema.Model.PhongModel;
 import com.example.dhd_cinema.R;
@@ -28,7 +29,14 @@ import java.util.ArrayList;
 
 public class Fragment_PhongChieu extends Fragment {
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Đặt tiêu đề trên Toolbar khi Fragment này được hiển thị
+        if (getActivity() != null) {
+            ((MainActivity) getActivity()).setActionBarTitle("Quản lý phòng chiếu ");
+        }
+    }
     public Fragment_PhongChieu() {
         // Required empty public constructor
     }

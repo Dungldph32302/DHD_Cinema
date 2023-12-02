@@ -18,6 +18,7 @@ import com.example.dhd_cinema.Adapter.AdapterHoaDon;
 import com.example.dhd_cinema.Adapter.AdapterSuatChieu;
 import com.example.dhd_cinema.Dao.HoaDonDao;
 import com.example.dhd_cinema.Dao.NguoiDungDao;
+import com.example.dhd_cinema.MainActivity;
 import com.example.dhd_cinema.Model.HoaDonModel;
 import com.example.dhd_cinema.Model.SuatChieuModel;
 import com.example.dhd_cinema.R;
@@ -30,7 +31,14 @@ public class FragmentAllHoaDon extends Fragment {
     public FragmentAllHoaDon() {
         // Required empty public constructor
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Đặt tiêu đề trên Toolbar khi Fragment này được hiển thị
+        if (getActivity() != null) {
+            ((MainActivity) getActivity()).setActionBarTitle("Hóa đơn ");
+        }
+    }
     RecyclerView rcv;
     ArrayList<HoaDonModel>list;
     HoaDonDao hoaDonDao;
