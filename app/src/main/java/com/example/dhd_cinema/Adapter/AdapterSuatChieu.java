@@ -144,7 +144,6 @@ public class AdapterSuatChieu extends RecyclerView.Adapter<AdapterSuatChieu.View
                     Bundle bundle= new Bundle();
                     bundle.putInt("idphim",list.get(position).getIdPhim());
                      frg.setArguments(bundle);
-
                     mainActivity.replec(frg);
                 }else {
                     Toast.makeText(context, "Xuất chiếu này đã được chiếu ", Toast.LENGTH_SHORT).show();

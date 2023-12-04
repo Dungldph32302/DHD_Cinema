@@ -59,46 +59,47 @@ public class Fragment_PhongChieu extends Fragment {
          rcv.setLayoutManager(layoutManager);
          adapter= new AdapterPhongChieu(getActivity(),list);
          rcv.setAdapter(adapter);
-//         add.setOnClickListener(new View.OnClickListener() {
-//             @Override
-//             public void onClick(View view) {
-//                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//                 LayoutInflater inflater = getLayoutInflater();
-//                 View view1 = inflater.inflate(R.layout.add_ghe, null);
-//                 builder.setView(view1);
-//                 Dialog dialog = builder.create();
-//                 dialog.show();
-//                 AppCompatEditText idphong = view1.findViewById(R.id.txtIDP);
-//                 AppCompatEditText soghe = view1.findViewById(R.id.txtSG);
-//
-//                 Button them = view1.findViewById(R.id.btnadd);
-//                 // xử lý khi chọn hủy
-//
-//                 them.setOnClickListener(new View.OnClickListener() {
-//                     @Override
-//                     public void onClick(View v) {
-//                         if (idphong.getText().toString().trim().isEmpty()) {
-//                             Toast.makeText(getActivity(), "Vui lòng nhập ID phòng", Toast.LENGTH_SHORT).show();
-//                         } else if (soghe.getText().toString().trim().isEmpty()) {
-//                             Toast.makeText(getActivity(), "Vui lòng nhập Số ghế", Toast.LENGTH_SHORT).show();
-//                         } else {
-//                             GheModel tl = new GheModel();
-//                             tl.setTrangThai(0);
-//                             tl.setIdPhong(Integer.parseInt(idphong.getText().toString()));
-//                             tl.setSoGhe(soghe.getText().toString());
-//                             if (gheDao.addGhe(tl)) {
-//                                 list.clear();
-//                                 list.addAll(gheDao.getAllGhe());
-//                                 adapterGhe.notifyDataSetChanged();
-//                                 Toast.makeText(getActivity(), "Bạn đã thêm 1 ghế mới ", Toast.LENGTH_SHORT).show();
-//                                 dialog.dismiss();
-//                             }
-//                         }
-//                     }
-//                 });
-//
-//             }
-//         });
+         add.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                 LayoutInflater inflater = getLayoutInflater();
+                 View view1 = inflater.inflate(R.layout.add_phong, null);
+                 builder.setView(view1);
+                 Dialog dialog = builder.create();
+                 dialog.show();
+                 AppCompatEditText idphong = view1.findViewById(R.id.txtIDP);
+                 AppCompatEditText soghe = view1.findViewById(R.id.txtSG);
+
+                 Button them = view1.findViewById(R.id.btnadd);
+                 // xử lý khi chọn hủy
+
+                 them.setOnClickListener(new View.OnClickListener() {
+                     @Override
+                     public void onClick(View v) {
+                         if (idphong.getText().toString().trim().isEmpty()) {
+                             Toast.makeText(getActivity(), "Vui lòng nhập Tên phòng", Toast.LENGTH_SHORT).show();
+                         } else if (soghe.getText().toString().trim().isEmpty()) {
+                             Toast.makeText(getActivity(), "Vui lòng nhập Số ghế", Toast.LENGTH_SHORT).show();
+                         } else {
+                             PhongModel tl = new PhongModel();
+                             tl.setLoaiPhong(1);
+                             tl.setTenPhong(idphong.getText().toString());
+                             int so=Integer.valueOf(soghe.getText().toString());
+                             tl.setSoCho(so);
+                             if (phongDao.addPhongChieu(tl)) {
+                                 list.clear();
+                                 list.addAll(phongDao.getAllPhongChieu());
+                                 adapter.notifyDataSetChanged();
+                                 Toast.makeText(getActivity(), "Bạn đã thêm 1 ghế mới ", Toast.LENGTH_SHORT).show();
+                                 dialog.dismiss();
+                             }
+                         }
+                     }
+                 });
+
+             }
+         });
          return view;
     }
 }
