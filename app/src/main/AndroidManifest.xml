@@ -15,11 +15,14 @@
         android:theme="@style/Theme.DHD_Cinema"
         tools:targetApi="31">
         <activity
+            android:name=".SuaPhim"
+            android:exported="false" />
+        <activity
             android:name=".ChiThietPhim"
             android:exported="false" />
         <activity
             android:name=".DanhGiaPhim"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".HoaDon_chitiet"
             android:exported="false" />
@@ -28,10 +31,7 @@
             android:exported="false" />
         <activity
             android:name=".ManHinhChao"
-            android:exported="true" >
-
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Login.DangKy"
             android:exported="true" />
@@ -47,7 +47,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
-
     </application>
 
 </manifest>
