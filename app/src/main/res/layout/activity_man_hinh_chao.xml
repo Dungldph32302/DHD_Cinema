@@ -13,7 +13,6 @@
         android:layout_width="200dp"
         android:layout_height="150dp"
         app:srcCompat="@drawable/img_26"
-
         tools:layout_editor_absoluteX="105dp"
         tools:layout_editor_absoluteY="243dp"
         android:layout_gravity="center"

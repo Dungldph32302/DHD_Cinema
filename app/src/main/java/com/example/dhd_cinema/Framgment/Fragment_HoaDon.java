@@ -43,6 +43,7 @@ import com.example.dhd_cinema.Model.GheModel;
 import com.example.dhd_cinema.Model.HoaDonModel;
 import com.example.dhd_cinema.Model.PhongModel;
 import com.example.dhd_cinema.Model.SuatChieuModel;
+import com.example.dhd_cinema.NotificationHelper;
 import com.example.dhd_cinema.R;
 
 import java.io.ByteArrayOutputStream;
@@ -97,6 +98,7 @@ public class Fragment_HoaDon extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment__hoa_don, container, false);
+        NotificationHelper.createNotificationChannel(getActivity());
         tienmat=view.findViewById(R.id.tienmat);
         chuyenkhoan=view.findViewById(R.id.chuyenkhoan);
         ngay=view.findViewById(R.id.tvngaychieu);
@@ -202,8 +204,7 @@ public class Fragment_HoaDon extends Fragment {
                     Toast.makeText(getActivity(), "Vui lòng chọn phương thức thanh toán ", Toast.LENGTH_SHORT).show();
                 }else {
                     if(hoaDonDao.addHoaDonandve(hoaDonModel,list1)){
-                        Toast.makeText(getActivity(), "Tạo thành công ", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getActivity(), "Ảnh"+linkanh, Toast.LENGTH_SHORT).show();
+                        NotificationHelper.showNotification(getActivity(),"Bạn vừa Đặt "+soluong+" Vé mới");
                         Intent intent= new Intent(getActivity(), Booked_tickets_successfully.class);
                         startActivity(intent);
                     }else {
@@ -269,7 +270,7 @@ public class Fragment_HoaDon extends Fragment {
                     Toast.makeText(getActivity(), "Vui lòng chọn phương thức thanh toán ", Toast.LENGTH_SHORT).show();
                 }else {
                     if(hoaDonDao.addHoaDonandve(hoaDonModel,list1)){
-                        Toast.makeText(getActivity(), "Tạo thành công ", Toast.LENGTH_SHORT).show();
+                        NotificationHelper.showNotification(getActivity(),"Bạn vừa Đặt "+soluong+" Vé mới");
                         Intent intent= new Intent(getActivity(), Booked_tickets_successfully.class);
                         startActivity(intent);
                     }else {
