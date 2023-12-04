@@ -64,14 +64,11 @@ public class ChiThietPhim extends AppCompatActivity {
         }
 
         String base64String = phim.getAnh();
-
-// Giải mã chuỗi Base64 thành mảng byte
+        // Giải mã chuỗi Base64 thành mảng byte
         byte[] decodedByteArray = Base64.decode(base64String, Base64.DEFAULT);
-
-// Chuyển đổi mảng byte thành Bitmap
+        // Chuyển đổi mảng byte thành Bitmap
         Bitmap bitmap = BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.length);
-
-// Hiển thị Bitmap bằng Glide
+        // Hiển thị Bitmap bằng Glide
         Glide.with(this)
                 .load(bitmap)
                 .into(anh);
@@ -85,5 +82,9 @@ public class ChiThietPhim extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
+
     }
 }

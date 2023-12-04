@@ -66,7 +66,8 @@
                     android:background="@drawable/edittext"
                     android:hint="dd/MM/yyyy"
                     android:paddingStart="30dp"
-                    />
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"/>
             </LinearLayout>
 
 

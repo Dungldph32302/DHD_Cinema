@@ -103,27 +103,29 @@ public class Fragment_ThemPhim extends Fragment {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                String ngay = "";
-                                String thang = "";
-                                if (dayOfMonth < 10) {
-                                    ngay = "0" + dayOfMonth;
-                                } else {
-                                    ngay = String.valueOf(dayOfMonth);
-                                }
+                                Calendar selectedDate = Calendar.getInstance();
+                                selectedDate.set(year, month, dayOfMonth);
 
-                                if ((month + 1) < 10) {
-                                    thang = "0" + (month + 1);
+                                Calendar currentDate = Calendar.getInstance();
+                                if (selectedDate.after(currentDate)) {
+                                    // Ngày phát hành không được lớn hơn ngày hiện tại
+                                    Toast.makeText(getContext(), "Ngày phát hành không được lớn hơn ngày hiện tại", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    thang = String.valueOf((month + 1));
+                                    String ngay = (dayOfMonth < 10) ? "0" + dayOfMonth : String.valueOf(dayOfMonth);
+                                    String thang = ((month + 1) < 10) ? "0" + (month + 1) : String.valueOf(month + 1);
+                                    ngayPhatHanh.setText(ngay + "/" + thang + "/" + year);
                                 }
-                                ngayPhatHanh.setText(ngay+ "/" + thang + "/" + year);
-
                             }
                         },
                         calendar.get(Calendar.YEAR),
                         calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DAY_OF_MONTH)
                 );
+
+                // Hạn chế ngày tối thiểu và tối đa
+                // datePickerDialog.setMinDate(minDate.getTimeInMillis());
+                // datePickerDialog.setMaxDate(maxDate.getTimeInMillis());
+
                 datePickerDialog.show();
             }
         });
