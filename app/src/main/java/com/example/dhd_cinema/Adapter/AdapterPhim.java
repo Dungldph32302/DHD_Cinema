@@ -78,21 +78,18 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
         holder.txtNgayPhatHanh_item.setText("" + (list.get(position).getNgayPhatHanh()));
 
         String base64String = list.get(position).getAnh();
+        if(base64String!=null){
+            // Giải mã chuỗi Base64 thành mảng byte
+            byte[] decodedByteArray = Base64.decode(base64String, Base64.DEFAULT);
 
-        // Giải mã chuỗi Base64 thành mảng byte
-        byte[] decodedByteArray = Base64.decode(base64String, Base64.DEFAULT);
+            // Chuyển đổi mảng byte thành Bitmap
+            Bitmap bitmap = BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.length);
 
-        // Chuyển đổi mảng byte thành Bitmap
-        Bitmap bitmap = BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.length);
-
-        // Hiển thị Bitmap bằng Glide
-        Glide.with(context)
-                .load(bitmap)
-                .into(holder.anh);
-
-
-
-        holder.chon.setOnClickListener(new View.OnClickListener() {
+            // Hiển thị Bitmap bằng Glide
+            Glide.with(context)
+                    .load(bitmap)
+                    .into(holder.anh);
+        }holder.chon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 PopupMenu popupMenu = new PopupMenu(context, view);
@@ -103,7 +100,6 @@ public class AdapterPhim extends RecyclerView.Adapter<AdapterPhim.ViewHolder>{
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         int itemId = item.getItemId();
-
                         if (itemId == R.id.action_custom){
                             // Xử lý khi chọn tùy chỉnh
                             //showDialogSua(list.get(position));

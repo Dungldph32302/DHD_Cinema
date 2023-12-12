@@ -90,15 +90,18 @@ Button btnLuu_sua_P;
                 int theLoaiPhimPosition = getTheLoaiPhimPosition(phim.getID_TL(), listTheLoaiPhim);
                 spn_TheLoaiPhim.setSelection(theLoaiPhimPosition);
 
-                String base64String = phim.getAnh();
-                // Giải mã chuỗi Base64 thành mảng byte
-                byte[] decodedByteArray = Base64.decode(base64String, Base64.DEFAULT);
-                // Chuyển đổi mảng byte thành Bitmap
-                Bitmap bitmap = BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.length);
-                // Hiển thị Bitmap bằng Glide
-                Glide.with(this)
-                        .load(bitmap)
-                        .into(anhphim);
+                duongDanAnh = phim.getAnh();
+                if(duongDanAnh!=null){
+                    // Giải mã chuỗi Base64 thành mảng byte
+                    byte[] decodedByteArray = Base64.decode(duongDanAnh, Base64.DEFAULT);
+                    // Chuyển đổi mảng byte thành Bitmap
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.length);
+                    // Hiển thị Bitmap bằng Glide
+                    Glide.with(this)
+                            .load(bitmap)
+                            .into(anhphim);
+                }
+
             }
         }
         back.setOnClickListener(new View.OnClickListener() {
@@ -196,7 +199,7 @@ Button btnLuu_sua_P;
                 } else {
                     if (phimDao.update(phim)) {
                         Toast.makeText(SuaPhim.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(SuaPhim.this, Fragment_Phim.class);
+                        Intent intent = new Intent(SuaPhim.this, MainActivity.class);
                         startActivity(intent);
                     } else {
                         Toast.makeText(SuaPhim.this, "Cập nhật không thành công", Toast.LENGTH_SHORT).show();

@@ -30,7 +30,7 @@
         android:title="Quản lý Ghế"
         />
     <item
-        android:icon="@drawable/baseline_category_24"
+        android:icon="@drawable/img_21"
         android:id="@+id/ve"
         android:title="Quản lý loại Vé"
 
@@ -64,12 +64,6 @@
     <item android:id="@+id/nav_item4"
         android:title="Người dùng">
         <menu>
-
-
-            <item
-                android:id="@+id/tk"
-                android:title="Tạo tài khoản"
-                android:icon="@drawable/baseline_person_24"/>
             <item
                 android:id="@+id/doimk"
                 android:title="Đổi mật khẩu"

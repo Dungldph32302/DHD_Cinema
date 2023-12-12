@@ -105,17 +105,19 @@ public class AdapterSuatChieu extends RecyclerView.Adapter<AdapterSuatChieu.View
 
 
         String base64String = list.get(position).getAnh();
-
-// Giải mã chuỗi Base64 thành mảng byte
-        byte[] decodedByteArray = Base64.decode(base64String, Base64.DEFAULT);
+        if(base64String!=null){
+            // Giải mã chuỗi Base64 thành mảng byte
+            byte[] decodedByteArray = Base64.decode(base64String, Base64.DEFAULT);
 
 // Chuyển đổi mảng byte thành Bitmap
-        Bitmap bitmap = BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.length);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.length);
 
 // Hiển thị Bitmap bằng Glide
-        Glide.with(context)
-                .load(bitmap)
-                .into(holder.anh);
+            Glide.with(context)
+                    .load(bitmap)
+                    .into(holder.anh);
+        }
+
 //       Glide.with(context).load(list.get(position).getAnh()).into(holder.anh);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

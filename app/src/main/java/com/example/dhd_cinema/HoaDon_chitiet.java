@@ -42,7 +42,6 @@ public class HoaDon_chitiet extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         Intent intent=getIntent();
         int id =intent.getIntExtra("idhd",-1);
         veDao= new VeDao(this);

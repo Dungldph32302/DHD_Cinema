@@ -92,14 +92,12 @@ public class MainActivity extends AppCompatActivity {
                 } else if (item.getItemId()==R.id.phim) {
                    Fragment_Phim frg= new Fragment_Phim();
                     replec(frg);
-
                 } else if (item.getItemId()==R.id.ve) {
                     FragmentVe frg= new FragmentVe();
                     replec(frg);
                  }else if (item.getItemId()==R.id.khac) {
                     Fragment_Khac frg= new Fragment_Khac();
                     replec(frg);
-
                 }
                 // doi ten titel
                 getSupportActionBar().setTitle(item.getTitle());
@@ -113,7 +111,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if(item.getItemId()==R.id.suatChieu){
-
+                    Fragment_SuatChieu frf = new Fragment_SuatChieu();
+                    replec(frf);
                 } else if (item.getItemId()==R.id.LoaiPhim) {
                     Fragment_TheLoaiPhim fragment_theLoaiPhim =new Fragment_TheLoaiPhim(); //tao doi tuong
                     replec(fragment_theLoaiPhim);
@@ -136,7 +135,11 @@ public class MainActivity extends AppCompatActivity {
                 else if (item.getItemId()==R.id.ThanhVien) {
                     Fragment_NguoiDung frg= new Fragment_NguoiDung();
                     replec(frg);
-                }else if (item.getItemId()==R.id.hoaDon) {
+                } else if (item.getItemId()==R.id.ve) {
+                    FragmentVe frg= new FragmentVe();
+                    replec(frg);
+                }
+                else if (item.getItemId()==R.id.hoaDon) {
                     FragmentAllHoaDon frg= new FragmentAllHoaDon();
                     replec(frg);
                 }else if (item.getItemId()==R.id.checkout) {

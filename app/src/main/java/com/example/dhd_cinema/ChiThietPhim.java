@@ -78,7 +78,8 @@ public class ChiThietPhim extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(ChiThietPhim.this, "Thoát!!!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ChiThietPhim.this, Fragment_Phim.class);
+                Intent intent = new Intent(ChiThietPhim.this, MainActivity.class);
+
                 startActivity(intent);
             }
         });
